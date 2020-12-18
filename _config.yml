@@ -9,7 +9,7 @@ avatarDesc: Deep learning
 url: "https://git-jhy.github.io/"
 
 # 博客是否自动生成目录，false为不生成
-enableToc: true
+enableToc: false
 
 # Comment
 comment:
