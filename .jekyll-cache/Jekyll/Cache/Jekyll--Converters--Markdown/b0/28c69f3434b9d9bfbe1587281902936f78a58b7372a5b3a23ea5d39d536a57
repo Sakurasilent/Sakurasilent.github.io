@@ -1,4 +1,4 @@
-I"�<p>一个正在努力学习想成为10倍工程师的小帅比</p>
+I"m<p>一个正在努力学习想成为10倍工程师的小帅比</p>
 
 <p>目前在就读于<a href="https://www.baidu.com/link?url=_8E5Y-R2U9FLDpAKr3VYtC9i6H97KIE7OQo7Nyh51qQIitwaUersOI6pRAHvl6AZ&amp;wd=&amp;eqid=b271de390001d504000000055fdc1bc0">湖南大学</a>，准备读研</p>
 
@@ -18,26 +18,29 @@
 
 <section class="post-comments">
 
-  
-    <div id="disqus_thread"></div>
-    <script>
-    
-    var disqus_config = function () {
-        this.page.url = "https://git-jhy.github.io//about/";
-        this.page.identifier = "/about/";
-    };
-    var disqus_shortname = 'leopard';
-    
-    (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
-    
-  
+  <!-- 来必力City版安装代码 -->
+  <div id="lv-container" data-id="city" data-uid="MTAyMC81MjIyMS8yODcwMQ==">
+  	<script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+
+         if (typeof LivereTower === 'function') { return; }
+
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+  	</script>
+  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+  </div>
+  <!-- City版安装代码已完成 -->
+
+
+
+<!--
+   -->
 
 </section>
 
