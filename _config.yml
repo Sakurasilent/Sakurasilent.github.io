@@ -74,7 +74,7 @@ nav:
 
     - {title: CATEGORIES, description: archive, url: '/archive'}
     - {title: TAGS, description: tags, url: '/tags'}
-    - {title: SUPPORT, description: support, url: '/support'}
+    # - {title: SUPPORT, description: support, url: '/support'}
     - {title: ABOUT, description: about, url: '/about'}
 
 # Pagination
