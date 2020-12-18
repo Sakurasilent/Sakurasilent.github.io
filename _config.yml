@@ -1,45 +1,45 @@
 # Basic
-title: 我有两颗糖
-subtitle: 博客小屋
-description: 某个不愿露脸的小帅比~
+title:         我有两颗糖
+subtitle:      博客小屋
+description:   某个不愿露脸的小帅比~
 # 头像里面的标题
-avatarTitle: Jianhua Yin
+avatarTitle:   Jianhua Yin
 # 头像里面的描述
-avatarDesc: Deep learning
-url: "https://git-jhy.github.io/"
+avatarDesc:    Deep learning
+url:           "https://git-jhy.github.io/"
 
 # 博客是否自动生成目录，false为不生成
-enableToc: false
+enableToc:     false
 
 # Comment
 comment:
-    # livere: MTAyMC81MDk5NC8yNzQ3Ng  # https://www.livere.com
-    # livere: MTAyMC81MDk5NC8yNzQ3Ng  # https://www.livere.com
-    # disqus: leopard
-    # uyan: 2143225  # 有言id,登录有言官网申请
+    # livere:  MTAyMC81MDk5NC8yNzQ3Ng  # https://www.livere.com
+    # livere:  MTAyMC81MDk5NC8yNzQ3Ng  # https://www.livere.com
+    # disqus:  leopard
+    # uyan:    2143225  # 有言id,登录有言官网申请
 
 # Social
 social:
-    QQ: 1437130953
-    # weibo: 5366874726
-    github: git-jhy
-    # zhihu: panpanleopard
-    # juejin: xxx
+    QQ:        1437130953
+    # weibo:   5366874726
+    github:    git-jhy
+    # zhihu:   panpanleopard
+    # juejin:  xxx
     # jianshu: 2ada30d8d0f7
     # twitter:
-    mail: jianhuayin@hnu.edu.cn
+    mail:      jianhuayin@hnu.edu.cn
 
 
 # 百度统计
 # 使用博客模板请去掉或者更换 id
 baidu:
-    id: ed778fdc182161852270b39aa608844a
+    id:        ed778fdc182161852270b39aa608844a
 
 # Google Analytics
 # 使用博客模板请去掉或者更换 id
 # ga:
-#     id: UA-84134159-3
-#     host: auto
+#     id:      UA-84134159-3
+#     host:    auto
 
 
 # 《----------------- 上面的信息修改成你自己的 ---------------------------》
@@ -52,18 +52,18 @@ baidu:
 # 《--------------- 下面的信息可以自行选择是否修改 ------------------------》
 
 
-permalink: /:year/:month/:title/
+permalink:     /:year/:month/:title/
 # Format
-highlighter: rouge
+highlighter:   rouge
 
-textColor: #FF0000
+textColor:     #FF0000
 
 # supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: clear
+cover_color:   clear
 
 # The blog button should not be removed.
 blog_button:
-    title: HOME
+    title:     HOME
 
 # Navigation buttons in the front page.s
 nav:
@@ -78,6 +78,6 @@ nav:
     - {title: ABOUT, description: about, url: '/about'}
 
 # Pagination
-gems: [jekyll-paginate,jekyll-sitemap]
-paginate: 20
+gems:          [jekyll-paginate,jekyll-sitemap]
+paginate:      20
 paginate_path: "page/:num/"
