@@ -1,0 +1,44 @@
+I"M<p>一个正在努力学习想成为10倍工程师的小帅比</p>
+
+<p>目前在就读于<a href="https://www.baidu.com/link?url=_8E5Y-R2U9FLDpAKr3VYtC9i6H97KIE7OQo7Nyh51qQIitwaUersOI6pRAHvl6AZ&amp;wd=&amp;eqid=b271de390001d504000000055fdc1bc0">湖南大学</a>，准备读研</p>
+
+<p>喜欢 Python 和 C++ 语言；</p>
+
+<p>平时闲着喜欢敲敲代码，也爱弹吉它、围棋和小游戏；</p>
+
+<p>对图像处理、深度学习、鬼成像和前端比较感兴趣，欢迎大家前来讨论。</p>
+
+<h2> 我的博客 </h2>
+
+<p>我的CSDN博客主页是<a href="https://blog.csdn.net/qq_41140138?spm=1010.2135.3001.5113">我有两颗糖</a></p>
+
+<p>这个博客是参考了一个博客模板搭建的<a href="https://github.com/leopardpan/leopardpan.github.io">快戳我一下</a></p>
+
+<p>很高兴大家能够光临我的“小窝”，大家要是喜欢可以多多支持呀～</p>
+
+<section class="post-comments">
+
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "https://git-jhy.github.io//about/";
+        this.page.identifier = "/about/";
+    };
+    var disqus_shortname = 'leopard';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+  
+
+</section>
+
+:ET

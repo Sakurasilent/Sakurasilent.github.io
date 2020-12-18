@@ -1,33 +1,24 @@
 ---
 layout: page
-title: 关于我 
+title: 关于我
 ---
 
-一个工作6年的 iOS SDK 开发者，在一家游戏公司做SDK开发和维护。
+一个正在努力学习想成为10倍工程师的小帅比
 
-除了iOS技术，我还一直维护着这个博客，懂一些前端的基础知识。
+目前在就读于[湖南大学](https://www.baidu.com/link?url=_8E5Y-R2U9FLDpAKr3VYtC9i6H97KIE7OQo7Nyh51qQIitwaUersOI6pRAHvl6AZ&wd=&eqid=b271de390001d504000000055fdc1bc0)，准备读研
 
-平时喜欢用python写一些工具，能用工具做的事情坚决不用人工去操作。
+喜欢 Python 和 C++ 语言；
 
-<h2> 我们的博客 </h2>  
+平时闲着喜欢敲敲代码，也爱弹吉它、围棋和小游戏；
 
-这个博客是我们大家的，目前已经有很大一部分人在使用我的博客模板了，我也很高兴大家使用我的模板。
+对图像处理、深度学习、鬼成像和前端比较感兴趣，欢迎大家前来讨论。
 
-如果你想搭建一个跟我一样的博客，可以看我的 
-<a href="/2016/10/jekyll_tutorials1/"> Jekyll 搭建个人博客 </a>
-教程
+<h2> <font color=orange>我的博客</font> </h2>  
 
+我的CSDN博客主页是[我有两颗糖](https://blog.csdn.net/qq_41140138?spm=1010.2135.3001.5113)
 
-有关于博客主题的建议和意见都可以提给我，让我们一起来打造一个精美的主题吧~ 
+这个博客是参考了一个大佬的博客模板搭建的[快戳我一下](https://github.com/leopardpan/leopardpan.github.io)，吾见之，甚是喜欢。
 
-博客源码在 <a target="_blank" href='https://github.com/leopardpan/leopardpan.github.io/'>Github</a> 上，你的 Star 是我更新的动力，谢谢~
-
-
-<h3> 搭建博客遇到了问题解法方法 </h3>  
-
-查看 [技术支持](https://leopardpan.cn/support/) 需求帮助
-
-博客模板会一直持续更新，请持续关注我，谢谢~
+很高兴大家能够光临我的“小窝”，大家要是喜欢可以多多支持呀～
 
 {% include comments.html %}
-
