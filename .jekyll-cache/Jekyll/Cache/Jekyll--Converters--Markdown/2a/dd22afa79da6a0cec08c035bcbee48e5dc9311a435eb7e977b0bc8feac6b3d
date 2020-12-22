@@ -1,0 +1,653 @@
+I"Ō<p><img src="/images/posts/blogImages/bear.png" width="120" align="left" />
+<br /><br /><br /><br /><br /></p>
+
+<h1 id="a-linux-文件">A. Linux 文件</h1>
+
+<ul>
+  <li>目录</li>
+  <li>文件</li>
+  <li>文件名（无换行、空格、shell中的特定字符）</li>
+  <li>根目录  用 <code class="language-plaintext highlighter-rouge">/</code>表示</li>
+</ul>
+
+<p><a href="https://www.runoob.com/linux/linux-system-contents.html">目录结构图</a>：</p>
+
+<p><img src="https://www.runoob.com/wp-content/uploads/2014/06/d0c50-linux2bfile2bsystem2bhierarchy.jpg" width="680" /></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── /                                                        根目录
+  ├── /bin         <span class="o">(</span>binary<span class="o">)</span>                                  可执行二进制或脚本
+  ├── /boot        <span class="o">(</span>boot<span class="o">)</span>                                    Linux启动所需的引导程序文件
+  ├── /dev         <span class="o">(</span>devices<span class="o">)</span>                                 系统的设备文件
+  ├── /etc         <span class="o">(</span>etcetera<span class="o">)</span>                                管理Linux系统的文件和工具
+  ├── /home        <span class="o">(</span>home<span class="o">)</span>                                    存放用户的主目录
+  ├── /lib         <span class="o">(</span>libraries<span class="o">)</span>                               函数库
+  ├── /lib64       <span class="o">(</span>libraries 64<span class="o">)</span>                            函数库
+  ├── /lost+found  <span class="o">(</span>lost+found<span class="o">)</span>
+  ├── /media       <span class="o">(</span>media<span class="o">)</span>                                   多媒体及挂载目录
+  ├── /mnt         <span class="o">(</span>mount<span class="o">)</span>                                   挂载目录
+  ├── /opt         <span class="o">(</span>optional application software packages<span class="o">)</span>  安装应用程序可选目录
+  ├── /proc        <span class="o">(</span>processes<span class="o">)</span>                               进程信息文件
+  ├── /root        <span class="o">(</span>root<span class="o">)</span>                                    root用户主目录
+  ├── /run         <span class="o">(</span>run<span class="o">)</span>                                     存储临时数据
+  ├── /sbin        <span class="o">(</span>superuser binaries<span class="o">)</span>                      超级用户使用的二进制或脚本
+  ├── /srv         <span class="o">(</span>service<span class="o">)</span>                                 服务启动后所需访问的数据目录
+  ├── /sys         <span class="o">(</span>system<span class="o">)</span>                                  文件系统
+  ├── /tmp         <span class="o">(</span>temporary<span class="o">)</span>                               临时文件目录
+  ├── /usr         <span class="o">(</span>unix system resource<span class="o">)</span>
+  └── /var         <span class="o">(</span>variable<span class="o">)</span>                                变量文件，系统运行期间变化
+</code></pre></div></div>
+
+<p>路径的表示：</p>
+
+<ul>
+  <li>
+    <p>&lt;font color=#229944&gt;绝对路径&lt;/font&gt;：
+路径的写法，由根目录 <strong>/</strong> 写起，例如： <code class="language-plaintext highlighter-rouge">/usr/share/doc</code> 这个目录。</p>
+  </li>
+  <li>
+    <p>&lt;font color=#229944&gt;相对路径&lt;/font&gt;：
+路径的写法，不是由跟目录 <code class="language-plaintext highlighter-rouge">/</code> 写起，例如由 <code class="language-plaintext highlighter-rouge">/usr/share/doc</code> 要到 <code class="language-plaintext highlighter-rouge">/usr/share/man</code> 时，可以写成：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ../man	<span class="c"># 相对路径</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="cd">cd</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span>		<span class="c"># 进入主目录</span>
+<span class="nb">cd</span> ~	<span class="c"># 进入主目录</span>
+<span class="nb">cd</span> ..	<span class="c"># 进入上一级目录</span>
+<span class="nb">cd</span> /	<span class="c"># 进入跟目录</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="b-文件与目录管理">B. 文件与目录管理</h1>
+
+<h3 id="pwd-print-work-directory">pwd (print work directory)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">pwd</span>		<span class="c"># Print Working Directory</span>
+</code></pre></div></div>
+
+<h3 id="ls-list-files">ls (list files)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span>		<span class="c"># 显示文件</span>
+<span class="nb">ls</span> <span class="nt">-l</span>	<span class="c"># 显示文件 + 信息</span>
+<span class="nb">ls</span> <span class="nt">-a</span>	<span class="c"># 显示所有文件（包含隐藏文件/目录）</span>
+<span class="nb">ls</span> <span class="nt">-R</span>	<span class="c"># 递归显示子文件</span>
+</code></pre></div></div>
+
+<h3 id="mkdir-make-directory">mkdir (make directory)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>AAA
+<span class="nb">mkdir</span> <span class="nt">-m</span> 711 BBB	<span class="c"># 创建文件夹，配置文件的权限喔！</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> test1/test2/test3/test4 	<span class="c"># 递归创建多级目录</span>
+</code></pre></div></div>
+
+<h3 id="rmdir">rmdir</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rmdir </span>AAA	<span class="c"># 删除一个不为空的文件夹AAA</span>
+</code></pre></div></div>
+
+<h3 id="touch">touch</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">touch </span>fileName1 fileName2	<span class="c"># 在当前目录下创建文件 fileName1 和 fileName2</span>
+</code></pre></div></div>
+
+<h3 id="rm">rm</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="nt">-i</span>	<span class="c"># 删除前逐一确认，-i ：互动模式，在删除前会询问使用者是否动作</span>
+<span class="nb">rm</span> <span class="nt">-f</span>   <span class="c"># 直接删除档案，不逐一确认</span>
+<span class="nb">rm</span> <span class="nt">-r</span>	<span class="c"># 将目录以下的所有文件/目录递归删除</span>
+</code></pre></div></div>
+
+<h3 id="cp">cp</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> <span class="o">[</span>选项] 源文件或目录 目标文件或目录
+
+<span class="nb">cp </span>abc<span class="k">**</span> ../	<span class="c"># 将所有以abc打头的文件复制到上一级目录</span>
+<span class="nb">cp</span> <span class="nt">-r</span> dir1 dir2	<span class="c"># 将文件夹dir1复制到dir2中</span>
+</code></pre></div></div>
+
+<h3 id="mv">mv</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="o">[</span><span class="nt">-fir</span><span class="o">]</span> 文件或目录   | f 强制删除不出现警告信息   | i 互动模式删除   | r 递归删除文件夹
+
+<span class="nb">rm</span> <span class="nt">-i</span> b		<span class="c"># 以互动的模式删除文件 b （有提示）</span>
+<span class="nb">rm</span>：是否删除普通空文件 <span class="s1">'b'</span>？Y
+<span class="nb">rm</span> <span class="nt">-r</span> <span class="nb">dir</span>	<span class="c"># 递归删除文件夹 dir</span>
+</code></pre></div></div>
+
+<h3 id="ln">ln</h3>
+
+<ul>
+  <li>硬链接 (hard link)：相当于文件的备份 copy</li>
+  <li>软链接 (symbolic link)：相当于文件的快捷方式，指向关系</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ln</span> <span class="o">[</span>options] target link_file
+
+<span class="nv">$ </span><span class="nb">ln</span> <span class="nt">-s</span> /home/yin/Desktop/cat.txt /home/yin/Desktop/ttt/cat.softlink	<span class="c"># 软链接</span>
+<span class="nv">$ </span><span class="nb">ln</span> /home/yin/Desktop/cat.txt /home/yin/Desktop/ttt/cat.hardlink		<span class="c"># 硬链接</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
+
+<span class="nt">-rw-r--r--</span> 2 yin yin    4 12月  9 22:44 cat.hardlink
+lrwxrwxrwx 1 yin yin   25 12月  9 22:45 cat.softlink -&gt; /home/yin/Desktop/cat.txt
+</code></pre></div></div>
+
+<h3 id="gzip">gzip</h3>
+
+<pre><code class="language-对问shell">gzip np			# 使用 gzip 命令对文件np压缩，生成 np.gz 文件
+gzip -r dir1 	# 对目录 dir1 中的所有文件逐个压缩
+gzip -dr dir1	# 对目录 dir1 中的所有文件解压缩
+</code></pre>
+
+<p>你可以使用 <strong>man [命令]</strong> 来查看各个命令的使用文档，如 ：<code class="language-plaintext highlighter-rouge">man cp</code></p>
+
+<hr />
+
+<h2 id="查看文件内容">查看文件内容</h2>
+
+<h3 id="cat">cat</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/issue	<span class="c"># 查看 issue</span>
+<span class="nb">tac</span> /etc/issue	<span class="c"># 查看 issue (从后往前)</span>
+</code></pre></div></div>
+
+<h3 id="head--tail">head &amp; tail</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">head </span>cat.md		<span class="c"># 显示 cat.md 的所有内容</span>
+<span class="nv">$ </span><span class="nb">head</span> <span class="nt">-n</span> 6 cat.md	<span class="c"># 查看 cat.md 的前两行内容</span>
+
+<span class="nv">$ </span><span class="nb">tail</span> <span class="nt">-n</span> 3 cat.md	<span class="c"># 查看 cat.md 的后两行内容</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="c-文件属性与权限管理">C. 文件属性与权限管理</h1>
+
+<p>下图中通过 chown 来授权用户，通过 chmod 为用户设置可以开门的权限</p>
+
+<p><img src="https://www.runoob.com/wp-content/uploads/2014/06/1_151733904241.png" width="180" /></p>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">ls -l</code> 命令查看文件的属性：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-rwxr-xr-x</span> 1 zz <span class="nb">users </span>18700 10-20 21:40 mycal
+</code></pre></div></div>
+
+<blockquote>
+  <p>第一个参数是文件类型：</p>
+
+  <ul>
+    <li>当为 <strong>d</strong> 则是目录</li>
+    <li>当为 <strong>-</strong> 则是文件；</li>
+    <li>若是 <strong>l</strong> 则表示为链接文档 (link file)；</li>
+    <li>若是 <strong>b</strong> 则表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
+    <li>若是 <strong>c</strong> 则表示为装置文件里面的串行端口设备，例如键盘、鼠标 (一次性读取装置)</li>
+  </ul>
+
+  <p>接下来的9个字符，每3个一组：</p>
+
+  <ul>
+    <li>user     rwx   7</li>
+    <li>group   r-x    4</li>
+    <li>others   r-x    4</li>
+  </ul>
+
+  <p>最后是：文件的 <font color="orange">硬链接数</font> 、文件拥有者、所属 group、文件字符数 bytes、date and time、fileName</p>
+</blockquote>
+
+<h3 id="chmod-change-mode">chmod (change mode)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> <span class="o">[</span><span class="nb">who</span><span class="o">]</span> operator <span class="o">[</span>permission] filename
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>who:   u – user      g – group      o – other     a – all</p>
+  </li>
+  <li>
+    <p>operator:   + 增加权限        - 取消权限          = 设置</p>
+
+    <p>权限</p>
+  </li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">chmod </span>a-x myfile 	收回所有用户的执行权限
+<span class="nv">$ </span><span class="nb">chmod </span>u+x myfile 	赋予文件所属者执行权限
+<span class="nv">$ </span><span class="nb">chmod </span>744 myfile	赋予所有者 rwx、用户组 r、其它用户 r
+</code></pre></div></div>
+
+<p>注：文件夹需要有可执行权限才能打开！</p>
+
+<h3 id="chown-change-ownerp">chown (change ownerp)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -R 对所有子目录下的文件执行同样操作</span>
+<span class="c"># -h 在改变符号链接文件的属主时不影响该链接所指向的目标文件</span>
+
+<span class="nb">chown</span> <span class="nt">-R</span> <span class="nt">-h</span> owner <span class="nb">dir</span>	<span class="c"># 将文件夹 dir 的所属用户设置为 owner</span>
+<span class="nb">chown </span>root fileNane		<span class="c"># 将文件 fileName 的所有者设置为 root</span>
+
+<span class="nb">chgrp</span> –R –h group file	<span class="c"># 将文件夹 dir 的所属用户组设置为 group</span>
+</code></pre></div></div>
+
+<h3 id="chgrp">chgrp</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">chgrp</span> <span class="o">[</span><span class="nt">-cfhRv</span><span class="o">][</span><span class="nt">--help</span><span class="o">][</span><span class="nt">--version</span><span class="o">][</span>所属群组][文件或目录...]
+<span class="c"># -R, --recursive     		operate on files and directories recursively</span>
+<span class="nv">$ </span><span class="nb">chgrp</span> <span class="nt">-R</span> group1 dir1		<span class="c"># 将目录 dir1 的所属群组改为 group1</span>
+</code></pre></div></div>
+
+<h3 id="id">id</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">id </span>userName		<span class="c"># 查看用户 userName 所属用户组</span>
+
+<span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>yin<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>yin<span class="o">)</span> 组<span class="o">=</span>1000<span class="o">(</span>yin<span class="o">)</span>,7<span class="o">(</span>lp<span class="o">)</span>,27<span class="o">(</span><span class="nb">sudo</span><span class="o">)</span>,100<span class="o">(</span><span class="nb">users</span><span class="o">)</span>,109<span class="o">(</span>netdev<span class="o">)</span>,117<span class="o">(</span>lpadmin<span class="o">)</span>,120<span class="o">(</span>scanner<span class="o">)</span>,123<span class="o">(</span>sambashare<span class="o">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="d-用户和用户组管理">D. 用户和用户组管理</h1>
+
+<h4 id="1-user-用户">(1) user 用户</h4>
+
+<p>添加用户的方法：</p>
+
+<ul>
+  <li>useradd：创建用户名，未创建主目录和设置密码</li>
+  <li>
+    <font color="orange">adduser</font>
+    <p>：创建用户名，同时创建目录并设置密码（常用）</p>
+  </li>
+</ul>
+
+<p>删除用户的方法：</p>
+
+<ul>
+  <li>userdel：删除用户名</li>
+  <li>userdel <strong>-r</strong> userName：删除用户以及对应的主目录</li>
+</ul>
+
+<h3 id="adduser">adduser</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>useradd –d  /home/sam <span class="nt">-m</span> sam	<span class="c"># 创建了一个用户sam，其中-d和-m选项用来为登录名sam产生一个主目录 /home/sam;  /home为默认的用户主目录所在的父目录</span>
+userdel <span class="nt">-r</span> sam		<span class="c"># 删除用户asm，同时删除对应的主目录</span>
+</code></pre></div></div>
+
+<h3 id="adduser-1">adduser</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adduser sam		<span class="c"># 创建用户，设置密码，同时创建主目录</span>
+</code></pre></div></div>
+
+<p>用户组管理可参照 <a href="https://www.runoob.com/linux/linux-user-manage.html">doc</a></p>
+
+<h3 id="su">su</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>su userName		<span class="c"># 切换用户，登录 userName</span>
+<span class="nb">cd</span> ~			<span class="c"># 进入userName 的主目录</span>
+</code></pre></div></div>
+
+<h3 id="sudo">sudo</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>su			<span class="c"># 切换到超级管理员</span>
+su root			<span class="c"># 切换到超级管理员</span>
+<span class="nb">sudo </span>command1	<span class="c"># 使用管理员权限执行命令 command1</span>
+</code></pre></div></div>
+
+<h2 id="2-group-用户组">(2) group 用户组</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>addgroup group1				<span class="c"># 添加用户组 group1</span>
+
+<span class="nv">$ </span>groupmod <span class="nt">-g</span> 111 group1		<span class="c"># 将组 group1 的组标识号修改为111</span>
+<span class="nv">$ </span>groupmod <span class="nt">-n</span> group01 group1	<span class="c"># 将组 group1 的名称改为 group01</span>
+
+<span class="nv">$ </span>gpasswd <span class="nt">-a</span> user1 group1		<span class="c"># 将 user1 加入 group1</span>
+<span class="nv">$ </span>gpasswd <span class="nt">-d</span> user1 group1		<span class="c"># 将 user1 移出 group1</span>
+
+<span class="nv">$ </span>delgroup group1				<span class="c"># 删除用户组 group11</span>
+</code></pre></div></div>
+
+<h5 id="3-与用户账号有关的系统文件">(3) 与用户账号有关的系统文件</h5>
+
+<p>与用户和用户组相关的信息都存放在一些系统文件中，这些文件包括 <code class="language-plaintext highlighter-rouge">/etc/passwd</code>, <code class="language-plaintext highlighter-rouge">/etc/shadow</code>, <code class="language-plaintext highlighter-rouge">/etc/group</code>等</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">/etc/passwrd</code> 对所有用户可读（默认隐藏），可以查看用户</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+yin:x:1000:1000::/home/yin:/bin/bash
+Host:x:1001:1001::/home/Host:/bin/bash
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p><strong>格式</strong>：用户名 : 口令 : 用户标识号 : 组标识号 : 注释性描述 : 主目录 : 登录Shell</p>
+
+      <ul>
+        <li>用户名：代表用户帐号的字符窜；</li>
+        <li>口令：真正加密后的口令在 /etc/shadow 中，/etc/passwd/ 中仅存放一个特殊字符 * 或 x；</li>
+        <li>注释性描述：用户的姓名、电话、住址等信息；</li>
+        <li>主目录：用户登录系统后所处的目录，对自己的主目录有读写执行权限；</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">/etc/shadow</code> 也有类似的内容</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="e-linux-磁盘管理">E. Linux 磁盘管理</h3>
+
+<p>Linux磁盘管理好坏直接关系到整个系统的性能问题，磁盘管理常用三个命令为df、du和fdisk。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">df</code>：列出文件系统的整体磁盘使用量</li>
+  <li><code class="language-plaintext highlighter-rouge">du</code>：检查磁盘空间使用量</li>
+  <li><code class="language-plaintext highlighter-rouge">fdisk</code>：用于磁盘分区</li>
+</ul>
+
+<h4 id="df-disk-free语法如下">df (disk free)语法如下：</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># df [-ahikHTm] [目录或文件名]</span>
+<span class="c"># -h ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；</span>
+
+<span class="nv">$ </span><span class="nb">df</span>		<span class="c"># 将系统内所有的文件系统列出来</span>
+<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>		<span class="c"># 将容量结果以易读的容量格式显示出来</span>
+文件系统        容量  已用  可用 已用% 挂载点
+udev            3.8G     0  3.8G    0% /dev
+tmpfs           776M  3.0M  773M    1% /run
+/dev/sda9        67G   12G   52G   19% /
+tmpfs           3.8G   93M  3.7G    3% /dev/shm
+tmpfs           5.0M  4.0K  5.0M    1% /run/lock
+tmpfs           3.8G     0  3.8G    0% /sys/fs/cgroup
+/dev/sda1       256M   42M  215M   17% /boot/efi
+tmpfs           776M   56K  776M    1% /run/user/1000
+/dev/sda8       996M  539M  458M   55% /media/yin/LRS_ESP
+/dev/sda5       108G   16G   92G   15% /media/yin/尹同学
+/dev/sda4       175G   97G   78G   56% /media/yin/LENOVO
+/dev/sda3       100G   86G   15G   86% /media/yin/Windows
+
+<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span> /etc	<span class="c"># 将 /etc 所在分区的可用的磁盘容量以易读的容量格式显示</span>
+文件系统         容量  已用  可用 已用% 挂载点
+/dev/sda9       67G  12G  52G  19%    /
+</code></pre></div></div>
+
+<h4 id="du-disk-usage">du (disk usage)</h4>
+
+<p>Linux <code class="language-plaintext highlighter-rouge">du</code>命令也是查看使用空间的，对<strong>文件</strong>和<strong>目录</strong>磁盘<font color="orange">使用的空间</font>进行查看</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">du</span> <span class="o">[</span><span class="nt">-ahskm</span><span class="o">]</span> 文件或目录名称
+
+<span class="nv">$ </span><span class="nb">du</span>			<span class="c"># 只列出当前目录下的所有文件夹容量（包括隐藏文件夹）</span>
+
+<span class="nv">$ </span><span class="nb">du</span> <span class="nt">-h</span> <span class="nb">test</span>	<span class="c"># 以易读的容量格式显示目录test中的所有 文件夹 的容量</span>
+672K    <span class="nb">test</span>
+
+<span class="nv">$ </span><span class="nb">du</span> <span class="nt">-ah</span> <span class="nb">test</span>	<span class="c"># 以易读的容量格式显示目录test中的所有 文件及文件夹 的容量(可以列出文件)</span>
+4.0K    <span class="nb">test</span>/b.txt
+4.0K    <span class="nb">test</span>/rx.md
+656K    <span class="nb">test</span>/Linux_Note.pdf
+4.0K    <span class="nb">test</span>/a.txt
+672K    <span class="nb">test</span>
+</code></pre></div></div>
+
+<h4 id="fdisk">fdisk</h4>
+
+<p><code class="language-plaintext highlighter-rouge">fdisk</code> 是 Linux 的磁盘分区表操作工具，语法如下：</p>
+
+<pre><code class="language-sell">fdisk [-l] 装置名称
+</code></pre>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>fdisk <span class="nt">-l</span>		<span class="c"># 列出所有分区信息</span>
+
+Disk /dev/sda: 465.8 GiB, 500107862016 bytes, 976773168 sectors
+Disk model: WDC WD5000LPCX-2
+Units: sectors of 1 <span class="k">*</span> 512 <span class="o">=</span> 512 bytes
+Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: 512 bytes / 4096 bytes
+I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: 4096 bytes / 4096 bytes
+Disklabel <span class="nb">type</span>: gpt
+Disk identifier: A00C89EE-990C-4830-9FBB-744156B01235
+
+Device         Start       End   Sectors   Size Type
+/dev/sda1       2048    534527    532480   260M EFI System
+/dev/sda2     534528    567295     32768    16M Microsoft reserved
+/dev/sda3     567296 210282495 209715200   100G Microsoft basic data
+/dev/sda4  210282496 575735807 365453312 174.3G Microsoft basic data
+/dev/sda5  719097856 944377855 225280000 107.4G Microsoft basic data
+/dev/sda6  944379904 946427903   2048000  1000M Windows recovery environment
+/dev/sda7  946427904 974725119  28297216  13.5G Windows recovery environment
+/dev/sda8  974725120 976773119   2048000  1000M Lenovo boot partition
+/dev/sda9  575735808 719097855 143362048  68.4G Linux filesystem
+
+Partition table entries are not <span class="k">in </span>disk order.
+
+<span class="nv">$ </span><span class="nb">df</span> /		<span class="c"># 查看根目录所在分区</span>
+文件系统          1K-块     已用     可用 已用% 挂载点        
+/dev/sda9      70031584 12443556 53987596   19% /
+
+<span class="nv">$ </span>fdisk /dev/sda	<span class="c"># 输入命令后接着输入 m 查看各种操作</span>
+Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: m		<span class="c"># 查看命令帮助</span>
+Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: q		<span class="c"># 离开不保存</span>
+</code></pre></div></div>
+
+<h4 id="mkfs">mkfs</h4>
+
+<p><code class="language-plaintext highlighter-rouge">mkfs</code> 命令可以<strong>实现</strong>磁盘分区格式化，语法为：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkfs <span class="o">[</span><span class="nt">-t</span> 文件系统格式] 装置文件名
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="f-apt">F. apt</h3>
+
+<p>apt（Advanced Packaging Tool）是一个在 Debian 和 Ubuntu 中的 Shell 前端软件包管理器；</p>
+
+<p>apt 命令提供了查找、安装、升级、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记；</p>
+
+<p>apt 命令执行需要超级管理员权限 <font color="orange">**root**</font>。</p>
+
+<h5 id="语法">语法</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>apt <span class="o">[</span>options] <span class="o">[</span><span class="nb">command</span><span class="o">]</span> <span class="o">[</span>package ...]
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>options：可选选项包括 -h（帮助），-y（当安装过程提示选择全部为”yes”），-q（不显示安装的过程）等等；</li>
+    <li>command：要进行的操作；</li>
+    <li>package：安装的包名。</li>
+  </ul>
+</blockquote>
+
+<h5 id="apt-常用命令">apt 常用命令</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">命令</th>
+      <th style="text-align: center">功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>sudo apt update</strong></td>
+      <td style="text-align: center">列出所有可更新的软件清单命令</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>sudo apt upgrade</strong></td>
+      <td style="text-align: center">升级软件包</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>apt list –upgradeable</strong></td>
+      <td style="text-align: center">列出可更新的软件包及版本信息</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>sudo apt full-upgrade</strong></td>
+      <td style="text-align: center">升级软件包，升级前先删除需要更新软件包</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">**sudo apt install **</td>
+      <td style="text-align: center">安装指定的软件命令（可以一次性安装多个包）</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">**sudo apt update **</td>
+      <td style="text-align: center">更新指定的软件命令</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">**sudo apt show **</td>
+      <td style="text-align: center">显示软件包具体信息，例如：版本号，安装大小，依赖关系等等</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">**sudo apt remove **</td>
+      <td style="text-align: center">删除软件包命令</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>sudo apt autoremove</strong></td>
+      <td style="text-align: center">清理不再使用的依赖和库文件</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>apt list –all-versions</strong></td>
+      <td style="text-align: center">列出所有已安装的包的版本信息</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>apt list –installed</strong></td>
+      <td style="text-align: center">列出所有已安装的包</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">**sudo apt search **</td>
+      <td style="text-align: center">查找相关的软件包</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update		<span class="c"># 查看可更新的包</span>
+<span class="nb">sudo </span>apt upgrade	<span class="c"># 升级安装包</span>
+<span class="nb">sudo </span>apt update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt upgrade <span class="nt">-y</span>	<span class="c"># 组合上面的命令，一键升级</span>
+<span class="nb">sudo </span>apt <span class="nb">install </span>mplayer				<span class="c"># 安装 mplayer</span>
+<span class="nb">sudo </span>apt <span class="nb">install </span>mplayer <span class="nt">--no-upgrade</span>	<span class="c"># 安装 mplayer，如果 mplayer 存在则不升级</span>
+<span class="nb">sudo </span>apt remove mplayer					<span class="c"># 移除包 mplayer</span>
+apt search libimobile					<span class="c"># 查找名为 libmobile 的包</span>
+apt show apache2						<span class="c"># 查看包 apache2 的相关信息</span>
+<span class="nb">sudo </span>apt autoremove						<span class="c"># 清理不再使用的依赖或库文件</span>
+</code></pre></div></div>
+
+<p>注：如果忘记包名称，可以输入一部分名字，按下 <code class="language-plaintext highlighter-rouge">Tab</code> 后会出现相关选项！</p>
+
+<hr />
+
+<h3 id="font-colorff5522g-exercisefont">&lt;font color=#ff5522&gt;G. Exercise&lt;/font&gt;：</h3>
+
+<h5 id="1-验收练习">1. 验收练习</h5>
+
+<p>下面是在熟悉Linux命令后的一个验收小测验，建议先根据问题描述自己实践，再看参考答案！</p>
+
+<p><strong>问题描述</strong></p>
+
+<ul>
+  <li>创建用户 Tom 和 Aimer</li>
+  <li>在 Tom 的家目录中创建文件夹 dir1 和 文件 file1</li>
+  <li>设置 dir1 的权限，使得 dir1 允许 Tom 和 Aimer 读、写和执行</li>
+</ul>
+
+<p><strong>参考答案</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>adduser Tom		<span class="c"># 创建用户</span>
+<span class="nb">sudo </span>adduser Aimer
+su Tom					<span class="c"># 登录用户 Tom</span>
+<span class="nb">cd</span> ~					<span class="c"># 进入 Tom 家目录</span>
+<span class="nb">mkdir </span>dir1
+<span class="nb">touch </span>file1
+<span class="nb">sudo </span>addgroup group01			<span class="c"># 创建用户组 group01</span>
+<span class="nb">sudo </span>gpasswd <span class="nt">-a</span> Tom group01		<span class="c"># 添加用户到用户组</span>
+<span class="nb">sudo </span>gpasswd <span class="nt">-a</span> Aimer group01
+<span class="nb">sudo chgrp</span> <span class="nt">-R</span> group01 dir1		<span class="c"># 将目录 dir1 的所属群组改为 group01</span>
+<span class="nb">chmod </span>g+r+x dir1				<span class="c"># 设置目录 dir1 对用户组的权限</span>
+</code></pre></div></div>
+
+<hr />
+
+<h5 id="2-开启httpftpssh服务">2. 开启HTTP、FTP、SSH服务</h5>
+
+<p><strong>(1) HTTP服务</strong></p>
+
+<ul>
+  <li>
+    <p>安装 apache2</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt instal apache2
+</code></pre></div>    </div>
+
+    <p>安装完成后会得到一个路径：<code class="language-plaintext highlighter-rouge">/var/www/html</code></p>
+  </li>
+  <li>
+    <p>在上述默认路径 <code class="language-plaintext highlighter-rouge">/var/www/html</code> 中新建一个 test.html 文件</p>
+  </li>
+  <li>
+    <p>打开手机热点，与客户端连接到同一个局域网，客户端使用 chrome 访问我的 ip/test.html</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>192.168.2.3/test.html
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong>(2) FTP服务</strong></p>
+
+<ul>
+  <li>
+    <p>ftp是文件传输协议，首先安装 <strong>vsftpd</strong>：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>vsftpd
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>接着在同一局域网下，另一台主机可连接我的主机：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>sftp root@192.168.2.3			<span class="c"># 我的用户名是root ip是 192.168.2.3</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>接着进行文件传输</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 本地命令  lcd	 lls</span>
+<span class="c"># 服务端命令  cd ls</span>
+sftp&gt; put /home/yin/Desktop/a.txt /var/www/doc/		<span class="c"># 上传本地的 a.txt 到服务器的 /var/www/doc/目录</span>
+sftp&gt; get /var/www/doc/b.txt /home/yin/Desktop/		<span class="c"># 下载服务端的 b.txt 到我的桌面</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong>(3) SSH</strong></p>
+
+<p>客户端： ssh client</p>
+
+<p>服务端： ssh server</p>
+
+<ul>
+  <li>
+    <p>服务端安装 openssh-server</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>openssh-server
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>若服务器 ip 192.168.2.3，ssh 服务端口为 22,服务器上有个用户为 root，用 ssh 登录服务器：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh root@192.168.2.3
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<p>「参考内容」</p>
+
+<ul>
+  <li><a href="https://www.runoob.com/linux/linux-tutorial.html">Linux 菜鸟教程</a></li>
+  <li>如何安装Linux操作系统可以参考我的CSDN博客<a href="https://blog.csdn.net/qq_41140138/article/details/110483861">安装Linux操作系统</a></li>
+</ul>
+:ET
