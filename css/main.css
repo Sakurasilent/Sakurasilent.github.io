@@ -3,7 +3,10 @@
    License: none (public domain)
 */
 @import url(animate.css);
-@import url(tomorrow.css);
+/*@import url(tomorrow.css);*/
+@import url(atom-one-dark.css);
+/* @import url(atom-one-dark-reasonable.css); */
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -25,7 +28,7 @@ ol, ul {
 
 blockquote, q {
   quotes: none;
-  background-color: #f0f0f0;
+  background-color: #F5FAFB;
 }
 blockquote:before, blockquote:after {
   content: '';
@@ -103,24 +106,37 @@ h5 {
   margin-bottom: .5em;
   font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   font-weight: lighter;
-  color: #333333;
+  color: #000000;
   -webkit-font-smoothing: antialiased; }
 
 h1 {
-  margin-top: 0;
-  font-size: 2.0em;
+  margin-top: 5px;
+  font-size: 2.8em;
   line-height: 1.2em;
-  letter-spacing: .05em;
+  letter-spacing: .08em;
   font-weight: bold;
-}
-
-h2 {
-  font-size: 1.5em;
-  font-weight: bold;
-  /*background:#B9D3EE;*/
   /*text-align: center;*/
 }
 
+/* 头像处的 h2 */
+h2 {
+  font-size: 2.0em;
+  font-weight: bold;
+  letter-spacing: .04em;
+  margin-left: 8px;
+}
+
+h3 {
+  font-size: 1.6em;
+  text-indent: 4px;
+  font-weight: bold;
+  letter-spacing: .03em;
+  margin-left: 8px;
+  border-left: 6px solid #22aa66;
+  padding-left: 18px;
+}
+
+/*
 h3 {
   font-size: 1.2em;
   text-indent: 4px;
@@ -128,48 +144,52 @@ h3 {
   padding: 6px 15px;
   margin-bottom: 20px;
   margin-top: 5px;
-  background:#B9D3EE;
+  background:#B9D3EE;*/
   /*0px right, 5px botton, 5px fuzzy*/
-  box-shadow: 0px 5px 5px #9FB6CD;
+  /*box-shadow: 0px 5px 5px #9FB6CD;
   border-left: 6px solid #1874CD;
   position:relative;
 }
+*/
 
 h4 {
-  font-size: 1.2em;
-  padding: 6px 15px;
+  font-size: 1.3em;
+  padding-left: 1px;
   font-weight: bold;
+  letter-spacing: .02em;
 }
 
 h5 {
   font-size: 1em;
   font-weight: bold;
+  letter-spacing: .01em;
 }
 
 p {
   margin-bottom: 10px;
   margin-top: 5px;
   line-height: 1.7em;
-  padding-left: 20px;
-  font-size: 16px;
+  padding-left: 10px;
+  font-size: 1.25em;
 }
 
 strong {
-  font-weight: bold; }
+  font-weight: bold;
+  letter-spacing: .04em; }
 
 em {
   font-style: italic; }
 
 blockquote {
-  padding-top: 10px;
-  padding-bottom: 1px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   padding-left: 10px;
-  margin-left: 20px;
+  margin-left: 8px;
 
   font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   font-weight: lighter;
   font-size: 1em;
-  border-left: 3px solid #4F4F4F;
+  border-left: 5px solid #98C3A9;
 }
 blockquote p:last-child {
   margin-bottom: 0; }
@@ -177,8 +197,10 @@ blockquote p:last-child {
 ol, ul {
   margin: 0 0 1.3em 2.5em; }
 ol li, ul li {
-  margin: 0 0 .2em 0;
-  line-height: 1.6em; }
+  margin: 0 0 .1em 0;
+  line-height: 1.8em;
+  line-height: 28px;
+  font-size: 1.2em;  }
 ol ol, ol ul, ul ol, ul ul {
   margin: .1em 0 .2em 2em; }
 ol {
@@ -187,6 +209,18 @@ ol {
 ul {
   list-style-type: disc; }
 
+code {
+  color: #F26900;
+  padding: .1em .4em;
+  background: #F5F2F2;
+  border: 0px solid #F5F2F2;
+  border-radius: 6px;
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  font-size: 1.1em;
+  vertical-align: bottom;
+  word-wrap: break-word; }
+
+/*
 code {
   color: #000000;
   padding: .1em .4em;
@@ -197,15 +231,17 @@ code {
   font-size: 1.0em;
   vertical-align: bottom;
   word-wrap: break-word; }
-
+*/
 pre {
   margin-bottom: 1.3em;
   padding: 1em 2.5%;
-  background: #e8f2fb;
-  border: 1px solid #c9e1f6;
-  border-radius: 3px;
+  background: #282C34;
+  /*border: 1px solid #c9e1f6;*/
+  border: 1px solid #dddddd;
+  border-radius: 12px;
   font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-  font-size: .9em;
+  /*font-size: .9em;*/
+  font-size: 1.1em;
   font-weight: normal;
   line-height: 1.3em;
   overflow: scroll; }
@@ -216,7 +252,7 @@ pre code {
   word-wrap: normal; }
 
 table {
-  color: #333333;
+  color: #000000;
   font-size: .9em;
   text-align: center;
   line-height: 40px;
@@ -868,7 +904,7 @@ img::-moz-selection {
     line-height: 1.3em;
   }
   .post-list__post-title a {
-   color: #333333;
+   color: #000000;
    padding-top: 5px;
    padding-left: 10px;
   }
@@ -1172,7 +1208,7 @@ input[type="tel"]:-ms-input-placeholder {
   }
   h1 {
     margin-top: 0;
-    font-size: 1.6em;
+    font-size: 2.0em;
     line-height: 1.0em;
     letter-spacing: 0;
   }
@@ -1224,7 +1260,7 @@ body {
     border-radius: 50%;
     width: 100%;
     height: 100%;
-    background: #333333;
+    background: #000000;
 }
 
 .ih-item.circle.effect .info h2 {
