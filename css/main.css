@@ -779,17 +779,35 @@ img::-moz-selection {
     line-height: 1em;
   }
 
+
+
+  /* nav{
+    font-size: 1.35em;
+    font-family: fantasy;
+    font-weight: bold;
+  } */
+
+
+
+
+
   .navigation__item a {
     display: inline-block;
     position: relative;
     width: 100%;
     border-color: #666;
-    color: #666;
+    color: #777;
+    font-size: 0.8em;     /*  size */
+    font-family: fantasy;
+    font-weight: bold;
     /*opacity: .8; */
   }
 
   .navigation__item a:hover {
-    color: #fff;
+    color: #2296FF;
+    font-size: 1.0em;
+    font-family: fantasy;
+    font-weight: bold;
   }
 
   .navigation__item_social {
@@ -1513,3 +1531,11 @@ nav a {
   padding-left: 10px;
   border-left: 21px solid #222222;
 }
+
+
+/* 左侧导航按钮的初始字体设置 */
+/* nav{
+  font-size: 1.35em;
+  font-family: fantasy;
+  font-weight: bold;
+} */
