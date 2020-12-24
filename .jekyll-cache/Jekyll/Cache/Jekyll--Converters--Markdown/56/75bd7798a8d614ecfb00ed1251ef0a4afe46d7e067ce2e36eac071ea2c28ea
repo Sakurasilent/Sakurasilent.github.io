@@ -1,4 +1,4 @@
-I"�[<p><br /></p>
+I"�[<p><br /></p>
 <h1 id="1-getting-started">1. GETTING STARTED</h1>
 
 <h2 id="11-install-git">1.1 Install git</h2>
@@ -59,7 +59,7 @@ git config username		<span class="c"># 查看 username</span>
 
 <h2 id="22-获取-git-仓库">2.2 获取 git 仓库</h2>
 
-<font color="ffaa55">**1. 在已存在目录中初始化仓库**</font>
+<h3 id="221-在已存在目录中初始化仓库">2.2.1 在已存在目录中初始化仓库</h3>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /home/yin/workspace
 <span class="nv">$ </span>git init					<span class="c"># 初始化仓库，创建一个名为 .git 的子目录</span>
@@ -71,7 +71,7 @@ git config username		<span class="c"># 查看 username</span>
 <span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s1">'initial project version'</span>	<span class="c"># 提交</span>
 </code></pre></div></div>
 
-<font color="ffaa55">**2. 克隆仓库**</font>
+<h3 id="222-克隆仓库">2.2.2 克隆仓库</h3>
 
 <p>克隆仓库的命令是 <code class="language-plaintext highlighter-rouge">git clone </code> 。 比如，要克隆 Git 的链接库 <code class="language-plaintext highlighter-rouge">libgit2</code>，可以用下面的命令：</p>
 
@@ -363,6 +363,10 @@ ssh <span class="nt">-vT</span> git@github.com
 <p>将密钥粘贴到github个人设置中：</p>
 
 <p><img src="/images/posts/blogImages/2020121005.png" width="700" /></p>
+
+<p><br /></p>
+
+<p><br /></p>
 
 <p>「参考内容」</p>
 

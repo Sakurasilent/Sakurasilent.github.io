@@ -1,4 +1,4 @@
-I"j�<p><br /></p>
+I"(�<p><br /></p>
 <h1 id="a-linux-文件">A. Linux 文件</h1>
 
 <ul>
@@ -447,7 +447,7 @@ Command <span class="o">(</span>m <span class="k">for </span><span class="nb">he
 
 <p>apt 命令提供了查找、安装、升级、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记；</p>
 
-<p>apt 命令执行需要超级管理员权限 <font color="orange">**root**</font>。</p>
+<p>apt 命令执行需要超级管理员权限 <font color="orange">root</font>。</p>
 
 <h3 id="语法">语法</h3>
 
@@ -462,7 +462,7 @@ Command <span class="o">(</span>m <span class="k">for </span><span class="nb">he
   </ul>
 </blockquote>
 
-<h3 id="apt-常用命令">apt 常用命令</h3>
+<h2 id="apt-常用命令">apt 常用命令</h2>
 
 <table>
   <thead>
@@ -538,9 +538,9 @@ apt show apache2						<span class="c"># 查看包 apache2 的相关信息</span>
 
 <hr />
 
-<h3 id="font-colorff5522g-exercisefont">&lt;font color=#ff5522&gt;G. Exercise&lt;/font&gt;：</h3>
+<h1 id="g-exercise">G. Exercise</h1>
 
-<h5 id="1-验收练习">1. 验收练习</h5>
+<h2 id="1-验收练习">1. 验收练习</h2>
 
 <p>下面是在熟悉Linux命令后的一个验收小测验，建议先根据问题描述自己实践，再看参考答案！</p>
 
@@ -569,7 +569,7 @@ su Tom					<span class="c"># 登录用户 Tom</span>
 
 <hr />
 
-<h5 id="2-开启httpftpssh服务">2. 开启HTTP、FTP、SSH服务</h5>
+<h2 id="2-开启httpftpssh服务">2. 开启HTTP、FTP、SSH服务</h2>
 
 <p><strong>(1) HTTP服务</strong></p>
 

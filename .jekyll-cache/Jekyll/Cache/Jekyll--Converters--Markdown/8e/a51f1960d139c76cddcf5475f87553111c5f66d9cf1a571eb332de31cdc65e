@@ -1,0 +1,296 @@
+I">P<p><br /></p>
+
+<h1 id="1-指针">1. 指针</h1>
+
+<h2 id="11-交换两个数">1.1 交换两个数</h2>
+
+<p><code class="language-plaintext highlighter-rouge">int *p = &amp;a;</code>	将指针 p 指向 a；</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">void</span> <span class="nf">change</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">){</span>	<span class="c1">// 使用指针交换数值</span>
+    <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">change</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"a = %d</span><span class="se">\n</span><span class="s">b = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="2-gdb-工具的使用">2. gdb 工具的使用</h1>
+
+<h2 id="21-安装-gdb-调试工具工具">2.1 安装 gdb 调试工具工具：</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>gdb
+</code></pre></div></div>
+
+<p>编译生成<font color="red">支持调试</font>的 .out 文件</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc <span class="nt">-g</span> main.c <span class="nt">-o</span> main.out  <span class="c"># 在编译的时候，产生调试信息</span>
+</code></pre></div></div>
+
+<h2 id="22-gdb-的使用">2.2 gdb 的使用</h2>
+
+<p>使用命令：<code class="language-plaintext highlighter-rouge">gdb main.out</code> 或 <code class="language-plaintext highlighter-rouge">gdb ./main.out</code> 进行调试</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gdb ./main2.out		<span class="c"># 调试main2.out</span>
+<span class="o">(</span>gdb<span class="o">)</span> list		<span class="c"># 查看源码</span>
+<span class="o">(</span>gdb<span class="o">)</span> l			<span class="c"># 查看源码</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> start		<span class="c"># 开始调试	会列出当前所在行号</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> p a		<span class="c"># print the value of variable a</span>
+<span class="o">(</span>gdb<span class="o">)</span> n			<span class="c"># next 单步执行(执行上一条命令，显示下一条命令)</span>
+<span class="o">(</span>gdb<span class="o">)</span> s			<span class="c"># 到某个函数处使用 s 进入这个函数</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> bt		<span class="c"># backtrace 查看函数堆栈</span>
+<span class="c">#0  change (a=5, b=3) at main2.c:5</span>
+<span class="c">#1  0x000000000040116d in main (argv=1, argc=0x7fffffffcc48) at main2.c:13</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> f 1		<span class="c"># 切换函数栈 1</span>
+<span class="o">(</span>gdb<span class="o">)</span> frame 0	<span class="c"># 切换到栈 0</span>
+<span class="o">(</span>gdb<span class="o">)</span> info stack	<span class="c"># 查看堆栈的使用情况</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> q			<span class="c"># 退出调试</span>
+</code></pre></div></div>
+
+<p>当使用指针进行调试时，进入函数后会出现地址：</p>
+
+<p><img src="/images/posts/blogImages/2020121004.png" width="700" /></p>
+
+<p><img src="/images/posts/blogImages/2020122402.png" width="600" /></p>
+
+<p>此时传入的是地址，两个地址 <font color="red">相差4个字节</font></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> p a		<span class="c"># 打印地址 a</span>
+<span class="o">(</span>gdb<span class="o">)</span> p <span class="k">*</span>a		<span class="c"># 打印 a 的内容</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="3-内存">3. 内存</h1>
+
+<p><strong>Q</strong>：32bits 的系统最大内存为4G？</p>
+
+<p><strong>A</strong>：32bits 的系统地址总线为32位，可使用的内存为 $2^{32}$ bits，最大内存为4G</p>
+
+<p><strong>Q</strong>：内存是如何分配的？</p>
+
+<p><strong>A</strong>：由操作系统统一来管理内存，操作系统调用函数</p>
+
+<p><strong>Q</strong>：为什么64位的系统中 gdb 打印的地址都是48位的？</p>
+
+<p><strong>A</strong>：受硬件处理器的限制，目前X86_64处理器的地址总线只有48位，一般默认64位地址的高16位为0，因此地址的实际范围为：<code class="language-plaintext highlighter-rouge">0x00 00 00 00 00 00</code> 到 <code class="language-plaintext highlighter-rouge">0x 7f ff ff ff ff ff</code></p>
+
+<p><strong>OS 功能</strong></p>
+
+<ul>
+  <li>
+    <p>对内存编号</p>
+  </li>
+  <li>
+    <p>对内存进行规划（如64位操作系统里面，将地址的低48位分配给用户使用，剩下的作为操作系统内核）</p>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="4-操作系统对内存的管理">4. 操作系统对内存的管理</h1>
+
+<p>对下面代码进行调试：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="n">global</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">rect</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+	<span class="k">static</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">count</span><span class="o">++</span><span class="p">;</span>
+	<span class="n">global</span><span class="o">++</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">quadrate</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span>
+	<span class="k">static</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">count</span><span class="o">++</span><span class="p">;</span>
+	<span class="n">global</span><span class="o">++</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="n">rect</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+	<span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+	<span class="kt">int</span><span class="o">*</span> <span class="n">pa</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+	<span class="kt">int</span><span class="o">*</span> <span class="n">pb</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">pglobal</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">global</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">pquadrate</span><span class="p">)(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">quadrate</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="n">quadrate</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="41-查看变量的地址">4.1 查看变量的地址：</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> start
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;a
+<span class="o">(</span>int <span class="k">*</span><span class="o">)</span> 0x7fffffffcb28		<span class="c"># 4 bits；a 的首地址为 0x7fffffffcb28 (字节作单位)</span>
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;b
+<span class="o">(</span>int <span class="k">*</span><span class="o">)</span> 0x7fffffffcb24		<span class="c"># 4 bits</span>
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;s
+<span class="o">(</span>int <span class="k">*</span><span class="o">)</span> 0x7fffffffcb2c		<span class="c"># 编译后进行了优化 (地址顺序和代码不一定一致)</span>
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;pquadrate
+<span class="o">(</span>int <span class="o">(</span><span class="k">**</span><span class="o">)(</span>int<span class="o">))</span> 0x7fffffffcb30
+
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;pa
+<span class="o">(</span>int <span class="k">**</span><span class="o">)</span> 0x7fffffffcb48		<span class="c"># 64 bits</span>
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;pb
+<span class="o">(</span>int <span class="k">**</span><span class="o">)</span> 0x7fffffffcb40		<span class="c"># 64 bits</span>
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;global
+<span class="o">(</span>int <span class="k">**</span><span class="o">)</span> 0x7fffffffcb38		
+
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;rect
+<span class="o">(</span>int <span class="o">(</span><span class="k">*</span><span class="o">)(</span>int, int<span class="o">))</span> 0x401102 &lt;rect&gt; <span class="c"># 先加载 (0x401139-0x401102=rect编译后的总长度)</span>
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;quadrate
+<span class="o">(</span>int <span class="o">(</span><span class="k">*</span><span class="o">)(</span>int<span class="o">))</span> 0x401139 &lt;quadrate&gt; 	<span class="c"># 后加载</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;global
+<span class="o">(</span>int <span class="k">*</span><span class="o">)</span> 0x40402c &lt;global&gt;	<span class="c"># 0x400402c 比代码段地址大</span>
+</code></pre></div></div>
+
+<h2 id="42-函数的调用">4.2 函数的调用：</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 当 main() 函数执行到：int s = quadrate(a);</span>
+    <span class="err">输入</span> <span class="n">s</span> <span class="err">进入函数</span> <span class="n">quadrate</span><span class="p">()</span><span class="o">:</span>
+       <span class="c1">// 当 quadrate() 函数执行到: int s = rect(a, a);</span>
+           <span class="err">输入</span> <span class="n">s</span> <span class="err">进入函数</span> <span class="n">rect</span><span class="p">()</span><span class="o">:</span>
+               <span class="err">此时打印栈的使用情况：</span>
+</code></pre></div></div>
+
+<p>得到下面的结果：</p>
+
+<p>函数调用时，栈从上往下增长，main 函数在最外层，地址更高，内层的函数地址更低，最内层的函数最先返回 FILO</p>
+
+<h2 id="43-内存的分配">4.3 内存的分配</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> bt
+<span class="c">#0  rect (a=5, b=5) at storage.c:7</span>
+<span class="c">#1  0x0000000000401171 in quadrate (a=5) at storage.c:17</span>
+<span class="c">#2  0x00000000004011b9 in main () at storage.c:29</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> f 0
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;count
+<span class="nv">$8</span> <span class="o">=</span> <span class="o">(</span>int <span class="k">*</span><span class="o">)</span> 0x404030 &lt;count&gt;		<span class="c"># rect 中的静态变量 更小</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> f 1
+<span class="o">(</span>gdb<span class="o">)</span> p &amp;count
+<span class="nv">$9</span> <span class="o">=</span> <span class="o">(</span>int <span class="k">*</span><span class="o">)</span> 0x404034 &lt;count&gt;		<span class="c"># quadrate 中的静态变量（quadrate 调用 rect）</span>
+</code></pre></div></div>
+
+<p>内存的示意图如下图所示：</p>
+
+<p><img src="/images/posts/blogImages/2020122402.png" width="600" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">内存</th>
+      <th style="text-align: center">存放内容</th>
+      <th style="text-align: center">特点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">代码段</td>
+      <td style="text-align: center">代码编译后生成的机器二进制码存放处（指令）</td>
+      <td style="text-align: center">地址向上增长</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">数据段</td>
+      <td style="text-align: center"><font color="red">全局变量、常量、静态变量</font></td>
+      <td style="text-align: center">向上增长</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">栈</td>
+      <td style="text-align: center">存放变量、函数调用</td>
+      <td style="text-align: center">地址接近 0x7fffffffffffffff，地址向下增长</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">内核</td>
+      <td style="text-align: center">操作系统相关的内容，用户不得修改</td>
+      <td style="text-align: center">地址高于 0x7fffffffffffffff</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>在 gdb 中查看内存：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x/3d 0x7fffffffd114	<span class="c"># 从给定地址开始显示3个数，用 decimal 显示</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="5-指针和数组">5. 指针和数组</h1>
+
+<h2 id="51-指针的运算">5.1 指针的运算</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">array</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+
+<span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="n">p</span> <span class="o">+=</span> <span class="mi">3</span><span class="p">;</span>			<span class="c1">// p 前进3格 指向 array[3]</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">array</span><span class="p">;</span>
+<span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>		<span class="c1">// *(p+2) = 5 即 array[2] = 5</span>
+</code></pre></div></div>
+
+<h2 id="52-字符数组">5.2 字符数组</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">char</span> <span class="n">str1</span><span class="p">[]</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>			<span class="c1">// 栈内存分配时分配在</span>
+	<span class="kt">char</span> <span class="o">*</span><span class="n">str2</span> <span class="o">=</span> <span class="s">"world"</span><span class="p">;</span>			<span class="c1">// "world" 存放在代码段，指针str2指向 "world"</span>
+	<span class="kt">char</span> <span class="n">str3</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"input the value: "</span><span class="p">);</span>
+	<span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">str3</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"str1 is %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">str1</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"str2 is %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">str2</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"str3 is %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">str3</span><span class="p">);</span>	<span class="c1">// str3是数组，也是地址</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>调试上述代码：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc <span class="nt">-g</span> test.c <span class="nt">-o</span> test.out
+<span class="nv">$ </span>gdb ./test.out
+
+<span class="o">(</span>gdb<span class="o">)</span> p str1		<span class="c"># 数值</span>
+<span class="nv">$1</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="o">(</span>gdb<span class="o">)</span> p str2		<span class="c"># 指针	存储在代码段</span>
+<span class="nv">$2</span> <span class="o">=</span> 0x402004 <span class="s2">"world"</span>
+</code></pre></div></div>
+
+<p>尝试 <code class="language-plaintext highlighter-rouge">scanf("%s", str2)</code> 回报错，原因是 str2 位于代码段，不能修改。</p>
+
+<p>在 <code class="language-plaintext highlighter-rouge">char str1[] = "hello";</code>之后加上一句 <code class="language-plaintext highlighter-rouge">str1[3] = '\0'</code>后再打印str1，只得到了 “hel”</p>
+
+<hr />
+
+<p>参考内容:</p>
+
+<p>1：<a href="http://www.imooc.com/learn/248">Linux 指针与内存</a></p>
+
+<p>2：<a href="https://www.imooc.com/learn/394">Linux C语言指针与内存</a></p>
+:ET

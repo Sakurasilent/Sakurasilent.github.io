@@ -1,4 +1,4 @@
-I"Z`<p><br /></p>
+I" a<p><br /></p>
 <h1 id="1-linux-c程序">1. Linux C程序</h1>
 
 <h2 id="11-第一个linux-c语言程序">1.1 第一个Linux C语言程序</h2>
@@ -37,7 +37,7 @@
   <p>.a是静态库，多个.o练链接得到，用于静态链接</p>
 </blockquote>
 
-<h3 id="gcc-命令">gcc 命令</h3>
+<h2 id="gcc-命令">gcc 命令</h2>
 
 <p>参数介绍</p>
 
@@ -93,7 +93,7 @@
 
 <h2 id="22-头文件与函数定义分离">2.2 头文件与函数定义分离</h2>
 
-<h3 id="先编译部分函数"><strong>先编译部分函数</strong></h3>
+<h4 id="先编译部分函数">先编译部分函数</h4>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc <span class="nt">-c</span> max.c		<span class="c"># 将 max.c 编译为 max.o</span>
 <span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
@@ -117,7 +117,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>重新编译主函数</strong></p>
+<h4 id="重新编译主函数">重新编译主函数</h4>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc max.o hello.c <span class="nt">-o</span> main.out
 </code></pre></div></div>
@@ -126,7 +126,7 @@
 
 <hr />
 
-<p><strong>创建头文件 .h</strong></p>
+<h3 id="创建头文件-h">创建头文件 .h</h3>
 
 <p>由于编译得到的 max.o 是二进制文件，需要生成一个可读文件来说明函数的功能，方便他人调用 max.o 文件：</p>
 
@@ -158,13 +158,16 @@ gcc max.o hello.c <span class="nt">-o</span> main.out	// compile
 
 <h1 id="3-makefile">3. makeFile</h1>
 
-<p><strong>Install make</strong></p>
+<h3 id="install-make">Install make</h3>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>make
 <span class="nv">$ </span>make <span class="nt">-v</span>
 </code></pre></div></div>
 
+<h3 id="创建-makefile">创建 Makefile</h3>
 <p>首先编辑好 <code class="language-plaintext highlighter-rouge">hello.c max.c min.c max.h min.h</code></p>
+
+<p>下面是主函数的代码：</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
 #include "max.h"	// int max(int a, int b);
@@ -183,7 +186,7 @@ gcc max.o hello.c <span class="nt">-o</span> main.out	// compile
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>生成 <code class="language-plaintext highlighter-rouge">Makefile</code> 文件（注意文件名）：</p>
+<p>接着，创建 <code class="language-plaintext highlighter-rouge">Makefile</code> 文件（注意文件名）：</p>
 
 <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># this is make file
 </span><span class="nl">hello.out</span><span class="o">:</span><span class="nf">max.o min.o hello.c</span>
@@ -194,6 +197,7 @@ gcc max.o hello.c <span class="nt">-o</span> main.out	// compile
 	gcc <span class="nt">-c</span> min.c
 </code></pre></div></div>
 
+<h3 id="使用-makefile-编译">使用 Makefile 编译</h3>
 <p>使用 <code class="language-plaintext highlighter-rouge">make</code> 命令进行编译：</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make
@@ -205,12 +209,14 @@ gcc max.o min.o hello.c <span class="nt">-o</span> hello.out
 </span>hello.c  hello.out  Makefile  max.c  max.h  max.o  min.c  min.h  min.o
 </code></pre></div></div>
 
-<p>使用Makefile的优点：</p>
+<h4 id="使用makefile的优点">使用Makefile的优点：</h4>
 
 <ul>
   <li>不需要每次都重新输入大量的命令来编译</li>
   <li>makefile 只对修改过的内容重新编译链接（节省了时间）</li>
 </ul>
+
+<hr />
 
 <h1 id="4-main-函数">4. main 函数</h1>
 
@@ -382,5 +388,5 @@ mtab
 
 <hr />
 
-<p>参考内容: <a href="https://www.imooc.com/learn/394">Linux 指针与内存</a></p>
+<p>参考内容: <a href="http://www.imooc.com/learn/248">Linux 指针与内存</a></p>
 :ET
