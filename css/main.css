@@ -91,7 +91,10 @@ p a {
 }
 
 a:hover {
-  color: #0000AA;
+  color: orange;
+  font-weight: bold;
+  font-size: 1.1em;
+  letter-spacing: .02em;
   -o-transition: .5s;
   -ms-transition: .5s;
   -moz-transition: .5s;
