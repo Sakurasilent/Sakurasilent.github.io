@@ -6,20 +6,22 @@ group: navigation
 ---
 {% include JB/setup %}
 
-<ul class="tag_box inline">
-  {% assign tags_list = site.tags %}
-  {% include JB/tags_list %}
-</ul>
-
-<div class="card">
-  {% for tag in site.tags %}
-
-  <h3 id="{{ tag[0] }}-ref">{{ tag[0] }}</h3>
-  <ul>
-    {% assign pages_list = tag[1] %}
-    {% include JB/pages_list %}
+<p class="TagsHead">所有标签</p>
+<div class="tags_style">
+  <ul class="tag_box inline">
+    {% assign tags_list = site.tags %}
+    {% include JB/tags_list %}
   </ul>
-
-
-  {% endfor %}
 </div>
+
+<br>
+
+{% for tag in site.tags %}
+
+<h4 id="{{ tag[0] }}-ref " class=tagName>{{ tag[0] }} </h4>
+<ul>
+  {% assign pages_list = tag[1] %}
+  {% include JB/pages_list %}
+</ul>
+<br>
+{% endfor %}
