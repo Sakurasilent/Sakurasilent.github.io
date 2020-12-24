@@ -1,4 +1,4 @@
-I" a<p><br /></p>
+I"�a<p><br /></p>
 <h1 id="1-linux-c程序">1. Linux C程序</h1>
 
 <h2 id="11-第一个linux-c语言程序">1.1 第一个Linux C语言程序</h2>
@@ -12,6 +12,8 @@
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
+
+<p>如果觉得终端打开的 Vim 编辑器代码主题有点不好看，可以参考<a href="https://blog.csdn.net/weixin_39274067/article/details/111469090">改一改</a></p>
 
 <p><strong>编译运行</strong>：</p>
 
