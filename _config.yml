@@ -1,7 +1,7 @@
 # Basic
 title:         我有两颗糖
 subtitle:      博客小屋
-description:   某个不愿露脸的尹同学
+description:   By 某个不愿露脸的尹同学
 # 头像里面的标题
 avatarTitle:   Yin
 # 头像里面的描述
@@ -20,14 +20,13 @@ comment:
 
 # Social
 social:
+    github:   git-jhy
     QQ:        1437130953
+    mail:      jianhuayin@hnu.edu.cn
     # weibo:   5366874726
-    github:    git-jhy
     # zhihu:   panpanleopard
     # juejin:  xxx
     # jianshu: 2ada30d8d0f7
-    # twitter:
-    mail:      jianhuayin@hnu.edu.cn
 
 
 # 百度统计
