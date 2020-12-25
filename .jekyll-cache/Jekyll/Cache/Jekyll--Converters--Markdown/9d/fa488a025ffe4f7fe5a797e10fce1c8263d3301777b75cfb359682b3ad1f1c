@@ -1,0 +1,412 @@
+I"�i<p><br /></p>
+<h1 id="1-getting-started">1. GETTING STARTED</h1>
+
+<h2 id="11-install-git">1.1 Install git</h2>
+
+<p>Reference：<a href="https://git-scm.com/download/linux">Download for Linux and Unix</a></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>su root
+<span class="nv">$ </span>apt-get <span class="nb">install </span>git	<span class="c"># 使用 apt-get 安装 git</span>
+<span class="nv">$ </span>git <span class="nt">--version</span>			<span class="c"># 查看所安装的 git 版本</span>
+</code></pre></div></div>
+
+<h2 id="12-git-配置">1.2 Git 配置</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--list</span> <span class="nt">--show-origin</span>					<span class="c"># 查看配置所在文件</span>
+
+git config <span class="nt">--global</span> user.name <span class="s2">"candy_wind"</span>		<span class="c"># 设置用户名</span>
+git config <span class="nt">--global</span> user.email jianhauyin@hnu.edu.cn	<span class="c"># 设置 Email</span>
+git config <span class="nt">--global</span> core.editor Typora			<span class="c"># 文本编辑器</span>
+
+git config <span class="nt">--list</span>		<span class="c"># 查看配置信息</span>
+user.name<span class="o">=</span>candy_wind
+user.email<span class="o">=</span>jianhuayin@hnu.edu.cn
+core.editor<span class="o">=</span>vim
+
+git config username		<span class="c"># 查看 username</span>
+</code></pre></div></div>
+
+<h2 id="getting-help">Getting help</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">help</span> &lt;verb&gt;
+<span class="nv">$ </span>git &lt;verb&gt; <span class="nt">--help</span>
+<span class="nv">$ </span>man git-&lt;verb&gt;
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="2-git-basics">2. GIT BASICS</h1>
+
+<p><strong>学习内容</strong>：</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />配置并初始化一个仓库（repository）</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />开始或停止跟踪（track）文件、暂存（stage）或提交（commit）更改</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />配置 Git 来忽略指定的文件和文件模式、如何迅速而简单地撤销错误操作、如何浏览你的项目的历史版本以及不同提交（commits）之间的差异、如何向你的远程仓库推送（push）以及如何从你的远程仓库拉取（pull）文件</li>
+</ul>
+
+<h2 id="21-git-文件状态">2.1 Git 文件状态</h2>
+
+<p>有三种状态： <strong>已提交 (committed)</strong>、<strong>已修改 (modified)</strong> 和 <strong>已暂存 (staged)</strong>。</p>
+
+<ul>
+  <li>已修改表示修改了文件，但还没保存到数据库中。</li>
+  <li>已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。</li>
+  <li>已提交表示数据已经安全地保存在本地数据库中</li>
+</ul>
+
+<p><img src="https://git-scm.com/book/en/v2/images/areas.png" width="600" /></p>
+
+<h2 id="22-获取-git-仓库">2.2 获取 git 仓库</h2>
+
+<h3 id="221-在已存在目录中初始化仓库">2.2.1 在已存在目录中初始化仓库</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /home/yin/workspace
+<span class="nv">$ </span>git init					<span class="c"># 初始化仓库，创建一个名为 .git 的子目录</span>
+</code></pre></div></div>
+
+<p>可以通过 <code class="language-plaintext highlighter-rouge">git add</code> 命令来指定所需的文件来进行追踪，然后执行 <code class="language-plaintext highlighter-rouge">git commit</code> ：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add FileName		                <span class="c"># 追踪文件（添加到 cache）</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s1">'initial project version'</span>	<span class="c"># 提交</span>
+</code></pre></div></div>
+
+<h3 id="222-克隆仓库">2.2.2 克隆仓库</h3>
+
+<p>克隆仓库的命令是 <code class="language-plaintext highlighter-rouge">git clone </code> 。 比如，要克隆 Git 的链接库 <code class="language-plaintext highlighter-rouge">libgit2</code>，可以用下面的命令：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/libgit2/libgit2	        <span class="c"># 克隆，在当前目录创建lingit2</span>
+<span class="nv">$ </span>git clone https://github.com/libgit2/libgit2 mylibgit	<span class="c"># 克隆到 mylibit</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="23-文件基本操作">2.3 文件基本操作</h2>
+
+<p>文件的状态变化如下图：</p>
+
+<p><img src="https://git-scm.com/book/en/v2/images/lifecycle.png" width="600" /></p>
+
+<p>工作区的文件有 <strong>已跟踪</strong> 或 <strong>未跟踪</strong> 两种状态，通过 <code class="language-plaintext highlighter-rouge">add</code> 来进行追踪，追踪后文件备份到 <strong>cache</strong> 中。编辑过某些文件之后，由于自上次提交后你对它们做了修改，Git 将它们标记为已修改文件。 在工作时，你可以选择性地将这些修改过的文件放入暂存区，然后提交所有已暂存的修改，如此反复。</p>
+
+<h3 id="231-查看文件状态">2.3.1 查看文件状态</h3>
+
+<p><code class="language-plaintext highlighter-rouge">git status</code>			   # 查看状态</p>
+
+<p><code class="language-plaintext highlighter-rouge">git status -s</code>		# 以紧凑的方式显示状态</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init		<span class="c"># initialize a repository</span>
+<span class="nv">$ </span>git status	        <span class="c"># 查看状态</span>
+<span class="nv">$ </span>git status <span class="nt">-s</span>		<span class="c"># 以紧凑的方式显示状态</span>
+<span class="nv">$ </span>git status <span class="nt">--short</span>	<span class="c"># 以紧凑的方式显示状态</span>
+</code></pre></div></div>
+
+<h3 id="232-文件的追踪与提交">2.3.2 文件的追踪与提交</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">touch </span>README.md
+<span class="nv">$ </span>git status <span class="nt">-s</span>
+<span class="nv">$ </span>git add README.md         <span class="c"># 添加追踪</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"initial project version"</span>     <span class="c"># commit</span>
+</code></pre></div></div>
+
+<h3 id="233-工作区变动">2.3.3 工作区变动</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add/rm &lt;文件&gt;...        <span class="c"># 更新要提交的内容 (若工作区文件删除，则用rm)</span>
+<span class="nv">$ </span>git checkout <span class="nt">--</span> &lt;文件&gt;...   <span class="c"># 丢弃工作区的改动</span>
+</code></pre></div></div>
+
+<p>如果想删除仓库中的文件，但让文件保留在磁盘，但是并<font color="red">不想让 Git 继续跟踪</font>，则用 <code class="language-plaintext highlighter-rouge">--cache</code>：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">rm</span> <span class="nt">--cache</span> FileName
+</code></pre></div></div>
+
+<p>在 Git 中修改文件名时使用 <code class="language-plaintext highlighter-rouge">git rm</code>：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">rm </span>filename1 filename2
+
+<span class="c"># 等价于：</span>
+<span class="nv">$ </span><span class="nb">mv </span>README.md README
+<span class="nv">$ </span>git <span class="nb">rm </span>README.md
+<span class="nv">$ </span>git add README
+</code></pre></div></div>
+
+<h3 id="234-查看历史版本">2.3.4 查看历史版本</h3>
+
+<p>（1）<code class="language-plaintext highlighter-rouge">git log</code> 命令可以查看历史提交版本信息</p>
+
+<p>（2）选项是 <code class="language-plaintext highlighter-rouge">--pretty</code>可以设置显示历史的方式， <code class="language-plaintext highlighter-rouge">oneline</code> 会将每个提交放在一行显示；
+另外还有 <code class="language-plaintext highlighter-rouge">short</code>，<code class="language-plaintext highlighter-rouge">full</code> 和 <code class="language-plaintext highlighter-rouge">fuller</code> 选项。</p>
+
+<p>（3）<code class="language-plaintext highlighter-rouge">format</code> 可以定制记录的显示格式</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log
+<span class="nv">$ </span>git log <span class="nt">-p</span> <span class="nt">-2</span>              <span class="c"># 只显示最近的两次提交</span>
+<span class="nv">$ </span>git log <span class="nt">--since</span><span class="o">=</span>2.weeks    <span class="c"># 列出最近两周的所有提交</span>
+<span class="nv">$ </span>git log <span class="nt">--pretty</span><span class="o">=</span>oneline   <span class="c"># 在一行显示每一个版本的信息</span>
+<span class="nv">$ </span>git log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s2">"%h - %an, %ar : %s"</span>   <span class="c"># 指定显示格式</span>
+</code></pre></div></div>
+
+<h3 id="回到历史版本">回到历史版本</h3>
+
+<p>可以使用 <code class="language-plaintext highlighter-rouge">git checkout xxxx</code> 回到过去的版本（本地内容也会回到过去）：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--pretty</span><span class="o">=</span>oneline
+362f0446037e774181cbf84ea48b528fc3e0de33 <span class="o">(</span>HEAD -&gt; master<span class="o">)</span> v1.2
+6e354fa64f745b49cabdb4f88506d9c7d079a2c4 v1.0
+
+<span class="nv">$ </span>git checkout 6e354fa64f745b49cabdb4f88506d9c7d079a2c4 <span class="c"># 回到历史版本</span>
+<span class="nv">$ </span><span class="nb">cat </span>start.md          <span class="c"># 查看内容 (看到的将是过去的版本)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="24-撤销操作">2.4 撤销操作</h2>
+
+<h3 id="241-重新提交">2.4.1 重新提交</h3>
+
+<p>如果上一次提交缺少了文件或者提交信息有误，可以运行带有 <code class="language-plaintext highlighter-rouge">--amend</code> （修订）选项的提交命令来重新提交：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s1">'initial commit'</span>
+<span class="nv">$ </span>git add forgotten_file
+<span class="nv">$ </span>git commit <span class="nt">--amend</span>				<span class="c"># 第二次提交将代替第一次提交的结果</span>
+</code></pre></div></div>
+
+<h3 id="242-取消暂存">2.4.2 取消暂存</h3>
+
+<p>使用<code class="language-plaintext highlighter-rouge">git reset HEAD ...</code> 来取消暂存：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add <span class="k">*</span>	                <span class="c"># 不小心将所有文件暂存了</span>
+<span class="nv">$ </span>git reset HEAD CONTRIBUTING.md	<span class="c"># 取消对文件 CONTRIBUTING.md 的暂存</span>
+</code></pre></div></div>
+
+<h3 id="243-撤消对文件的修改">2.4.3 撤消对文件的修改</h3>
+
+<p>如果你并不想保留对 <code class="language-plaintext highlighter-rouge">CONTRIBUTING.md</code> 文件的修改怎么办？使用 <code class="language-plaintext highlighter-rouge">git checkout &lt;FileName&gt;</code> 来丢弃工作区的改动（慎用，因为他会将此前修改的内容全部删除）：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout CONTRIBUTING.md
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="25-git-基础---远程仓库的使用">2.5 Git 基础 - 远程仓库的使用</h2>
+
+<h3 id="251-查看远程仓库-remote-repository">2.5.1 查看远程仓库 (remote repository)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/schacon/ticgit	<span class="c"># clone</span>
+<span class="nv">$ </span><span class="nb">cd </span>ticgit
+
+<span class="nv">$ </span>git remote		<span class="c"># 查看远程(remote)仓库</span>
+origin
+
+<span class="nv">$ </span>git remote <span class="nt">-v</span>		<span class="c"># 显示需要读写远程仓库使用的 Git 保存的简写与其对应的 URL</span>
+origin  https://github.com/schacon/ticgit <span class="o">(</span>fetch<span class="o">)</span>
+origin  https://github.com/schacon/ticgit <span class="o">(</span>push<span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="252-远程仓库基础操作">2.5.2 远程仓库基础操作</h3>
+
+<p>运行 <code class="language-plaintext highlighter-rouge">git remote add  </code> ：添加一个新的远程 Git 仓库</p>
+
+<p>运行 <code class="language-plaintext highlighter-rouge">git fetch</code>：从远程仓库中获得数据</p>
+
+<p>运行 <code class="language-plaintext highlighter-rouge">git push</code>：将分支上传到服务器</p>
+
+<p>运行  <code class="language-plaintext highlighter-rouge">git pull</code>：下拉分支并合并到本地</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add <span class="o">[</span>&lt;选项&gt;] &lt;名称&gt; &lt;地址&gt;		<span class="c"># 添加一个新的远程 Git 仓库</span>
+<span class="nv">$ </span>git remote add pb https://github.com/schacon/ticgit
+<span class="nv">$ </span>git remote <span class="nt">-v</span>
+origin  https://github.com/schacon/ticgit <span class="o">(</span>fetch<span class="o">)</span>
+origin  https://github.com/schacon/ticgit <span class="o">(</span>push<span class="o">)</span>
+pb      https://github.com/schacon/ticgit <span class="o">(</span>fetch<span class="o">)</span>
+pb      https://github.com/schacon/ticgit <span class="o">(</span>push<span class="o">)</span>
+
+<span class="nv">$ </span>git fetch &lt;remote&gt;		<span class="c"># 从远程仓库中获得数据</span>
+<span class="nv">$ </span>git push origin master	<span class="c"># 将 master 分支推送到 origin 服务器</span>
+</code></pre></div></div>
+
+<h3 id="253-在本地创建远程分支">2.5.3 在本地创建远程分支</h3>
+
+<p>假设 branch1 和 master 位于文件夹：/home/yin/workspace/story</p>
+
+<p><code class="language-plaintext highlighter-rouge">git clone --bare</code>：裸仓库，无项目目录，不用于写项目，只用于做远程分支</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  branch1
+<span class="k">*</span> master
+
+<span class="nv">$ </span><span class="nb">cd</span> /home/yin/
+<span class="nv">$ </span>git clone <span class="nt">--bare</span> /home/yin/workspace/story        <span class="c"># 在 /home/yin/ 中创建裸仓库 story.git</span>
+
+<span class="nv">$ </span><span class="nb">cd</span> /home/yin/workspace/story
+<span class="nv">$ </span>git remote        <span class="c"># 查看远程仓库</span>
+<span class="nv">$ </span>git remote add remote-story /home/yin/story.git   <span class="c"># 将 story.git 添加为远程的源 命名为 remote-story</span>
+
+<span class="nv">$ </span><span class="nb">cd</span> /home/yin/project/                <span class="c"># 进入到新的目录下</span>
+<span class="nv">$ </span>git clone /home/yin/story.git        <span class="c"># 克隆仓库，并自动生成项目目录，自动将被克隆仓库设置为源 origin</span>
+<span class="nv">$ </span><span class="nb">cd </span>story
+<span class="nv">$ </span>git remote show origin               <span class="c"># 查看源 origin 的详细信息</span>
+</code></pre></div></div>
+
+<h3 id="254-查看重命名与删除">2.5.4 查看、重命名与删除</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote show origin		<span class="c"># 查看远程仓库 origin 的信息</span>
+<span class="nv">$ </span>git remote rename pb paul	<span class="c"># 将 pb 重命名为 paul</span>
+<span class="nv">$ </span>git remote remove paul		<span class="c"># 删除远程仓库 paul</span>
+</code></pre></div></div>
+
+<h2 id="26-添加标签">2.6 添加标签</h2>
+
+<p>在 Git 中创建附注标签十分简单。</p>
+
+<p>最简单的方式是当你在运行 <code class="language-plaintext highlighter-rouge">tag</code> 命令时指定 <code class="language-plaintext highlighter-rouge">-a</code> 选项：</p>
+
+<ul>
+  <li>
+    <p>可以在每次提交完后打标签（需要加上打标签的注释 -m）</p>
+  </li>
+  <li>
+    <p>也可以在提交了很多个版本后，使用哈希数字来打标签</p>
+  </li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag                                 <span class="c"># 查看所有标签</span>
+<span class="nv">$ </span>git tag <span class="nt">-a</span> &lt;version&gt; <span class="nt">-m</span> &lt;message&gt;       <span class="c"># 前期</span>
+<span class="nv">$ </span>git tag <span class="nt">-a</span> &lt;version&gt; &lt;check_sum&gt; <span class="nt">-m</span> &lt;commit message&gt;	<span class="c"># 后期</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 前期打标签</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"version 1.4"</span>           <span class="c"># 提交了一次</span>
+<span class="nv">$ </span>git tag <span class="nt">-a</span> v1.4 <span class="nt">-m</span> <span class="s2">"version 1.4"</span>      <span class="c"># 给上一次提交打标签 'v1.4'</span>
+<span class="nv">$ </span>git log                               <span class="c"># log 信息中包含了标签名</span>
+commit 1a95e08271d2ab3dceb74d6cb060622ca0c7e714 <span class="o">(</span>HEAD -&gt; master, tag: v3.0<span class="o">)</span>
+Author: git-jhy &lt;1437130953@qq.com&gt;
+Date:   Fri Dec 25 16:40:33 2020 +0800
+
+<span class="c"># 后期打标签</span>
+<span class="nv">$ </span>git log <span class="nt">--pretty</span><span class="o">=</span>oneline              <span class="c"># 查看历史版本</span>
+00e494284346b763d4def08a8d3a4d736bb8554e version 3.0
+4f13017fe621c0dda92ce694693dc72caad744ab veersion 2.0
+d66f70f362024c0d85f44a18c23dc0d9d17ba968 initial version
+
+<span class="nv">$ </span>git tag <span class="nt">-a</span> v2.0 4f130 <span class="nt">-m</span> <span class="s2">"version 2.0"</span> <span class="c"># 添加标签 v2.0 -m后为说明文字</span>
+<span class="nv">$ </span>git tag                                <span class="c"># 查看所有标签</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="3-git-分支">3. Git 分支</h1>
+
+<blockquote>
+  <p>使用分支意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线。</p>
+
+  <p>Git 的分支，其实本质上仅仅是指向提交对象的可变指针。 Git 的默认分支名字是 master。 在多次提交操作之后，你其实已经有一个指向最后那个提交对象的 master 分支。</p>
+</blockquote>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init                     <span class="c"># 初始化文件夹，自动生成 master 分支</span>
+<span class="nv">$ </span>git branch                   <span class="c"># 查看当前所在分支</span>
+<span class="nv">$ </span>git branch <span class="nt">-b</span> testing        <span class="c"># 创建新分支，但未跳转到新分支</span>
+<span class="nv">$ </span>git checkout <span class="nt">-b</span> xxx          <span class="c"># Switched to a new branch "xxx"</span>
+</code></pre></div></div>
+
+<p>git 有一个特殊的指针 <code class="language-plaintext highlighter-rouge">HEAD</code> 始终指向<font color="red">当前所在的本地分支</font>；</p>
+
+<p>每当创建一个新分支，都会<font color="orange">在当前所在的提交对象上创建一个指针</font>：</p>
+
+<p><img src="/images/posts/blogImages/2020121001.png" width="500" /></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout testing               <span class="c"># 切换分支，HEAD指向 testing</span>
+<span class="nv">$ </span>vim test.rb
+<span class="nv">$ </span>git commit <span class="nt">-a</span> <span class="nt">-m</span> <span class="s1">'made a change'</span>   <span class="c"># testing 分支提交一次</span>
+</code></pre></div></div>
+
+<p>如图所示，你的 testing 分支向前移动了，但是 master 分支却没有，它仍然指向运行 git checkout 时所指的对象。</p>
+
+<p><img src="/images/posts/blogImages/2020121002.png" width="500" /></p>
+
+<p>此时如果使用 <code class="language-plaintext highlighter-rouge">branch</code> 命令切换回 <strong>master</strong> 分支，则 <code class="language-plaintext highlighter-rouge">HEAD</code> 回到 <strong>master</strong>，<font color="red">工作目录恢复成 master 分支所指向的快照内容</font>。 也就是说，你现在做修改的话，项目将始于一个较旧的版本。 本质上来讲，这就是忽略 testing 分支所做的修改，以便于向另一个方向进行开发。</p>
+
+<hr />
+
+<h2 id="31-分支的创建与合并">3.1 分支的创建与合并</h2>
+
+<p><code class="language-plaintext highlighter-rouge">git merge new_branch</code>	合并 new_branch 分支到当前所在分支</p>
+
+<p><code class="language-plaintext highlighter-rouge">git branch -d new_branch</code>	删除分支 new_branch</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">-b</span> new_branch	<span class="c"># 新建分支(HEAD指向 new_branch)</span>
+<span class="nv">$ </span>git <span class="nb">touch </span>README.md
+<span class="nv">$ </span>git add README.md
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"add README.md"</span>
+
+<span class="nv">$ </span>git checkout master		<span class="c"># 回到主分支(HEAD指向master)</span>
+<span class="nv">$ </span>git merge new_branch		<span class="c"># 将 new_branch 合并到 master</span>
+
+<span class="nv">$ </span>git branch <span class="nt">-d</span> new_branch	<span class="c"># 删除 new_branch</span>
+</code></pre></div></div>
+
+<p>注：合并分支时可能遇到 conflict，需要先解决冲突再进行合并。</p>
+
+<hr />
+
+<h2 id="32-分支管理">3.2 分支管理</h2>
+
+<p>下面是<code class="language-plaintext highlighter-rouge">git branch</code>的功能：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git branch               <span class="c"># “*”所指的分支为当前所在分支，即HEAD所指向的分支</span>
+<span class="k">*</span> master
+  branch1
+  branch2
+<span class="nv">$ </span>git merge branch1
+
+<span class="nv">$ </span>git branch <span class="nt">-v</span>            <span class="c"># 要查看每一个分支的最后一次提交</span>
+
+<span class="nv">$ </span>git branch <span class="nt">--merged</span>      <span class="c"># 查看哪些分支已经合并到当前分支 (此时可删除branch1)</span>
+  branch1
+<span class="k">*</span> master
+
+<span class="nv">$ </span>git branch <span class="nt">--no-merged</span>   <span class="c"># 查看哪些分支还没合并到当前分支</span>
+  branch2
+</code></pre></div></div>
+
+<h2 id="33-项目分享与更新">3.3 项目分享与更新</h2>
+
+<p><code class="language-plaintext highlighter-rouge">git fetch</code> 命令与一个远程的仓库交互，并且将远程仓库中有但是在当前仓库的没有的所有信息拉取下来然后存储在你本地数据库中。</p>
+
+<p><code class="language-plaintext highlighter-rouge">git pull</code> 命令基本上就是 <code class="language-plaintext highlighter-rouge">git fetch</code> 和 <code class="language-plaintext highlighter-rouge">git merge</code> 命令的组合体，Git 从你指定的远程仓库中抓取内容，然后马上尝试将其合并进你所在的分支中。</p>
+
+<p><code class="language-plaintext highlighter-rouge">git push</code> 命令用来与另一个仓库通信，计算你本地数据库与远程仓库的差异，然后将差异推送到另一个仓库中。 它需要有另一个仓库的写权限，因此这通常是需要验证的。</p>
+
+<hr />
+
+<h1 id="4-ssh协议">4. ssh协议</h1>
+
+<p>创建密钥：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh-keygen <span class="nt">-t</span> rsa
+<span class="nv">$ </span><span class="nb">cd</span> /home/yin/.ssh/
+<span class="nv">$ </span><span class="nb">cat </span>id_rsa.pub
+<span class="nv">$ </span>ssh <span class="nt">-vT</span> git@github.com
+</code></pre></div></div>
+
+<p>过程如下：</p>
+
+<p><img src="/images/posts/blogImages/2020121003.png" width="700" /></p>
+
+<p>当看到下面的 successfully 时，表示成功了!</p>
+
+<p><img src="/images/posts/blogImages/2020121004.png" width="700" /></p>
+
+<p>将密钥粘贴到github个人设置中：</p>
+
+<p><img src="/images/posts/blogImages/2020121005.png" width="700" /></p>
+
+<p><br /></p>
+
+<p><br /></p>
+
+<p>「参考内容」</p>
+
+<ul>
+  <li><a href="https://git-scm.com/book/zh/v2/">Git</a></li>
+  <li><a href="https://guides.github.com/activities/hello-world/">GitHub:Hello world</a></li>
+</ul>
+:ET
