@@ -1,4 +1,4 @@
-I"4�<p><br /></p>
+I"��<p><br /></p>
 <h1 id="a-linux-目录结构">A. Linux 目录结构</h1>
 
 <ul>
@@ -53,10 +53,10 @@
 
 <h3 id="cd">cd</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span>		<span class="c"># 进入主目录</span>
-<span class="nb">cd</span> ~	<span class="c"># 进入主目录</span>
-<span class="nb">cd</span> ..	<span class="c"># 进入上一级目录</span>
-<span class="nb">cd</span> /	<span class="c"># 进入跟目录</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span>		<span class="c"># 进入主目录</span>
+<span class="nv">$ </span><span class="nb">cd</span> ~	<span class="c"># 进入主目录</span>
+<span class="nv">$ </span><span class="nb">cd</span> ..	<span class="c"># 进入上一级目录</span>
+<span class="nv">$ </span><span class="nb">cd</span> /	<span class="c"># 进入跟目录</span>
 </code></pre></div></div>
 
 <hr />
@@ -65,56 +65,56 @@
 
 <h3 id="pwd-print-work-directory">pwd (print work directory)</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">pwd</span>		<span class="c"># Print Working Directory</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">pwd</span>		<span class="c"># Print Working Directory</span>
 </code></pre></div></div>
 
 <h3 id="ls-list-files">ls (list files)</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span>		<span class="c"># 显示文件</span>
-<span class="nb">ls</span> <span class="nt">-l</span>	<span class="c"># 显示文件 + 信息</span>
-<span class="nb">ls</span> <span class="nt">-a</span>	<span class="c"># 显示所有文件（包含隐藏文件/目录）</span>
-<span class="nb">ls</span> <span class="nt">-R</span>	<span class="c"># 递归显示子文件</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span>        <span class="c"># 显示文件</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>     <span class="c"># 显示文件 + 信息</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-a</span>     <span class="c"># 显示所有文件（包含隐藏文件/目录）</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-R</span>     <span class="c"># 递归显示子文件</span>
 </code></pre></div></div>
 
 <h3 id="mkdir-make-directory">mkdir (make directory)</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>AAA
-<span class="nb">mkdir</span> <span class="nt">-m</span> 711 BBB	<span class="c"># 创建文件夹，配置文件的权限喔！</span>
-<span class="nb">mkdir</span> <span class="nt">-p</span> test1/test2/test3/test4 	<span class="c"># 递归创建多级目录</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>AAA
+<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-m</span> 711 BBB                   <span class="c"># 创建文件夹，配置文件的权限喔！</span>
+<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> test1/test2/test3/test4   <span class="c"># 递归创建多级目录</span>
 </code></pre></div></div>
 
 <h3 id="rmdir">rmdir</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rmdir </span>AAA	<span class="c"># 删除一个不为空的文件夹AAA</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rmdir </span>AAA	<span class="c"># 删除一个不为空的文件夹AAA</span>
 </code></pre></div></div>
 
 <h3 id="touch">touch</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">touch </span>fileName1 fileName2	<span class="c"># 在当前目录下创建文件 fileName1 和 fileName2</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">touch </span>fileName1 fileName2	<span class="c"># 在当前目录下创建文件 fileName1 和 fileName2</span>
 </code></pre></div></div>
 
 <h3 id="rm">rm</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="nt">-i</span>	<span class="c"># 删除前逐一确认，-i ：互动模式，在删除前会询问使用者是否动作</span>
-<span class="nb">rm</span> <span class="nt">-f</span>   <span class="c"># 直接删除档案，不逐一确认</span>
-<span class="nb">rm</span> <span class="nt">-r</span>	<span class="c"># 将目录以下的所有文件/目录递归删除</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-i</span>    <span class="c"># 删除前逐一确认，-i ：互动模式，在删除前会询问使用者是否动作</span>
+<span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-f</span>    <span class="c"># 直接删除档案，不逐一确认</span>
+<span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-r</span>    <span class="c"># 将目录以下的所有文件/目录递归删除</span>
 </code></pre></div></div>
 
 <h3 id="cp">cp</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> <span class="o">[</span>选项] 源文件或目录 目标文件或目录
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp</span> <span class="o">[</span>选项] 源文件或目录 目标文件或目录
 
-<span class="nb">cp </span>abc<span class="k">**</span> ../	<span class="c"># 将所有以abc打头的文件复制到上一级目录</span>
-<span class="nb">cp</span> <span class="nt">-r</span> dir1 dir2	<span class="c"># 将文件夹dir1复制到dir2中</span>
+<span class="nv">$ </span><span class="nb">cp </span>abc<span class="k">**</span> ../     <span class="c"># 将所有以abc打头的文件复制到上一级目录</span>
+<span class="nv">$ </span><span class="nb">cp</span> <span class="nt">-r</span> dir1 dir2  <span class="c"># 将文件夹dir1复制到dir2中</span>
 </code></pre></div></div>
 
 <h3 id="mv">mv</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="o">[</span><span class="nt">-fir</span><span class="o">]</span> 文件或目录   | f 强制删除不出现警告信息   | i 互动模式删除   | r 递归删除文件夹
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm</span> <span class="o">[</span><span class="nt">-fir</span><span class="o">]</span> 文件或目录   | f 强制删除不出现警告信息   | i 互动模式删除   | r 递归删除文件夹
 
-<span class="nb">rm</span> <span class="nt">-i</span> b		<span class="c"># 以互动的模式删除文件 b （有提示）</span>
-<span class="nb">rm</span>：是否删除普通空文件 <span class="s1">'b'</span>？Y
-<span class="nb">rm</span> <span class="nt">-r</span> <span class="nb">dir</span>	<span class="c"># 递归删除文件夹 dir</span>
+<span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-i</span> b		<span class="c"># 以互动的模式删除文件 b （有提示）</span>
+<span class="nv">$ </span><span class="nb">rm</span>：是否删除普通空文件 <span class="s1">'b'</span>？Y
+<span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-r</span> <span class="nb">dir</span>	<span class="c"># 递归删除文件夹 dir</span>
 </code></pre></div></div>
 
 <h3 id="ln">ln</h3>
@@ -124,7 +124,7 @@
   <li>软链接 (symbolic link)：相当于文件的快捷方式，指向关系</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ln</span> <span class="o">[</span>options] target link_file
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ln</span> <span class="o">[</span>options] target link_file
 
 <span class="nv">$ </span><span class="nb">ln</span> <span class="nt">-s</span> /home/yin/Desktop/cat.txt /home/yin/Desktop/ttt/cat.softlink	<span class="c"># 软链接</span>
 <span class="nv">$ </span><span class="nb">ln</span> /home/yin/Desktop/cat.txt /home/yin/Desktop/ttt/cat.hardlink		<span class="c"># 硬链接</span>
@@ -136,9 +136,9 @@ lrwxrwxrwx 1 yin yin   25 12月  9 22:45 cat.softlink -&gt; /home/yin/Desktop/ca
 
 <h3 id="gzip">gzip</h3>
 
-<pre><code class="language-对问shell">gzip np			# 使用 gzip 命令对文件np压缩，生成 np.gz 文件
-gzip -r dir1 	# 对目录 dir1 中的所有文件逐个压缩
-gzip -dr dir1	# 对目录 dir1 中的所有文件解压缩
+<pre><code class="language-对问shell">$ gzip np         # 使用 gzip 命令对文件np压缩，生成 np.gz 文件
+$ gzip -r dir1    # 对目录 dir1 中的所有文件逐个压缩
+$ gzip -dr dir1   # 对目录 dir1 中的所有文件解压缩
 </code></pre>
 
 <p>你可以使用 <strong>man [命令]</strong> 来查看各个命令的使用文档，如 ：<code class="language-plaintext highlighter-rouge">man cp</code></p>
@@ -149,16 +149,16 @@ gzip -dr dir1	# 对目录 dir1 中的所有文件解压缩
 
 <h3 id="cat">cat</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/issue	<span class="c"># 查看 issue</span>
-<span class="nb">tac</span> /etc/issue	<span class="c"># 查看 issue (从后往前)</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> /etc/issue	<span class="c"># 查看 issue</span>
+<span class="nv">$ </span><span class="nb">tac</span> /etc/issue	<span class="c"># 查看 issue (从后往前)</span>
 </code></pre></div></div>
 
 <h3 id="head--tail">head &amp; tail</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">head </span>cat.md		<span class="c"># 显示 cat.md 的所有内容</span>
-<span class="nv">$ </span><span class="nb">head</span> <span class="nt">-n</span> 6 cat.md	<span class="c"># 查看 cat.md 的前两行内容</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">head </span>cat.md           <span class="c"># 显示 cat.md 的所有内容</span>
+<span class="nv">$ </span><span class="nb">head</span> <span class="nt">-n</span> 6 cat.md      <span class="c"># 查看 cat.md 的前两行内容</span>
 
-<span class="nv">$ </span><span class="nb">tail</span> <span class="nt">-n</span> 3 cat.md	<span class="c"># 查看 cat.md 的后两行内容</span>
+<span class="nv">$ </span><span class="nb">tail</span> <span class="nt">-n</span> 3 cat.md      <span class="c"># 查看 cat.md 的后两行内容</span>
 </code></pre></div></div>
 
 <hr />
@@ -198,7 +198,7 @@ gzip -dr dir1	# 对目录 dir1 中的所有文件解压缩
 
 <h3 id="chmod-change-mode">chmod (change mode)</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> <span class="o">[</span><span class="nb">who</span><span class="o">]</span> operator <span class="o">[</span>permission] filename
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">chmod</span> <span class="o">[</span><span class="nb">who</span><span class="o">]</span> operator <span class="o">[</span>permission] filename
 </code></pre></div></div>
 
 <ul>
@@ -224,10 +224,10 @@ gzip -dr dir1	# 对目录 dir1 中的所有文件解压缩
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -R 对所有子目录下的文件执行同样操作</span>
 <span class="c"># -h 在改变符号链接文件的属主时不影响该链接所指向的目标文件</span>
 
-<span class="nb">chown</span> <span class="nt">-R</span> <span class="nt">-h</span> owner <span class="nb">dir</span>	<span class="c"># 将文件夹 dir 的所属用户设置为 owner</span>
-<span class="nb">chown </span>root fileNane		<span class="c"># 将文件 fileName 的所有者设置为 root</span>
+<span class="nv">$ </span><span class="nb">chown</span> <span class="nt">-R</span> <span class="nt">-h</span> owner <span class="nb">dir</span>	<span class="c"># 将文件夹 dir 的所属用户设置为 owner</span>
+<span class="nv">$ </span><span class="nb">chown </span>root fileNane		<span class="c"># 将文件 fileName 的所有者设置为 root</span>
 
-<span class="nb">chgrp</span> –R –h group file	<span class="c"># 将文件夹 dir 的所属用户组设置为 group</span>
+<span class="nv">$ </span><span class="nb">chgrp</span> –R –h group file	<span class="c"># 将文件夹 dir 的所属用户组设置为 group</span>
 </code></pre></div></div>
 
 <h3 id="chgrp">chgrp</h3>
@@ -269,41 +269,41 @@ gzip -dr dir1	# 对目录 dir1 中的所有文件解压缩
 
 <h3 id="adduser">adduser</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>useradd –d  /home/sam <span class="nt">-m</span> sam	<span class="c"># 创建了一个用户sam，其中-d和-m选项用来为登录名sam产生一个主目录 /home/sam;  /home为默认的用户主目录所在的父目录</span>
-userdel <span class="nt">-r</span> sam		<span class="c"># 删除用户asm，同时删除对应的主目录</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>useradd –d  /home/sam <span class="nt">-m</span> sam	<span class="c"># 创建了一个用户sam，其中-d和-m选项用来为登录名sam产生一个主目录 /home/sam;  /home为默认的用户主目录所在的父目录</span>
+<span class="nv">$ </span>userdel <span class="nt">-r</span> sam		<span class="c"># 删除用户asm，同时删除对应的主目录</span>
 </code></pre></div></div>
 
 <h3 id="adduser-1">adduser</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adduser sam		<span class="c"># 创建用户，设置密码，同时创建主目录</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>adduser sam		<span class="c"># 创建用户，设置密码，同时创建主目录</span>
 </code></pre></div></div>
 
 <p>用户组管理可参照 <a href="https://www.runoob.com/linux/linux-user-manage.html">doc</a></p>
 
 <h3 id="su">su</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>su userName		<span class="c"># 切换用户，登录 userName</span>
-<span class="nb">cd</span> ~			<span class="c"># 进入userName 的主目录</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>su userName       <span class="c"># 切换用户，登录 userName</span>
+<span class="nv">$ </span><span class="nb">cd</span> ~              <span class="c"># 进入userName 的主目录</span>
 </code></pre></div></div>
 
 <h3 id="sudo">sudo</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>su			<span class="c"># 切换到超级管理员</span>
-su root			<span class="c"># 切换到超级管理员</span>
-<span class="nb">sudo </span>command1	<span class="c"># 使用管理员权限执行命令 command1</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>su           <span class="c"># 切换到超级管理员</span>
+<span class="nv">$ </span>su root           <span class="c"># 切换到超级管理员</span>
+<span class="nv">$ </span><span class="nb">sudo </span>command1     <span class="c"># 使用管理员权限执行命令 command1</span>
 </code></pre></div></div>
 
 <h2 id="2-group-用户组">(2) group 用户组</h2>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>addgroup group1				<span class="c"># 添加用户组 group1</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>addgroup group1              <span class="c"># 添加用户组 group1</span>
 
-<span class="nv">$ </span>groupmod <span class="nt">-g</span> 111 group1		<span class="c"># 将组 group1 的组标识号修改为111</span>
-<span class="nv">$ </span>groupmod <span class="nt">-n</span> group01 group1	<span class="c"># 将组 group1 的名称改为 group01</span>
+<span class="nv">$ </span>groupmod <span class="nt">-g</span> 111 group1       <span class="c"># 将组 group1 的组标识号修改为111</span>
+<span class="nv">$ </span>groupmod <span class="nt">-n</span> group01 group1   <span class="c"># 将组 group1 的名称改为 group01</span>
 
-<span class="nv">$ </span>gpasswd <span class="nt">-a</span> user1 group1		<span class="c"># 将 user1 加入 group1</span>
-<span class="nv">$ </span>gpasswd <span class="nt">-d</span> user1 group1		<span class="c"># 将 user1 移出 group1</span>
+<span class="nv">$ </span>gpasswd <span class="nt">-a</span> user1 group1      <span class="c"># 将 user1 加入 group1</span>
+<span class="nv">$ </span>gpasswd <span class="nt">-d</span> user1 group1      <span class="c"># 将 user1 移出 group1</span>
 
-<span class="nv">$ </span>delgroup group1				<span class="c"># 删除用户组 group11</span>
+<span class="nv">$ </span>delgroup group1              <span class="c"># 删除用户组 group11</span>
 </code></pre></div></div>
 
 <h2 id="3-与用户账号有关的系统文件">(3) 与用户账号有关的系统文件</h2>
@@ -353,8 +353,8 @@ Host:x:1001:1001::/home/Host:/bin/bash
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># df [-ahikHTm] [目录或文件名]</span>
 <span class="c"># -h ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；</span>
 
-<span class="nv">$ </span><span class="nb">df</span>		<span class="c"># 将系统内所有的文件系统列出来</span>
-<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>		<span class="c"># 将容量结果以易读的容量格式显示出来</span>
+<span class="nv">$ </span><span class="nb">df</span>      <span class="c"># 将系统内所有的文件系统列出来</span>
+<span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>   <span class="c"># 将容量结果以易读的容量格式显示出来</span>
 文件系统        容量  已用  可用 已用% 挂载点
 udev            3.8G     0  3.8G    0% /dev
 tmpfs           776M  3.0M  773M    1% /run
@@ -397,7 +397,7 @@ tmpfs           776M   56K  776M    1% /run/user/1000
 
 <p><code class="language-plaintext highlighter-rouge">fdisk</code> 是 Linux 的磁盘分区表操作工具，语法如下：</p>
 
-<pre><code class="language-sell">fdisk [-l] 装置名称
+<pre><code class="language-sell">$ fdisk [-l] 装置名称
 </code></pre>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>fdisk <span class="nt">-l</span>		<span class="c"># 列出所有分区信息</span>
@@ -436,7 +436,7 @@ Command <span class="o">(</span>m <span class="k">for </span><span class="nb">he
 
 <p><code class="language-plaintext highlighter-rouge">mkfs</code> 命令可以<strong>实现</strong>磁盘分区格式化，语法为：</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkfs <span class="o">[</span><span class="nt">-t</span> 文件系统格式] 装置文件名
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkfs <span class="o">[</span><span class="nt">-t</span> 文件系统格式] 装置文件名
 </code></pre></div></div>
 
 <hr />
@@ -523,15 +523,15 @@ Command <span class="o">(</span>m <span class="k">for </span><span class="nb">he
   </tbody>
 </table>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update		<span class="c"># 查看可更新的包</span>
-<span class="nb">sudo </span>apt upgrade	<span class="c"># 升级安装包</span>
-<span class="nb">sudo </span>apt update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt upgrade <span class="nt">-y</span>	<span class="c"># 组合上面的命令，一键升级</span>
-<span class="nb">sudo </span>apt <span class="nb">install </span>mplayer				<span class="c"># 安装 mplayer</span>
-<span class="nb">sudo </span>apt <span class="nb">install </span>mplayer <span class="nt">--no-upgrade</span>	<span class="c"># 安装 mplayer，如果 mplayer 存在则不升级</span>
-<span class="nb">sudo </span>apt remove mplayer					<span class="c"># 移除包 mplayer</span>
-apt search libimobile					<span class="c"># 查找名为 libmobile 的包</span>
-apt show apache2						<span class="c"># 查看包 apache2 的相关信息</span>
-<span class="nb">sudo </span>apt autoremove						<span class="c"># 清理不再使用的依赖或库文件</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt update		<span class="c"># 查看可更新的包</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt upgrade	<span class="c"># 升级安装包</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt upgrade <span class="nt">-y</span>	<span class="c"># 组合上面的命令，一键升级</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>mplayer				<span class="c"># 安装 mplayer</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>mplayer <span class="nt">--no-upgrade</span>	<span class="c"># 安装 mplayer，如果 mplayer 存在则不升级</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt remove mplayer					<span class="c"># 移除包 mplayer</span>
+<span class="nv">$ </span>apt search libimobile					<span class="c"># 查找名为 libmobile 的包</span>
+<span class="nv">$ </span>apt show apache2						<span class="c"># 查看包 apache2 的相关信息</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt autoremove						<span class="c"># 清理不再使用的依赖或库文件</span>
 </code></pre></div></div>
 
 <p>注：如果忘记包名称，可以输入一部分名字，按下 <code class="language-plaintext highlighter-rouge">Tab</code> 后会出现相关选项！</p>
@@ -554,17 +554,17 @@ apt show apache2						<span class="c"># 查看包 apache2 的相关信息</span>
 
 <p><strong>参考答案</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>adduser Tom		<span class="c"># 创建用户</span>
-<span class="nb">sudo </span>adduser Aimer
-su Tom					<span class="c"># 登录用户 Tom</span>
-<span class="nb">cd</span> ~					<span class="c"># 进入 Tom 家目录</span>
-<span class="nb">mkdir </span>dir1
-<span class="nb">touch </span>file1
-<span class="nb">sudo </span>addgroup group01			<span class="c"># 创建用户组 group01</span>
-<span class="nb">sudo </span>gpasswd <span class="nt">-a</span> Tom group01		<span class="c"># 添加用户到用户组</span>
-<span class="nb">sudo </span>gpasswd <span class="nt">-a</span> Aimer group01
-<span class="nb">sudo chgrp</span> <span class="nt">-R</span> group01 dir1		<span class="c"># 将目录 dir1 的所属群组改为 group01</span>
-<span class="nb">chmod </span>g+r+x dir1				<span class="c"># 设置目录 dir1 对用户组的权限</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>adduser Tom		<span class="c"># 创建用户</span>
+<span class="nv">$ </span><span class="nb">sudo </span>adduser Aimer
+<span class="nv">$ </span>su Tom					<span class="c"># 登录用户 Tom</span>
+<span class="nv">$ </span><span class="nb">cd</span> ~					<span class="c"># 进入 Tom 家目录</span>
+<span class="nv">$ </span><span class="nb">mkdir </span>dir1
+<span class="nv">$ </span><span class="nb">touch </span>file1
+<span class="nv">$ </span><span class="nb">sudo </span>addgroup group01			<span class="c"># 创建用户组 group01</span>
+<span class="nv">$ </span><span class="nb">sudo </span>gpasswd <span class="nt">-a</span> Tom group01		<span class="c"># 添加用户到用户组</span>
+<span class="nv">$ </span><span class="nb">sudo </span>gpasswd <span class="nt">-a</span> Aimer group01
+<span class="nv">$ </span><span class="nb">sudo chgrp</span> <span class="nt">-R</span> group01 dir1		<span class="c"># 将目录 dir1 的所属群组改为 group01</span>
+<span class="nv">$ </span><span class="nb">chmod </span>g+r+x dir1				<span class="c"># 设置目录 dir1 对用户组的权限</span>
 </code></pre></div></div>
 
 <hr />
@@ -577,7 +577,7 @@ su Tom					<span class="c"># 登录用户 Tom</span>
   <li>
     <p>安装 apache2</p>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt instal apache2
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt instal apache2
 </code></pre></div>    </div>
 
     <p>安装完成后会得到一个路径：<code class="language-plaintext highlighter-rouge">/var/www/html</code></p>
@@ -599,7 +599,7 @@ su Tom					<span class="c"># 登录用户 Tom</span>
   <li>
     <p>ftp是文件传输协议，首先安装 <strong>vsftpd</strong>：</p>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>vsftpd
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>vsftpd
 </code></pre></div>    </div>
   </li>
   <li>
@@ -613,8 +613,8 @@ su Tom					<span class="c"># 登录用户 Tom</span>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 本地命令  lcd	 lls</span>
 <span class="c"># 服务端命令  cd ls</span>
-sftp&gt; put /home/yin/Desktop/a.txt /var/www/doc/		<span class="c"># 上传本地的 a.txt 到服务器的 /var/www/doc/目录</span>
-sftp&gt; get /var/www/doc/b.txt /home/yin/Desktop/		<span class="c"># 下载服务端的 b.txt 到我的桌面</span>
+<span class="nv">$ </span>sftp&gt; put /home/yin/Desktop/a.txt /var/www/doc/		<span class="c"># 上传本地的 a.txt 到服务器的 /var/www/doc/目录</span>
+<span class="nv">$ </span>sftp&gt; get /var/www/doc/b.txt /home/yin/Desktop/		<span class="c"># 下载服务端的 b.txt 到我的桌面</span>
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -629,13 +629,13 @@ sftp&gt; get /var/www/doc/b.txt /home/yin/Desktop/		<span class="c"># 下载服�
   <li>
     <p>服务端安装 openssh-server</p>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>openssh-server
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>openssh-server
 </code></pre></div>    </div>
   </li>
   <li>
     <p>若服务器 ip 192.168.2.3，ssh 服务端口为 22,服务器上有个用户为 root，用 ssh 登录服务器：</p>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh root@192.168.2.3
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh root@192.168.2.3
 </code></pre></div>    </div>
   </li>
 </ul>
