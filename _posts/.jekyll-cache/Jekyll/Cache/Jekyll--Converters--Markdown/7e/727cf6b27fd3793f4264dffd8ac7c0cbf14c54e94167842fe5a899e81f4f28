@@ -1,0 +1,403 @@
+I"�c<p><br /></p>
+<h1 id="1-linux-c程序">1. Linux C程序</h1>
+
+<h2 id="11-第一个linux-c语言程序">1.1 第一个Linux C语言程序</h2>
+
+<p>在 workspace/ 中创建一个文件夹，使用命令 <code class="language-plaintext highlighter-rouge">vi hello.c</code> 创建 .c 文件：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hello world!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>如果觉得终端打开的 Vim 编辑器代码主题有点不好看，可以参考<a href="https://blog.csdn.net/qq_41140138/article/details/111410743">改一改</a></p>
+
+<p><strong>编译运行</strong>：</p>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">gcc</code> 或 <code class="language-plaintext highlighter-rouge">cc</code> 来编译 <strong>hello.c</strong> ，生成 <strong>.out</strong> 文件: <code class="language-plaintext highlighter-rouge">gcc xxx.c -o xxx.out</code></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc hello.c <span class="nt">-o</span> main.out		<span class="c"># 编译 hello.c 生成的可执行文件为 .out</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
+<span class="nt">-rw-r--r--</span> 1 yin yin   197 12月 19 20:03 hello.c		<span class="c"># 不可执行</span>
+<span class="nt">-rwxr-xr-x</span> 1 yin yin 16448 12月 19 20:04 main.out	<span class="c"># 可执行</span>
+
+<span class="nv">$ </span>./main.out		<span class="c"># 运行 ./ 表示当前目录下</span>
+</code></pre></div></div>
+
+<h2 id="12-gcc">1.2 gcc</h2>
+
+<h3 id="121-文件类型">1.2.1 文件类型</h3>
+
+<blockquote>
+  <p>.out是可执行文件，相当于win上的exe，一般是经过链接产生的可执行文件</p>
+
+  <p>.o是编译中间机器码，相当于win上的.obj，一般是通过编译但未链接的文件</p>
+
+  <p>.a是静态库，多个.o练链接得到，用于静态链接</p>
+</blockquote>
+
+<h3 id="122-c语言转变为可执行文件的过程">1.2.2 C语言转变为可执行文件的过程</h3>
+
+<p>一个C/C++文件要经过预处理（preprocessing）、编译（compliation）、汇编（assembly）和连接（linking）才能变成可执行文件</p>
+<ul>
+  <li>预处理：包含头文件，得到完整的代码 (.i)</li>
+  <li>汇编：用汇编器将 c 语言转化为 汇编语言(.s)</li>
+  <li>编译：将汇编语言转化为可执行的机器代码 (.o)</li>
+  <li>链接：将所有 (.o) 文件链接得到可执行文件 (.out)</li>
+</ul>
+
+<h3 id="123-gcc-命令">1.2.3 gcc 命令</h3>
+
+<p>参数介绍</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">gcc -c hello.c</code> : 把程序 hello.c 做成 hello.o 文件 <font color="red">xxx.c $\rightarrow$ xxx.o</font></li>
+  <li><code class="language-plaintext highlighter-rouge">gcc -S hello.c</code> : 生成 .s 的汇编代码  <font color="red">xxx.c $\rightarrow$ xxx.s</font></li>
+  <li><code class="language-plaintext highlighter-rouge">gcc hello.c -o hello.out</code> : 生成可执行文件 .out，-o 后面接 .o 文件名</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc <span class="nt">-c</span> hello.c		<span class="c"># hello.o</span>
+
+<span class="nv">$ </span>gcc <span class="nt">-S</span> hello.c		<span class="c"># hello.s</span>
+
+<span class="nv">$ </span>gcc hh.c <span class="nt">-o</span> hh.out	<span class="c"># hello.out</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="2-多文件操作">2. 多文件操作</h1>
+
+<h2 id="21-多文件分而治之">2.1 多文件分而治之</h2>
+
+<p>创建一个文件夹 project1 ，使用 vim 编辑器添加 max.c 和 compare.c :</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// max.c</span>
+<span class="kt">int</span> <span class="nf">max</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="o">?</span> <span class="n">a</span> <span class="o">:</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// compare.c</span>
+<span class="cp">#include &lt;stdio.h&gt;
+#include "max.c"
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">maxNum</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"The greater number is : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">maxNum</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>使用下面的命令编译运行：</p>
+
+<p>由于<code class="language-plaintext highlighter-rouge">compare.c </code> 中包含了 <code class="language-plaintext highlighter-rouge">max.c</code> ，因此编译 <code class="language-plaintext highlighter-rouge">compare.c </code> 的同时会链接到  <code class="language-plaintext highlighter-rouge">max.c</code> ，命令如下：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc compare.c <span class="nt">-o</span> main.out	<span class="c"># compire and generate main.out</span>
+<span class="nv">$ </span><span class="nb">ls
+</span>hello.c  max.c  main.out
+<span class="nv">$ </span>./main.out				<span class="c"># run</span>
+</code></pre></div></div>
+
+<h2 id="22-头文件与函数定义分离">2.2 头文件与函数定义分离</h2>
+
+<h4 id="先编译部分函数">先编译部分函数</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc <span class="nt">-c</span> max.c		<span class="c"># 将 max.c 编译为 max.o</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
+
+<span class="nt">-rw-r--r--</span> 1 yin yin  196 12月 20 17:40 hello.c
+<span class="nt">-rw-r--r--</span> 1 yin yin   48 12月 20 17:38 max.c
+<span class="nt">-rw-r--r--</span> 1 yin yin 1232 12月 20 17:47 max.o
+</code></pre></div></div>
+
+<p>接着删除包含头文件(因为后面编译会包含 .o 文件；若不删除，头文件会重复)</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span><span class="c1">// #include "max.c"</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">maxNum</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"The greater number is : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">maxNum</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="重新编译主函数">重新编译主函数</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc max.o hello.c <span class="nt">-o</span> main.out
+</code></pre></div></div>
+
+<p>此时编译速度<font color="red">很快</font>，对于包含了大量函数调用时，先将不常改动的函数编译为<code class="language-plaintext highlighter-rouge">静态库</code>，可以提高变异速度。</p>
+
+<hr />
+
+<h3 id="创建头文件-h">创建头文件 .h</h3>
+
+<p>由于编译得到的 max.o 是二进制文件，需要生成一个可读文件来说明函数的功能，方便他人调用 max.o 文件：</p>
+
+<ul>
+  <li>
+    <p>创建头文件 <code class="language-plaintext highlighter-rouge">max.h</code>，添加函数的声明</p>
+  </li>
+  <li>
+    <p>在 <code class="language-plaintext highlighter-rouge">hello.c</code> 中使用 <code class="language-plaintext highlighter-rouge">#include "max.h"</code> 包含头文件</p>
+  </li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// vi max.h</span>
+<span class="kt">int</span> <span class="nf">max</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">);</span>
+
+<span class="c1">// hello.c</span>
+<span class="cp">#include &lt;stdio.h&gt;
+#include "max.h"		// 添加头文件
+</span></code></pre></div></div>
+
+<p>重新编译</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls
+</span>hello.c  max.c  max.h  max.o
+gcc max.o hello.c <span class="nt">-o</span> main.out	// compile
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="3-makefile">3. makeFile</h1>
+
+<h3 id="install-make">Install make</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>make
+<span class="nv">$ </span>make <span class="nt">-v</span>
+</code></pre></div></div>
+
+<h3 id="创建-makefile">创建 Makefile</h3>
+<p>首先编辑好 <code class="language-plaintext highlighter-rouge">hello.c max.c min.c max.h min.h</code></p>
+
+<p>下面是主函数的代码：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+#include "max.h"	// int max(int a, int b);
+#include "min.h"	// int min(int a, int b);
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Input two integers: "</span><span class="p">);</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"The max number is: %d</span><span class="se">\n</span><span class="s">The min number is: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>接着，创建 <code class="language-plaintext highlighter-rouge">Makefile</code> 文件（注意文件名）：</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># this is make file
+</span><span class="nl">hello.out</span><span class="o">:</span><span class="nf">max.o min.o hello.c</span>
+	gcc max.o min.o hello.c <span class="nt">-o</span> hello.out
+<span class="nl">max.o</span><span class="o">:</span><span class="nf">max.c</span>
+	gcc <span class="nt">-c</span> max.c
+<span class="nl">min.o</span><span class="o">:</span><span class="nf">min.c</span>
+	gcc <span class="nt">-c</span> min.c
+</code></pre></div></div>
+
+<h3 id="使用-makefile-编译">使用 Makefile 编译</h3>
+<p>使用 <code class="language-plaintext highlighter-rouge">make</code> 命令进行编译：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make
+gcc <span class="nt">-c</span> max.c
+gcc <span class="nt">-c</span> min.c
+gcc max.o min.o hello.c <span class="nt">-o</span> hello.out
+
+<span class="nv">$ </span><span class="nb">ls
+</span>hello.c  hello.out  Makefile  max.c  max.h  max.o  min.c  min.h  min.o
+</code></pre></div></div>
+
+<h4 id="使用makefile的优点">使用Makefile的优点：</h4>
+
+<ul>
+  <li>不需要每次都重新输入大量的命令来编译</li>
+  <li>makefile 只对修改过的内容重新编译链接（节省了时间）</li>
+</ul>
+
+<hr />
+
+<h1 id="4-main-函数">4. main 函数</h1>
+
+<p>main函数的完整形式为：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;sdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argv</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argc</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"hello world~</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="41-return-0">4.1 return 0</h2>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">&amp;&amp;</code> 连接两条命令编译运行：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc main.c <span class="nt">-o</span> main.out <span class="o">&amp;&amp;</span> ./main.out
+</code></pre></div></div>
+
+<p>查看程序是否正常执行：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+0				<span class="c"># 得到0 说明程序正常执行</span>
+</code></pre></div></div>
+
+<p>若将 <code class="language-plaintext highlighter-rouge">return 0;</code> 改为 <code class="language-plaintext highlighter-rouge">return 100;</code> 使用 <code class="language-plaintext highlighter-rouge">echo $?</code> 后得到的结果是100（因为命令的后半部分是运行 main.out，接着运行下面的命令：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./main.out <span class="o">&amp;&amp;</span> <span class="nb">ls
+</span>hello world!
+</code></pre></div></div>
+
+<p>没有执行 ls，说明 <code class="language-plaintext highlighter-rouge">return 0</code> 返回值0不是随意的！(把程序改回去，ls 可正常执行)</p>
+
+<h2 id="42-main-参数">4.2 main 参数</h2>
+
+<p>修改上面的main函数，打印argv：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">printf</span><span class="p">(</span><span class="s">"argv is %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>编译运行：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc main2.c <span class="nt">-o</span> main2.out
+<span class="nv">$ </span>./main2.out			<span class="c"># 1</span>
+<span class="nv">$ </span>./main2.out <span class="nt">-l</span>		<span class="c"># 2</span>
+<span class="nv">$ </span>./main2.out <span class="nt">-l</span> <span class="nt">-a</span>		<span class="c"># 3</span>
+</code></pre></div></div>
+
+<p>再添加一个打印语句：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">argv</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"argc[%d] is %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">argc</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>编译运行：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc main3.c <span class="nt">-o</span> main3.out
+<span class="nv">$ </span>./main3.out <span class="nt">-a</span> <span class="nt">-l</span> abcd
+argc is 4
+argc[0] is ./main3.out
+argc[1] is <span class="nt">-a</span>
+argc[2] is <span class="nt">-l</span>
+argc[3] is abcd
+</code></pre></div></div>
+
+<p>可见，<code class="language-plaintext highlighter-rouge">main(int argv, char* argc[])</code> 中，传入的参数是字符串，<font color="red">argv 是字符串参数的个数，argc 是一个字符串数组的地址，argc[i]是一个个字符串参数</font>。</p>
+
+<hr />
+
+<h1 id="5-输入输出流和错误流">5. 输入输出流和错误流</h1>
+
+<h2 id="51-标准输入流标准输出流和标准错误流">5.1 标准输入流、标准输出流和标准错误流</h2>
+
+<p>在 <font color="oran"> stdio.h </font> 中包含了 <code class="language-plaintext highlighter-rouge">stdin</code>、<code class="language-plaintext highlighter-rouge">stdout</code> 和 <code class="language-plaintext highlighter-rouge">stderr</code>，看个例子：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;	// stdio stdout stderr
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// printf("Input the value a:\n");</span>
+	<span class="n">fprintf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">"Input the value a:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>	<span class="c1">// printf 的原型</span>
+
+	<span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+	<span class="c1">// scanf("%d", &amp;a);</span>
+	<span class="n">fscanf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>	<span class="c1">// scanf 的原型</span>
+
+	<span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"The value mast &gt; 0!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>fprintf 是 printf 的原型，将数据打印到输出设备（默认显示屏）</li>
+  <li>fscanf 是 scanf 的原型，将数据存放到对应的地址上 &amp;a（默认从键盘读取）</li>
+  <li>stderr 是标准错误流，当发生错误时输出信息，返回值不为0</li>
+</ul>
+
+<h2 id="52-重定向">5.2 重定向</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="n">a</span><span class="p">){</span>
+    	<span class="n">printf</span><span class="p">(</span><span class="s">"The number is: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"a != 0 !</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>编译运行上述代码：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc ciore.c <span class="nt">-o</span> a2.out
+<span class="nv">$ </span>./a2.out
+2
+2
+
+<span class="nv">$ </span>./a2.out 1&gt;&gt; t.txt	<span class="c"># 默认为标准输出流 (1可以不写) 不覆盖原有的内容</span>
+2						<span class="c"># 输入 2</span>
+<span class="nv">$ </span><span class="nb">cat </span>t.txt
+The number is: 2
+
+<span class="nv">$ </span><span class="nb">ls</span> <span class="o">&gt;&gt;</span> ls.txt			<span class="c"># 将 ls 的输出追加到 ls.txt 结尾</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="o">&gt;</span> ls.txt			<span class="c"># 将 ls 的输出覆盖到 ls.txt</span>
+
+vi input.txt				<span class="c"># 创建 input.txt 写入数字 2</span>
+2
+<span class="nv">$ </span>./a2.out &lt; input.txt		<span class="c"># 标准输入流</span>
+The number is: 2
+
+<span class="nv">$ </span>./a2.out 1&gt; t.txt 2&gt; f.txt &lt;input.txt		<span class="c"># 三种流一起用</span>
+0
+<span class="nv">$ </span><span class="nb">cat </span>fal.txt
+a <span class="o">!=</span> 0 <span class="o">!</span>
+</code></pre></div></div>
+
+<p><strong>重定向</strong>：标准输入流为0；标准输出流为1；默认为标准输出流</p>
+
+<hr />
+
+<h1 id="6-管道的原理与应用">6. 管道的原理与应用</h1>
+
+<p>看个例子：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> /etc/ | <span class="nb">grep </span>ab	<span class="c"># 查看 etc 中所有文件名包含 ab 的文件</span>
+<span class="c"># ls有输出，利用了输出流</span>
+<span class="c"># grep 可以筛选文件，但是需要输入流</span>
+<span class="c"># 竖线 | 表示管道</span>
+crontab
+crypttab
+fstab
+mtab
+</code></pre></div></div>
+
+<p>管道的作用：<font color="red">将前一个命令的输出流作为下一个命令的输入流来使用</font>，联系了两个应用程序。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ps <span class="nt">-e</span> | <span class="nb">grep </span>ssh		<span class="c"># 查看是否有 ssh 的进程</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>参考内容: <a href="http://www.imooc.com/learn/248">Linux 指针与内存</a></p>
+:ET

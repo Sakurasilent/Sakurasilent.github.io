@@ -1,4 +1,4 @@
-I"Cv<p><br /></p>
+I"�v<p><br /></p>
 <h1 id="1-getting-started">1. GETTING STARTED</h1>
 
 <h2 id="11-install-git">1.1 Install git</h2>
@@ -392,9 +392,9 @@ d66f70f362024c0d85f44a18c23dc0d9d17ba968 initial version
 
 <p>创建密钥：</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh-keygen <span class="nt">-t</span> rsa
-<span class="nv">$ </span><span class="nb">cd</span> /home/yin/.ssh/
-<span class="nv">$ </span><span class="nb">cat </span>id_rsa.pub
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh-keygen <span class="nt">-t</span> rsa      <span class="c"># -t rsa可以省略，默认就是生成rsa类型的密钥</span>
+<span class="nv">$ </span><span class="nb">cd</span> /home/yin/.ssh/     <span class="c"># 进入 .ssh 文件夹</span>
+<span class="nv">$ </span><span class="nb">cat </span>id_rsa.pub         <span class="c"># 查看公钥</span>
 <span class="nv">$ </span>ssh <span class="nt">-vT</span> git@github.com
 </code></pre></div></div>
 

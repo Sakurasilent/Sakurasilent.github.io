@@ -1,0 +1,153 @@
+I"[<p><br /></p>
+
+<h1 id="1-公钥和私钥">1. 公钥和私钥</h1>
+
+<p>公钥和私钥都属于 <strong>非对称加密算法</strong> 的一个实现，这个加密算法的信息交换过程是：</p>
+
+<ul>
+  <li>持有公钥的一方（甲）在收到持有私钥的一方（乙）的请求时，甲会在自己的公钥列表中查找是否有乙的公钥，如果有则使用一个随机字串使用公钥加密并发送给乙。</li>
+  <li>乙收到加密的字串使用自己的私钥进行解密，并将解密后的字串发送给甲。</li>
+  <li>甲接收到乙发送来的字串与自己的字串进行对比，如过通过则验证通过，否则验证失败。</li>
+</ul>
+
+<p>  非对称加密算法不能使用相同的密钥进行解密，也就是说公钥加密的只能使用私钥进行解密。可以参照 <a href="https://www.zhihu.com/question/33645891">知乎</a>上的一个小例子来理解：</p>
+
+<blockquote>
+  <p>甲：你想一个三位数，然后用这个数字乘上91，告诉我结果的后3位我就能猜出你想的是什么数字</p>
+
+  <p>乙想了想，得来个难一点的数，996 x 91 = 90636 … …</p>
+
+  <p>乙：真的吗，那636吧</p>
+
+  <p>过了几秒钟 … …</p>
+
+  <p>甲：你想的是 966 吧 (* V *)</p>
+
+  <p>甲：其实方法很简单，你想，91 x 11 = 1001，1001 乘任意三位数后，末尾三位还是原来的数字，所以你告诉我636后，636 x 11 = 6996 就知道你猜的数字是 996了。</p>
+</blockquote>
+
+<p>  实际上，生成公钥和私钥的过程和这个类似，只是实际上用的不只是乘法，乘方、取模都有可能用上！因此，经过公钥加密后的内容只有用私钥才能解开，而私钥只有自己知道，所以很难泄漏，如果有人想要暴力破解私钥也需要花上数十年甚至上百年的时间去破解！</p>
+
+<p><br /></p>
+
+<h1 id="2-linux使用密钥登录">2. Linux使用密钥登录</h1>
+
+<p>如果我主机上的用户 <code class="language-plaintext highlighter-rouge">dd</code> 想要免密码登录 <code class="language-plaintext highlighter-rouge">root</code></p>
+
+<h2 id="21-安装--openssh-server">2.1 安装  openssh-server</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>openssh-server
+</code></pre></div></div>
+
+<h2 id="22-生成密钥">2.2 生成密钥</h2>
+
+<p>登录用户 dd 并进入到 dd 的主目录：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>su <span class="nb">dd</span>
+<span class="nv">$ </span><span class="nb">cd</span> ~
+<span class="nv">$ </span>ssh-keygen <span class="nt">-t</span> rsa     <span class="c"># 生成密钥；  -t rsa 为默认参数，可省略</span>
+</code></pre></div></div>
+
+<p>  接着会提示输入存放密钥的文件夹，按下 enter 使用默认路径（密码可以不设置）。完成后会在<font color="orange">当前用户 dd</font>家目录下生成 .ssh隐藏目录，里面包含两个文件：<code class="language-plaintext highlighter-rouge">id_rsa</code>、<code class="language-plaintext highlighter-rouge">id_rsa.pub</code>文件，前者为私钥文件，后者为公钥文件。</p>
+
+<h2 id="23-将公钥复制到root目录下">2.3 将公钥复制到root目录下</h2>
+
+<p>进入 <code class="language-plaintext highlighter-rouge">dd/.ssh</code> ，将公钥复制到文件 <code class="language-plaintext highlighter-rouge">authorized_keys</code>中，并设置权限：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /home/dd/.ssh
+<span class="nv">$ </span><span class="nb">ls
+</span>id_rsa  id_rsa.pub
+<span class="nv">$ </span><span class="nb">cat </span>id_rsa.pub <span class="o">&gt;&gt;</span> authorized_keys  <span class="c"># 复制 id_rsa.pub 的内容到 文件 authorized_keys 中</span>
+
+su root      <span class="c"># 获得权限</span>
+<span class="nb">chmod </span>600 authorized_keys            <span class="c"># 该文件规定如果属组其他人可写则文件不生效</span>
+<span class="nb">chmod </span>700 ../.ssh
+
+<span class="nv">$ </span><span class="nb">cp </span>authorized_keys /root/.ssh      <span class="c"># 把 authorized_keys 复制到 root/.ssh</span>
+<span class="nv">$ </span><span class="nb">cd</span> /root/.ssh
+<span class="nv">$ </span><span class="nb">ls
+</span>authorized_keys  known_hosts         <span class="c"># known_hosts 为已识别的用户，登录后自动生成</span>
+</code></pre></div></div>
+
+<h2 id="24-测试免密码登录">2.4 测试免密码登录</h2>
+
+<p>切换回 dd 用户，尝试用 <code class="language-plaintext highlighter-rouge">ssh root@127.0.0.1</code> 免密码登录root：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh root@127.0.0.1
+Welcome to Deepin 20 GNU/Linux
+
+    <span class="k">*</span> Homepage:https://www.deepin.org/
+
+    <span class="k">*</span> Bugreport:https://bbs.deepin.org/
+
+
+Last login: Mon Dec 28 16:29:41 2020 from 127.0.0.1
+root@root:~#
+</code></pre></div></div>
+
+<p>这样就成功登录到 root 了！</p>
+
+<p><br /></p>
+
+<h1 id="3-完整的命令过程">3. 完整的命令过程</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">dd</span>@root:~<span class="nv">$ </span>ssh-keygen <span class="nt">-t</span> rsa
+Generating public/private rsa key pair.
+Enter file <span class="k">in </span>which to save the key <span class="o">(</span>/home/dd/.ssh/id_rsa<span class="o">)</span>:
+Created directory <span class="s1">'/home/dd/.ssh'</span><span class="nb">.</span>
+Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>:
+Enter same passphrase again:
+Your identification has been saved <span class="k">in</span> /home/dd/.ssh/id_rsa.
+Your public key has been saved <span class="k">in</span> /home/dd/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:DReJA4lcwAwXkHtdlbmZIc081oEvxwtaEdlgh2tgBEI <span class="nb">dd</span>@root
+The key<span class="s1">'s randomart image is:
++---[RSA 2048]----+
+|  oOE=+=.**%o.   |
+|  ..=.. B./oo    |
+|   . . o.=.@     |
+|  . . .  +X +    |
+|   .    S+.+ .   |
+|        .   .    |
+|                 |
+|                 |
+|                 |
++----[SHA256]-----+
+
+dd@root:~$ pwd
+/home/dd
+dd@root:~$ cd .ssh
+dd@root:~/.ssh$ cat id_rsa.pub &gt;&gt; authorized_keys
+dd@root:~/.ssh$ ls -a
+.  ..  authorized_keys  id_rsa  id_rsa.pub
+
+dd@root:~/.ssh$ su root
+请输入密码
+Password:
+验证成功
+root@root:/home/dd/.ssh# chmod 600 authorized_keys
+root@root:/home/dd/.ssh# chmod 700 ../.ssh
+root@root:/home/dd/.ssh# ls -l
+总用量 12
+-rw------- 1 dd dd  389 12月 28 16:25 authorized_keys
+-rw------- 1 dd dd 1811 12月 28 16:24 id_rsa
+-rw-r--r-- 1 dd dd  389 12月 28 16:24 id_rsa.pub
+
+root@root:/home/dd/.ssh# cp authorized_keys /root/.ssh
+root@root:/home/dd/.ssh# cd /root/.ssh
+root@root:~/.ssh# ls
+authorized_keys  known_hosts
+root@root:~/.ssh# exit
+exit
+
+dd@root:~/.ssh$ ssh root@127.0.0.1
+Welcome to Deepin 20 GNU/Linux
+
+    * Homepage:https://www.deepin.org/
+
+    * Bugreport:https://bbs.deepin.org/
+
+
+Last login: Mon Dec 28 16:29:41 2020 from 127.0.0.1
+root@root:~#
+</span></code></pre></div></div>
+:ET
