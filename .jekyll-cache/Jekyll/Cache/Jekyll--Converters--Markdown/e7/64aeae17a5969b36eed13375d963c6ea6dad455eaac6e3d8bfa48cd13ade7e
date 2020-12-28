@@ -1,4 +1,4 @@
-I"Ms<p><br /></p>
+I"u<p><br /></p>
 <h1 id="1-getting-started">1. GETTING STARTED</h1>
 
 <h2 id="11-install-git">1.1 Install git</h2>
@@ -393,7 +393,7 @@ d66f70f362024c0d85f44a18c23dc0d9d17ba968 initial version
 <span class="nv">$ </span>ssh <span class="nt">-vT</span> git@github.com
 </code></pre></div></div>
 
-<p>过程如下：</p>
+<p>在终端输入上面的代码后，会在当前用户主目录下生成隐藏的 <code class="language-plaintext highlighter-rouge">.ssh</code> 目录，其中包含了存放私钥的文件 <code class="language-plaintext highlighter-rouge">id_rsa</code> 和存放公钥的文件 <code class="language-plaintext highlighter-rouge">id_rsa.pub</code>，具体过程如下：</p>
 
 <p><img src="/images/posts/blogImages/2020121003.png" width="700" /></p>
 
@@ -401,7 +401,7 @@ d66f70f362024c0d85f44a18c23dc0d9d17ba968 initial version
 
 <p><img src="/images/posts/blogImages/2020121004.png" width="700" /></p>
 
-<p>将密钥粘贴到github个人设置中：</p>
+<p>接着，将 <code class="language-plaintext highlighter-rouge">cat id_rsa.pub</code> 显示的公钥粘贴到 github 上：</p>
 
 <p><img src="/images/posts/blogImages/2020121005.png" width="700" /></p>
 
