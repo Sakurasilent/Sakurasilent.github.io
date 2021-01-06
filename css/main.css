@@ -1542,9 +1542,10 @@ nav a {
 }
 
 .tagName{
-  font-size: 1.5em;
+  font-size: 1.3em;
   padding-left: 10px;
-  border-left: 21px solid #222222;
+  border-left: 19px solid #222222;
+  font-family: fantasy;
 }
 
 
