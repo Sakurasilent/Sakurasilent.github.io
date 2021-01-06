@@ -1,19 +1,19 @@
-I"�<h1 id="1-配置-java-环境变量">1. 配置 Java 环境变量</h1>
+I"�<h1 id="1-配置-java-环境变量">1. 配置 Java 环境变量</h1>
 
 <p>要在Linux上使用eclipse，首先需要配置好 Java 环境变量，具体步骤如下：</p>
 
-<h3 id="11-安装好-jdk">1.1 安装好 JDK</h3>
+<h2 id="11-安装好-jdk">1.1 安装好 JDK</h2>
 
-<p>在官网上下载 <a href="https://www.oracle.com/cn/java/technologies/javase-downloads.html">Click me to download</a>，推荐下载 <a href="https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html">Java SE 8</a>，我的电脑是64位的Linux系统，可以直接下载压缩包 <a href="https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html#license-lightbox">jdk-8u271-linux-x64.tar.gz</a>（注意下载的时候需要登录 ORACLE 帐号），默认下载的位置为 <code class="language-plaintext highlighter-rouge">/home/yin/Downloads</code>
-<abbr>
-将压缩包解压到 /usr/local/jdk1.8.0_172：</abbr></p>
+<p>在官网上下载 <a href="https://www.oracle.com/cn/java/technologies/javase-downloads.html">Click me to download</a>，推荐下载 <a href="https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html">Java SE 8</a>，我的电脑是64位的Linux系统，可以直接下载压缩包 <a href="https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html#license-lightbox">jdk-8u271-linux-x64.tar.gz</a>（注意下载的时候需要登录 ORACLE 帐号），默认下载的位置为 <code class="language-plaintext highlighter-rouge">/home/yin/Downloads</code></p>
+
+<p>将压缩包解压到 /usr/local/jdk1.8.0_172：</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo cp</span> /home/yin/Downloads/jdk-8u172-linux-x64.tar /usr/local
 <span class="nv">$ </span><span class="nb">cd </span>usr/local
 <span class="nv">$ </span><span class="nb">sudo tar</span> <span class="nt">-zxvf</span> jdk-8u172-linux-x64.tar
 </code></pre></div></div>
 
-<h3 id="12-更改环境变量">1.2 更改环境变量</h3>
+<h2 id="12-更改环境变量">1.2 更改环境变量</h2>
 
 <p>使用下面的命令：</p>
 
@@ -40,13 +40,13 @@ Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM 
 
 <h1 id="2-安装-eclipse">2. 安装 eclipse</h1>
 
-<h3 id="21-下载-eclipse">2.1 下载 ECLIPSE</h3>
+<h2 id="21-下载-eclipse">2.1 下载 ECLIPSE</h2>
 
 <p>在官网下载 <a href="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2020-12/R/eclipse-java-2020-12-R-linux-gtk-x86_64.tar.gz">ECLIPSE for Java developer</a>，再将得到的 <strong>gz</strong> 压缩包解压到 <code class="language-plaintext highlighter-rouge">/usr/local/eclipse</code>，压缩包解压会得到 eclipse 文件夹，将它复制到 <code class="language-plaintext highlighter-rouge">/usr/local/</code> 即可，完成后就可以点击 eclipse 文件夹中的 eclipse 运行软件了，如下图：</p>
 
-<p><img src="/images/posts/blogImages/image-20201231210908855.png" width="920" /></p>
+<p><img src="/images/posts/blogImages/image-20201231210908855.png" width="720" /></p>
 
-<h3 id="22-创建快捷方式">2.2 创建快捷方式</h3>
+<h2 id="22-创建快捷方式">2.2 创建快捷方式</h2>
 
 <p>为了方便打开 eclipse，下面创建一个快捷方式：</p>
 

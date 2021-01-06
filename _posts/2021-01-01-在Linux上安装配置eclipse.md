@@ -56,7 +56,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.172-b11, mixed mode)
 
 在官网下载 [ECLIPSE for Java developer](https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2020-12/R/eclipse-java-2020-12-R-linux-gtk-x86_64.tar.gz)，再将得到的 **gz** 压缩包解压到 `/usr/local/eclipse`，压缩包解压会得到 eclipse 文件夹，将它复制到 `/usr/local/` 即可，完成后就可以点击 eclipse 文件夹中的 eclipse 运行软件了，如下图：
 
-<img src="/images/posts/blogImages/image-20201231210908855.png" width=920>
+<img src="/images/posts/blogImages/image-20201231210908855.png" width=720>
 
 
 
