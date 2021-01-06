@@ -1,4 +1,4 @@
-I"��<p><br /></p>
+I"�<p><br /></p>
 <h1 id="a-linux-目录结构">A. Linux 目录结构</h1>
 
 <ul>
@@ -95,9 +95,10 @@
 
 <h3 id="rm">rm</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-i</span>    <span class="c"># 删除前逐一确认，-i ：互动模式，在删除前会询问使用者是否动作</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-i</span>    <span class="c"># 互动模式，在删除前会询问使用者是否动作</span>
 <span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-f</span>    <span class="c"># 直接删除档案，不逐一确认</span>
 <span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-r</span>    <span class="c"># 将目录以下的所有文件/目录递归删除</span>
+<span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-rf</span> dir1   <span class="c"># 强制递归删除 dir1 中的所有内容</span>
 </code></pre></div></div>
 
 <h3 id="cp">cp</h3>
@@ -110,11 +111,8 @@
 
 <h3 id="mv">mv</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm</span> <span class="o">[</span><span class="nt">-fir</span><span class="o">]</span> 文件或目录   | f 强制删除不出现警告信息   | i 互动模式删除   | r 递归删除文件夹
-
-<span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-i</span> b		<span class="c"># 以互动的模式删除文件 b （有提示）</span>
-<span class="nv">$ </span><span class="nb">rm</span>：是否删除普通空文件 <span class="s1">'b'</span>？Y
-<span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-r</span> <span class="nb">dir</span>	<span class="c"># 递归删除文件夹 dir</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv</span> <span class="o">[</span>选项]... 源文件 目标文件
+<span class="nb">mv</span> <span class="o">[</span>选项]... 源文件... 目录
 </code></pre></div></div>
 
 <h3 id="ln">ln</h3>
