@@ -232,7 +232,7 @@ code {
   border: 0px solid #F5F2F2;
   border-radius: 6px;
   font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-  font-size: 1.1em;
+  font-size: 1.2em;
   vertical-align: bottom;
   word-wrap: break-word; }
 
@@ -249,7 +249,7 @@ code {
   word-wrap: break-word; }
 */
 pre {
-  margin-bottom: 1.3em;
+  margin-bottom: 1.4em;
   padding: 0.5% 1.5% 0.5% 2.5%;
   background: #282C34;
   /*border: 1px solid #c9e1f6;*/
@@ -257,9 +257,10 @@ pre {
   border-radius: 8px;
   font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
   /*font-size: .9em;*/
-  font-size: 1.0em;
+  font-size: 1.2em;
   font-weight: normal;
-  line-height: 1.6em;
+  line-height: 1.65em;
+  font-family: Console;
   overflow: scroll; }
 
 pre code {
