@@ -1,4 +1,4 @@
-I"�,<h1 id="1-第一个--java-程序">1. 第一个  Java 程序</h1>
+I"�,<h1 id="1-第一个--java-程序">1. 第一个  Java 程序</h1>
 
 <p>打开终端，输入</p>
 
@@ -71,7 +71,8 @@
 
 <p>类中包含了一个 <strong>static</strong> 的静态方法 <code class="language-plaintext highlighter-rouge">public static void main(String[] args)</code>，不需要对象调用，可以自动执行。</p>
 
-<font color="red">`this` **关键字**：</font>
+<p><br />
+<code class="language-plaintext highlighter-rouge">this</code> 关键字：</p>
 
 <p>当实例变量和局部变量重名，JAVA平台会按照先局部变量、后实例变量的顺序寻找。</p>
 
@@ -336,7 +337,7 @@
 
 <p>比较函数 <code class="language-plaintext highlighter-rouge">equals</code></p>
 
-<font color="red">填补一个大坑</font>
+<font color="red" font-size="1.1em">填补一个大坑</font>
 <p>：<code class="language-plaintext highlighter-rouge">equals</code> 比较的是内容是否相等、<code class="language-plaintext highlighter-rouge">== </code>比较的是引用的变量地址是否相等。</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"xxx"</span><span class="o">);</span>

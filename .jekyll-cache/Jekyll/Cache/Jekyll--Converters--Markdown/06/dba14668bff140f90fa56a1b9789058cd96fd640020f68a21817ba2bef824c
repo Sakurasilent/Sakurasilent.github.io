@@ -1,4 +1,4 @@
-I"�c<p><br /></p>
+I"�d<p><br /></p>
 <h1 id="1-linux-c程序">1. Linux C程序</h1>
 
 <h2 id="11-第一个linux-c语言程序">1.1 第一个Linux C语言程序</h2>
@@ -395,6 +395,7 @@ mtab
 <p>管道的作用：<font color="red">将前一个命令的输出流作为下一个命令的输入流来使用</font>，联系了两个应用程序。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ps <span class="nt">-e</span> | <span class="nb">grep </span>ssh		<span class="c"># 查看是否有 ssh 的进程</span>
+<span class="nv">$ </span><span class="nb">pwd</span> | <span class="nb">du</span> <span class="nt">-h</span> <span class="nt">-d</span> 2      <span class="c"># 查看当前目录的存储空间占用情况</span>
 </code></pre></div></div>
 
 <hr />

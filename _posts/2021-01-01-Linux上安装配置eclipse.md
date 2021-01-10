@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 06-在Linux上安装配置eclipse
+title: 06-Linux上安装配置eclipse
 date: 2021-01-01
 description: 接下来的两周开始学习两门编程语言了，首先安装好 Java 环境
 tags: Linux Java
@@ -12,9 +12,11 @@ tags: Linux Java
 
 ## 1.1 安装好 JDK
 
-在官网上下载 [Click me to download](https://www.oracle.com/cn/java/technologies/javase-downloads.html)，推荐下载 [Java SE 8](https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html)，我的电脑是64位的Linux系统，可以直接下载压缩包 [jdk-8u271-linux-x64.tar.gz](https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html#license-lightbox)（注意下载的时候需要登录 ORACLE 帐号），默认下载的位置为 `/home/yin/Downloads`
+在官网上下载 [Click me to download](https://www.oracle.com/cn/java/technologies/javase-downloads.html)，推荐下载 [Java SE 8](https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html)，我的电脑是64位的Linux系统，可以直接下载压缩包 [jdk-8u271-linux-x64.tar.gz](https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html#license-lightbox)（注意下载的时候需要登录 ORACLE 帐号）
 
-将压缩包解压到 /usr/local/jdk1.8.0_172：
+默认下载存储的位置为 `/home/yin/Downloads`
+
+将压缩包解压到 ``/usr/local/jdk1.8.0_172`：
 
 ```shell
 $ sudo cp /home/yin/Downloads/jdk-8u172-linux-x64.tar /usr/local
@@ -27,7 +29,7 @@ $ sudo tar -zxvf jdk-8u172-linux-x64.tar
 使用下面的命令：
 
 ```shell
-$ sudo vim /ect/profile
+$ sudo vim /etc/profile
 ```
 
 将下面的内容追加到末尾（相关参数注意根据需要改动）：
@@ -69,12 +71,12 @@ $ cd /usr/share/applications
 $ sudo vim eclipse.desktop		# 创建快捷方式，下面是文件内容
 [Desktop Entry]
 Encoding=UTF-8
-Name=zyr eclipse
-Comment=Eclipse
-Exec=/usr/local/eclipse/java-oxygen/eclipse/eclipse
-Icon=/usr/local/eclipse/java-oxygen/eclipse/icon.xpm
+Name=eclipse
+Comment=Eclipse IDE
+Exec=/usr/local/eclipse/eclipse        
+Icon=/usr/local/eclipse/icon.xpm
 Terminal=false
-StartupNotify=true
+starttupNotify=true
 Type=Application
 Categories=Application;Development;
 ```

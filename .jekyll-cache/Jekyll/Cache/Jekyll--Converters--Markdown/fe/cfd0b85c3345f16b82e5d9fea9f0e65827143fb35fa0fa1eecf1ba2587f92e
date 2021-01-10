@@ -177,10 +177,6 @@
 
 <p>得到下面的结果：</p>
 
-<p>函数调用时，栈从上往下增长，main 函数在最外层，地址更高，内层的函数地址更低，最内层的函数最先返回 FILO</p>
-
-<h2 id="43-内存的分配">4.3 内存的分配</h2>
-
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> bt
 <span class="c">#0  rect (a=5, b=5) at storage.c:7</span>
 <span class="c">#1  0x0000000000401171 in quadrate (a=5) at storage.c:17</span>
@@ -194,6 +190,10 @@
 <span class="o">(</span>gdb<span class="o">)</span> p &amp;count
 <span class="nv">$9</span> <span class="o">=</span> <span class="o">(</span>int <span class="k">*</span><span class="o">)</span> 0x404034 &lt;count&gt;		<span class="c"># quadrate 中的静态变量（quadrate 调用 rect）</span>
 </code></pre></div></div>
+
+<p>函数调用时，栈从上往下增长，main 函数在最外层，地址更高，内层的函数地址更低，最内层的函数最先返回 FILO</p>
+
+<h2 id="43-内存的分配">4.3 内存的分配</h2>
 
 <p>内存的示意图如下图所示：</p>
 

@@ -1,12 +1,14 @@
-I"�<h1 id="1-配置-java-环境变量">1. 配置 Java 环境变量</h1>
+I"�<h1 id="1-配置-java-环境变量">1. 配置 Java 环境变量</h1>
 
 <p>要在Linux上使用eclipse，首先需要配置好 Java 环境变量，具体步骤如下：</p>
 
 <h2 id="11-安装好-jdk">1.1 安装好 JDK</h2>
 
-<p>在官网上下载 <a href="https://www.oracle.com/cn/java/technologies/javase-downloads.html">Click me to download</a>，推荐下载 <a href="https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html">Java SE 8</a>，我的电脑是64位的Linux系统，可以直接下载压缩包 <a href="https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html#license-lightbox">jdk-8u271-linux-x64.tar.gz</a>（注意下载的时候需要登录 ORACLE 帐号），默认下载的位置为 <code class="language-plaintext highlighter-rouge">/home/yin/Downloads</code></p>
+<p>在官网上下载 <a href="https://www.oracle.com/cn/java/technologies/javase-downloads.html">Click me to download</a>，推荐下载 <a href="https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html">Java SE 8</a>，我的电脑是64位的Linux系统，可以直接下载压缩包 <a href="https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html#license-lightbox">jdk-8u271-linux-x64.tar.gz</a>（注意下载的时候需要登录 ORACLE 帐号）</p>
 
-<p>将压缩包解压到 /usr/local/jdk1.8.0_172：</p>
+<p>默认下载存储的位置为 <code class="language-plaintext highlighter-rouge">/home/yin/Downloads</code></p>
+
+<p>将压缩包解压到 ``/usr/local/jdk1.8.0_172`：</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo cp</span> /home/yin/Downloads/jdk-8u172-linux-x64.tar /usr/local
 <span class="nv">$ </span><span class="nb">cd </span>usr/local
@@ -17,7 +19,7 @@
 
 <p>使用下面的命令：</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vim /ect/profile
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vim /etc/profile
 </code></pre></div></div>
 
 <p>将下面的内容追加到末尾（相关参数注意根据需要改动）：</p>
@@ -54,12 +56,12 @@ Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM 
 <span class="nv">$ </span><span class="nb">sudo </span>vim eclipse.desktop		<span class="c"># 创建快捷方式，下面是文件内容</span>
 <span class="o">[</span>Desktop Entry]
 <span class="nv">Encoding</span><span class="o">=</span>UTF-8
-<span class="nv">Name</span><span class="o">=</span>zyr eclipse
-<span class="nv">Comment</span><span class="o">=</span>Eclipse
-<span class="nv">Exec</span><span class="o">=</span>/usr/local/eclipse/java-oxygen/eclipse/eclipse
-<span class="nv">Icon</span><span class="o">=</span>/usr/local/eclipse/java-oxygen/eclipse/icon.xpm
+<span class="nv">Name</span><span class="o">=</span>eclipse
+<span class="nv">Comment</span><span class="o">=</span>Eclipse IDE
+<span class="nv">Exec</span><span class="o">=</span>/usr/local/eclipse/eclipse        
+<span class="nv">Icon</span><span class="o">=</span>/usr/local/eclipse/icon.xpm
 <span class="nv">Terminal</span><span class="o">=</span><span class="nb">false
-</span><span class="nv">StartupNotify</span><span class="o">=</span><span class="nb">true
+</span><span class="nv">starttupNotify</span><span class="o">=</span><span class="nb">true
 </span><span class="nv">Type</span><span class="o">=</span>Application
 <span class="nv">Categories</span><span class="o">=</span>Application<span class="p">;</span>Development<span class="p">;</span>
 </code></pre></div></div>
