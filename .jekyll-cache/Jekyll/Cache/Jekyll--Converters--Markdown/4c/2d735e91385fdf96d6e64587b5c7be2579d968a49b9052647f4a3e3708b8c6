@@ -1,0 +1,903 @@
+I"�Y<h1 id="1-初识-java">1. 初识 Java</h1>
+
+<p>Java是一种可以开发跨平台应用软件的面向对象程序设计语言，是一种强类型的语言。</p>
+
+<h3 id="11-第一个--java-程序">1.1 第一个  Java 程序</h3>
+
+<p>打开终端，输入</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vim HelloWorld.java
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// static提供了这样一个特性，无需建立对象，就可以启动</span>
+        <span class="n">system</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello world!"</span><span class="o">);</span>		
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>在终端将上述代码存放到 <code class="language-plaintext highlighter-rouge">Hello.java</code>中，使用 <code class="language-plaintext highlighter-rouge">javac  Hello.java</code>编译代码，生成一个 <code class="language-plaintext highlighter-rouge">Hello.class</code>文件，接着使用 <code class="language-plaintext highlighter-rouge">java Hello</code>来运行程序。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>javac Hello.java	<span class="c"># 编译</span>
+<span class="nv">$ </span>java Hello		<span class="c"># 运行</span>
+</code></pre></div></div>
+
+<p>在编写代码时可能需要使用 package：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.*</span>	<span class="c1">// 导入java_installation/java/io下的所有类</span>
+</code></pre></div></div>
+
+<h3 id="12-java-源程序与编译型运行区别">1.2 Java 源程序与编译型运行区别</h3>
+
+<p><img src="https://www.runoob.com/wp-content/uploads/2013/12/ZSSDMld.png" width="600" align="left" /></p>
+
+<p><strong>基础语法</strong></p>
+
+<ul>
+  <li>对大小写敏感</li>
+  <li>类名应当大写开头</li>
+  <li>方法名要小写开头</li>
+  <li><strong>源文件名要和 public 类名相同</strong></li>
+  <li>标识符由字母、下划线或 $ 打头，不能是关键字</li>
+</ul>
+
+<hr />
+
+<h1 id="2-java-对象和类">2. Java 对象和类</h1>
+
+<p>看一个简单的类：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Dog</span> <span class="o">{</span>
+
+	<span class="nc">String</span> <span class="n">name</span><span class="o">;</span>	<span class="c1">// 实例变量</span>
+	<span class="nc">String</span> <span class="n">color</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="c1">// 构造器 public 类型</span>
+	<span class="kd">public</span> <span class="nf">Dog</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="nc">String</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>	<span class="c1">// 参数名和实例变量名相同时，使用 this</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">color</span><span class="o">=</span><span class="n">color</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">" is running..."</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Age: "</span> <span class="o">+</span> <span class="n">age</span><span class="o">);</span>
+		<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="nc">Dog</span> <span class="n">myDog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Dog</span><span class="o">(</span><span class="s">"Tom"</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="s">"Brown"</span><span class="o">);</span>   <span class="c1">// 创建对象</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">myDog</span><span class="o">.</span><span class="na">color</span><span class="o">);</span>
+		<span class="n">myDog</span><span class="o">.</span><span class="na">getAge</span><span class="o">();</span>     <span class="c1">// 调用函数</span>
+		<span class="n">myDog</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>这个类描述了小狗，属性包含：名字、颜色和年龄，类里面的函数称为方法。</p>
+
+<p><strong>static</strong> 类型的 <strong>main</strong> 函数不需要调用，自动执行。</p>
+
+<p><code class="language-plaintext highlighter-rouge">this</code> 关键字</p>
+
+<p>当实例变量和局部变量重名，JAVA平台会按照先局部变量、后实例变量的顺序寻找。</p>
+
+<p>如果使用 <code class="language-plaintext highlighter-rouge">this.name</code>，则不会在方法（局部变量）中寻找变量name，而是直接去实例变量中去寻找。</p>
+
+<p>当实例变量和局部变量名字不重复时，可以不使用 this，编译器会自动加上 this</p>
+
+<hr />
+
+<h1 id="3-数据与变量">3. 数据与变量</h1>
+
+<h3 id="31-基本数据类型">3.1 基本数据类型</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Data</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">65</span><span class="o">;</span>
+        <span class="kt">short</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">float</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">2.5</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span>    <span class="c1">// decimal</span>
+        <span class="kt">int</span> <span class="n">e</span> <span class="o">=</span> <span class="mo">054</span><span class="o">;</span>    <span class="c1">// octal</span>
+        <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mh">0x30</span><span class="o">;</span>   <span class="c1">// hex</span>
+        <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="sc">'a'</span><span class="o">;</span>  <span class="c1">// 占 2 字节 使用 Unicode 可以存放一个汉字</span>
+        <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="o">;</span>
+        <span class="kt">boolean</span> <span class="n">full</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+        <span class="kt">byte</span> <span class="n">a1</span> <span class="o">=</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span><span class="n">a</span><span class="o">;</span>  <span class="c1">// 强制转换</span>
+
+        <span class="kd">final</span> <span class="kt">double</span> <span class="no">PI</span> <span class="o">=</span> <span class="mf">3.1459265</span><span class="o">;</span>    <span class="c1">// const</span>
+
+        <span class="c1">// 可以查看特定类型数据的长度和范围</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Double</span><span class="o">.</span><span class="na">SIZE</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Java 为每一个内置数据类型都提供了对应的<code class="language-plaintext highlighter-rouge">包装类</code>：Boolean, Byte, Short, Integer, Long, Character, Float, Double.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="nc">Double</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">5.3</span><span class="o">;</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">floor</span><span class="o">(</span><span class="n">x</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Java Math</code> 类：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"PI = "</span> <span class="o">+</span> <span class="nc">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"cos(PI/2) = "</span> <span class="o">+</span> <span class="nc">Math</span><span class="o">.</span><span class="na">tan</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">/</span><span class="mi">4</span><span class="o">));</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"random: "</span> <span class="o">+</span> <span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"exp()"</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="32-基本变量类型">3.2 基本变量类型</h3>
+
+<ul>
+  <li>类变量：独立于方法之外的变量，用 static 修饰；</li>
+  <li>实例变量：独立于方法之外的变量，不过没有 static 修饰；</li>
+  <li>局部变量：类的方法中的变量。</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Var</span><span class="o">{</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">// 类变量</span>
+    <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"Tom"</span><span class="o">;</span>    <span class="c1">// 实例变量</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(){</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>         <span class="c1">// 局部变量</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>类变量属于静态变量，无论一个类有多少个对象，类变量都共用一个！</p>
+
+<hr />
+
+<h1 id="4-java-修饰符">4. Java 修饰符</h1>
+
+<h3 id="41-访问控制修饰符">4.1 访问控制修饰符</h3>
+
+<p>Java 支持四种不同的访问权限：</p>
+
+<p><strong>default</strong>：在同一包内可见，不使用任何修饰符。使用对象：类、接口、变量、方法。</p>
+
+<p><strong>private</strong> : 在同一类内可见。使用对象：变量、方法。 注意：不能修饰类（外部类）</p>
+
+<p><strong>public</strong> : 对所有类可见。使用对象：类、接口、变量、方法</p>
+
+<p><strong>protected</strong> : 对同一包内的类和所有子类可见。使用对象：变量、方法。 注意：不能修饰类（外部类）。</p>
+
+<h3 id="42-非访问修饰符">4.2 非访问修饰符</h3>
+
+<p><strong>static</strong></p>
+
+<p>静态变量：static 关键字用来声明独立于对象的静态变量，无论一个类实例化多少对象，它的静态变量只有一份拷贝。</p>
+
+<p>静态函数：static 关键字用来声明独立于对象的静态方法。静态方法不能使用类的非静态变量。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">INstenceCOunter</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">numInstences</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>    <span class="c1">// 静态变量</span>
+
+    <span class="n">prvate</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">addInstence</span><span class="o">(){</span>       <span class="c1">// 静态函数</span>
+        <span class="n">numInstences</span><span class="o">++;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>注意：<font color="red">在静态方法中调用非静态方法时，编译器会报错</font>（因为非静态方法只有实例化的对象能够调用，而静态方法执行的过程中未调用构造函数实例化对象，因此不允许调用！）</p>
+
+<p>解决办法可以参考 <a href="https://blog.csdn.net/q610376681/article/details/49359819">博客</a> ，要么创建一个类的对象，通过对象来调用函数，要么将非静态方法声明中加上 <code class="language-plaintext highlighter-rouge">static</code> 改为静态方法，同时将变量声明为全局静态的。</p>
+
+<p><strong>final</strong></p>
+
+<p>被 final 修饰的实例变量必须显式指定初始值，之后不能再修改</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">final</span> <span class="kt">double</span> <span class="no">PI</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="o">;</span>   <span class="c1">// 不能修改值</span>
+
+    <span class="c1">// final 方法不能被子类重写</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">changeName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="5-流程控制">5. 流程控制</h1>
+
+<h3 id="51-循环结构">5.1 循环结构</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+    <span class="n">count</span><span class="o">--;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">break</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="n">count</span><span class="o">--;</span>
+<span class="o">}</span>
+
+<span class="nc">String</span> <span class="o">[]</span> <span class="n">names</span> <span class="o">=</span> <span class="o">{</span><span class="s">"Tom"</span><span class="o">,</span> <span class="s">"Domy"</span><span class="o">,</span> <span class="s">"Sam"</span><span class="o">};</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">name</span> <span class="o">:</span> <span class="n">names</span><span class="o">){</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="52-分支结构">5.2 分支结构</h3>
+
+<p>常用的<code class="language-plaintext highlighter-rouge">分支结构</code>如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+<span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+<span class="k">else</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+<span class="k">switch</span> <span class="o">(</span><span class="n">expression</span><span class="o">){</span>
+    <span class="k">case</span> <span class="nl">value1:</span>
+        <span class="c1">// code_block</span>
+        <span class="k">break</span><span class="o">;</span>
+    <span class="k">case</span> <span class="nl">value2:</span>
+        <span class="c1">// code_block</span>
+        <span class="k">break</span><span class="o">;</span>
+    <span class="k">default</span><span class="o">:</span>
+        <span class="c1">// code_block</span>
+        <span class="k">break</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="6-java-方法">6. Java 方法</h1>
+
+<h3 id="61-方法的定义与调用">6.1 方法的定义与调用</h3>
+
+<p>一个方法包含了 <code class="language-plaintext highlighter-rouge">修饰符</code>、<code class="language-plaintext highlighter-rouge">返回值类型</code>、<code class="language-plaintext highlighter-rouge">方法名</code>、<code class="language-plaintext highlighter-rouge">参数</code> 和 <code class="language-plaintext highlighter-rouge">方法体</code>构成</p>
+
+<p><img src="/images/posts/blogImages/image-20210104201620033.png" width="800" /></p>
+
+<p>在不创建类对象的情况下，主函数可以调用<code class="language-plaintext highlighter-rouge">静态方法</code>：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MethodTest</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">max</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="o">?</span> <span class="n">a</span> <span class="o">:</span> <span class="n">b</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">max</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">));</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>在静态的主函数调用其他函数有以下两种方法：</p>
+
+<ul>
+  <li>用 <strong>static</strong> 修饰其他函数，可被主函数直接调用</li>
+  <li>创建类的对象，通过类的对象间接地调用函数</li>
+</ul>
+
+<h3 id="62-可变参数">6.2 可变参数</h3>
+
+<p>可变参数的声明方式为：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">typeName</span><span class="o">...</span> <span class="n">parameterName</span>
+</code></pre></div></div>
+
+<p>举个例子：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sum</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">));</span>  <span class="c1">// 15.0</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">sum</span><span class="o">(</span><span class="kt">double</span><span class="o">...</span> <span class="n">list</span><span class="o">){</span>
+        <span class="kt">double</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">double</span> <span class="n">elem</span> <span class="o">:</span> <span class="n">list</span><span class="o">){</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">elem</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>此处传入的参数有很多个，可以像数组一样来访问传入的参数。</p>
+
+<hr />
+
+<h1 id="7-数组">7. 数组</h1>
+
+<h3 id="71-一维数组">7.1 一维数组</h3>
+
+<p><strong>数组的声明</strong></p>
+
+<p>可以用下面两种方法声明数组：<code class="language-plaintext highlighter-rouge">dateType[] arrayName;</code> 或 <code class="language-plaintext highlighter-rouge">dataType arrayName[];</code>，但与 C++ 不同的是 Java 语言中声明数组的时候不可以指定数组长度。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">animals</span><span class="o">;</span>
+<span class="kt">double</span><span class="o">[]</span> <span class="n">salaries</span><span class="o">;</span>
+<span class="nc">String</span><span class="o">[]</span> <span class="n">names</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p><strong>创建数组</strong></p>
+
+<p>所谓创建数组，就是要为数组分配内存空间，不分配内存是不能存放数组元素的，创建数组就是在内存中划分出几个连续的空间用于依次存储数组中的数据元素，其语法形式如下。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">myList</span><span class="o">;</span>          <span class="c1">// 声明数组</span>
+<span class="n">myList</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span>  <span class="c1">// 创建数组</span>
+
+<span class="nc">String</span><span class="o">[]</span> <span class="n">names</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[</span><span class="mi">6</span><span class="o">];</span>   <span class="c1">// 声明和创建</span>
+</code></pre></div></div>
+
+<p>上面的代码创建数组的过程为：在<code class="language-plaintext highlighter-rouge">堆内存</code>中创建 10 个连续的、存放 int 型元素的空间，并把存储空间的首地址赋给变量 myList。</p>
+
+<p><strong>元素访问</strong></p>
+
+<p>可以使用下标 <code class="language-plaintext highlighter-rouge">[]</code> 访问数组元素，可以使用冒号 <code class="language-plaintext highlighter-rouge">:</code> 循环数组元素：</p>
+
+<p>当使用数组作函数的参数时，采用的是<code class="language-plaintext highlighter-rouge">引用传递</code>，可以直接对内存数据进行修改。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">numbers</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="n">numbers</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">number</span> <span class="o">:</span> <span class="n">numbers</span><span class="o">){</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">number</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>数组初始化</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">names</span> <span class="o">=</span> <span class="o">{</span><span class="s">"Tom"</span><span class="o">,</span> <span class="s">"Lucy"</span><span class="o">,</span> <span class="s">"Jerrey"</span><span class="o">};</span>
+</code></pre></div></div>
+
+<h3 id="72-二维数组">7.2 二维数组</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">3</span><span class="o">][</span><span class="mi">4</span><span class="o">];</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">;</span> <span class="n">j</span><span class="o">++){</span>
+                <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="o">;</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]);</span>
+            <span class="o">}</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="8-string-字符串">8. String 字符串</h1>
+
+<h3 id="81-string-类">8.1 String 类</h3>
+
+<p>String 类有以下构造函数：</p>
+
+<ul>
+  <li>String(String s)：初始化一个新创建的String对象，使其表示一个与参数相同的字符序列。</li>
+  <li>String(char[] value)：创建一个新的String对象，使其表示字符数组参数中当前包含的字符序列。</li>
+  <li>String(char[] value, int offset, int count)：创建一个新的String对象，它包含取自字符数组参数的一个子数组的字符序列。</li>
+</ul>
+
+<p>举个例子：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">"hello"</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"hello"</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">str3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"Hello world"</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>注意：String 字符串是<code class="language-plaintext highlighter-rouge">常量</code>，使用 String 创建的字符串不支持字符串内字符的操作</p>
+
+<p><strong>字符串的存储</strong></p>
+
+<p>当创建两个字符串变量，若字符串的内容相同，使用 new 创建得到的两个字符串地址不同，不使用 new 创建的两个字符串变量地址相同：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CharacterClass</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">"12345"</span><span class="o">;</span>	<span class="c1">// 公共池</span>
+		<span class="nc">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="s">"12345"</span><span class="o">;</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">identityHashCode</span><span class="o">(</span><span class="n">str1</span><span class="o">));</span>   <span class="c1">// 打印地址对应的 hash</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">identityHashCode</span><span class="o">(</span><span class="n">str2</span><span class="o">));</span>
+
+		<span class="nc">String</span> <span class="n">str3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"12345"</span><span class="o">);</span>	<span class="c1">// 堆</span>
+		<span class="nc">String</span> <span class="n">str4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"12345"</span><span class="o">);</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">identityHashCode</span><span class="o">(</span><span class="n">str3</span><span class="o">));</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">identityHashCode</span><span class="o">(</span><span class="n">str4</span><span class="o">));</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">110718392</span>    <span class="c1">// str1 和 str2 是同一个字符串</span>
+<span class="mi">110718392</span>
+<span class="mi">231685785</span>    <span class="c1">// str3 和 str4 不是一个字符串</span>
+<span class="mi">114935352</span>
+</code></pre></div></div>
+
+<h3 id="82-string-类方法">8.2 String 类方法</h3>
+
+<p>常用的字符串函数有：length(), equal(), charAt(), indexOf(), subString(), format()</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+
+        <span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"hello"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"hello"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str1</span> <span class="o">==</span> <span class="n">str2</span><span class="o">);</span>      <span class="c1">// false</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">str2</span><span class="o">));</span> <span class="c1">// true</span>
+
+        <span class="nc">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"abcdefg"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s1</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">2</span><span class="o">));</span>      <span class="c1">// c</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s1</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="sc">'e'</span><span class="o">));</span>   <span class="c1">// 4</span>
+
+        <span class="nc">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"This is a text."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>       <span class="c1">// 15</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s2</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span><span class="mi">14</span><span class="o">));</span>
+
+        <span class="nc">String</span> <span class="n">formated_str</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"PI = %f"</span><span class="o">,</span> <span class="mf">3.14</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">formated_str</span><span class="o">);</span>      <span class="c1">// PI = 3.14</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>注意</strong>：<code class="language-plaintext highlighter-rouge">equals</code> 比较的是内容是否相等、<code class="language-plaintext highlighter-rouge">==</code> 比较的是引用的变量地址是否相等。</p>
+
+<h3 id="83-stringbuffer-类">8.3 StringBuffer 类</h3>
+
+<p> 以下是 StringBuffer 类最常用的构造方法。</p>
+
+<ul>
+  <li>StringBuffer()：构造一个其中不带字符的字符串缓冲区，其初始容量为16个字符。</li>
+  <li>StringBuffer(String str)：构造一个字符串缓冲区，并将其内容初始化为指定的字符串内容。</li>
+  <li>StringBuffer(int capacity)：构造一个字符串缓冲区，大小为 capacity 个字节。</li>
+  <li>StringBuffer 字符串使用场合为经常需要对字符串内容进行修改操作的场合。</li>
+</ul>
+
+<p>常用方法如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">length</span><span class="o">()</span>
+<span class="kd">public</span> <span class="kt">char</span> <span class="nf">charAt</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCharAt</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="kt">char</span> <span class="n">ch</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">StringBuffer</span> <span class="nf">deleteCharAt</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span>
+
+<span class="kd">public</span> <span class="nc">StringBuffer</span> <span class="nf">append</span><span class="o">(</span><span class="kt">char</span><span class="o">[]</span> <span class="n">str</span><span class="o">)</span>            <span class="c1">// 追加字符串</span>
+<span class="kd">public</span> <span class="nc">StringBuffer</span> <span class="nf">insert</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="kt">char</span><span class="o">[]</span> <span class="n">str</span><span class="o">)</span> <span class="c1">// 在 index 插入 str</span>
+<span class="kd">public</span> <span class="nc">StringBuffer</span> <span class="nf">delete</span><span class="o">(</span><span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">)</span>    <span class="c1">// 删除 [start, end)</span>
+<span class="kd">public</span> <span class="nc">StringBuffer</span> <span class="nf">replace</span><span class="o">(</span><span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">,</span> <span class="nc">String</span> <span class="n">str</span><span class="o">)</span>
+
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">substring</span><span class="o">(</span><span class="kt">int</span> <span class="n">beginIndex</span><span class="o">,</span> <span class="kt">int</span> <span class="n">endIndex</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">synchronized</span> <span class="nc">StringBuffer</span> <span class="nf">reverse</span><span class="o">()</span>
+</code></pre></div></div>
+
+<p>举个例子：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    	<span class="nc">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">(</span><span class="s">"this is a StringBuffer"</span><span class="o">);</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span>
+
+    	<span class="n">sb</span><span class="o">.</span><span class="na">setCharAt</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="sc">'T'</span><span class="o">);</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span>
+
+    	<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"."</span><span class="o">);</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span>
+
+    	<span class="n">sb</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span> <span class="s">"not "</span><span class="o">);</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span>
+
+    	<span class="n">sb</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span> <span class="mi">12</span><span class="o">);</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>输出结果为：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span> <span class="n">is</span> <span class="n">a</span> <span class="nc">StringBuffer</span>
+<span class="nc">This</span> <span class="n">is</span> <span class="n">a</span> <span class="nc">StringBuffer</span>
+<span class="nc">This</span> <span class="n">is</span> <span class="n">a</span> <span class="nc">StringBuffer</span><span class="o">.</span>
+<span class="nc">This</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="nc">StringBuffer</span><span class="o">.</span>
+<span class="nc">This</span> <span class="n">is</span> <span class="n">a</span> <span class="nc">StringBuffer</span><span class="o">.</span>
+</code></pre></div></div>
+
+<p>StringBuilder 与 StringBuffer 使用方法类似，虽然 StringBuilder 不是线程安全的，但速度快，因此大多数情况下用 StringBuilder 类。</p>
+
+<hr />
+
+<h1 id="9-读写操作">9. 读写操作</h1>
+
+<h3 id="91-scanner-类">9.1 Scanner 类</h3>
+
+<p>Java 提供了 <code class="language-plaintext highlighter-rouge">Scannner</code> 类，可以设置参数来从键盘读取数据，创建<code class="language-plaintext highlighter-rouge">Scanner</code>对象如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+<span class="nc">Scanner</span> <span class="n">scan</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span> <span class="c1">// 参数 System.in 代表读取键盘的输入</span>
+</code></pre></div></div>
+
+<h3 id="92-读取字符串">9.2 读取字符串</h3>
+
+<p>输入字符串的方式有两种：</p>
+
+<p><code class="language-plaintext highlighter-rouge">next()</code></p>
+
+<ul>
+  <li>一定要读取到有效字符后才可以结束输入</li>
+  <li>输入一行时，以空格分隔字符串，因此不能得到带有空格的字符串；</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">nextLine()</code></p>
+
+<ul>
+  <li>输入一行，以换行符结束，能读取有空格的字符串</li>
+  <li>可以读取空白内容</li>
+</ul>
+
+<p>举个例子：（输入为 “hello world”）</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+
+        <span class="nc">Scanner</span> <span class="n">sc1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>   
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sc1</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>         <span class="c1">// hello</span>
+
+        <span class="nc">Scanner</span> <span class="n">sc2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sc2</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>     <span class="c1">// hello world</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="93-读取数字">9.3 读取数字</h3>
+
+<p>下面的程序对输入的所有数字求和，当输入不是 double 类型时（如字符串），程序会终止</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+		<span class="kt">double</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="k">while</span> <span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">hasNextDouble</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">sum</span> <span class="o">+=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextDouble</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Sum: "</span> <span class="o">+</span> <span class="n">sum</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="94-文件读写操作">9.4 文件读写操作</h3>
+
+<p>可以使用 <code class="language-plaintext highlighter-rouge">BufferedWriter</code> 和 <code class="language-plaintext highlighter-rouge">BufferedReader</code> 实现按行读写操作：</p>
+
+<h4 id="941-创建对象">9.4.1 创建对象</h4>
+
+<p>构造函数声明如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="nc">Reader</span> <span class="n">in</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nf">BufferedWriter</span><span class="o">(</span><span class="nc">Writer</span> <span class="n">out</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>创建 BueredWriter 对象：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileWriter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.BufferedWriter</span><span class="o">;</span>
+
+<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"a.txt"</span><span class="o">);</span>
+<span class="nc">FileWriter</span> <span class="n">fw</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+<span class="nc">BufferedWriter</span> <span class="n">bw</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedWriter</span><span class="o">(</span><span class="n">fw</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>创建 BufferedReader 对象：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.FileReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+
+<span class="nc">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"a.txt"</span><span class="o">));</span>
+</code></pre></div></div>
+
+<h4 id="942-常用方法">9.4.2 常用方法</h4>
+
+<p>BufferedWriter 类常用的方法有：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="kt">char</span> <span class="n">ch</span><span class="o">)</span>		<span class="c1">// 写入单个字符</span>
+<span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="kt">char</span> <span class="o">[]</span><span class="n">cbuf</span><span class="o">,</span><span class="kt">int</span> <span class="n">off</span><span class="o">,</span><span class="kt">int</span> <span class="n">len</span><span class="o">)</span>	<span class="c1">// 写入字符数据的某一部分</span>
+<span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">,</span><span class="kt">int</span> <span class="n">off</span><span class="o">,</span><span class="kt">int</span> <span class="n">len</span><span class="o">)</span>	<span class="c1">// 写入字符串的某一部分</span>
+<span class="kt">void</span> <span class="nf">newLine</span><span class="o">()</span>	<span class="c1">// 写入一个行分隔符</span>
+<span class="kt">void</span> <span class="nf">flush</span><span class="o">()</span>	<span class="c1">// 刷新缓冲，将缓冲数据写到目的文件中</span>
+<span class="kt">void</span> <span class="nf">close</span><span class="o">()</span>	<span class="c1">// 关闭此流，再关闭前会先刷新</span>
+</code></pre></div></div>
+
+<p>BufferedReader 类常用的方法有：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">read</span><span class="o">()</span>				<span class="c1">// 读取单个字符  达到尾部返回-1</span>
+<span class="kt">boolean</span> <span class="nf">ready</span><span class="o">()</span>    		<span class="c1">// Tells whether this stream is ready to be read</span>
+<span class="nc">String</span> <span class="nf">readLine</span><span class="o">();</span>  	<span class="c1">// Reads a line of text</span>
+<span class="kt">void</span> <span class="nf">close</span><span class="o">();</span>           <span class="c1">// 关闭该流并释放与该流相关的所有资源</span>
+</code></pre></div></div>
+
+<h4 id="943-实例程序">9.4.3 实例程序</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.BufferedWriter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileWriter</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    	<span class="k">try</span> <span class="o">{</span>
+    		<span class="nc">BufferedWriter</span> <span class="n">bw</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"a.txt"</span><span class="o">));</span>
+    		<span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Line 1"</span><span class="o">);</span>
+    		<span class="n">bw</span><span class="o">.</span><span class="na">newLine</span><span class="o">();</span>
+    		<span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Line 2"</span><span class="o">);</span>
+    		<span class="n">bw</span><span class="o">.</span><span class="na">newLine</span><span class="o">();</span>
+    		<span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Line 3"</span><span class="o">);</span>
+    		<span class="n">bw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>     <span class="c1">// 刷新缓冲区，将缓冲区的内容写入到文件</span>
+    		<span class="n">bw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Finish writting"</span><span class="o">);</span>
+
+    		<span class="nc">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"a.txt"</span><span class="o">));</span>
+    		<span class="k">while</span> <span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">ready</span><span class="o">())</span> <span class="o">{</span>
+    			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+    		<span class="o">}</span>
+    		<span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    	<span class="o">}</span>
+    	<span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// TODO: handle exception</span>
+    		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>输出结果如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Finish</span> <span class="n">writting</span>
+<span class="nc">Line</span> <span class="mi">1</span>
+<span class="nc">Line</span> <span class="mi">2</span>
+<span class="nc">Line</span> <span class="mi">3</span>
+</code></pre></div></div>
+
+<p>下面这个程序实现了文件的复制：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.BufferedWriter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileWriter</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    	<span class="k">try</span> <span class="o">{</span>
+    		<span class="nc">FileReader</span> <span class="n">fr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"a.txt"</span><span class="o">);</span>
+    		<span class="nc">FileWriter</span> <span class="n">fw</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"b.txt"</span><span class="o">);</span>
+    		<span class="nc">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="n">fr</span><span class="o">);</span>
+    		<span class="nc">BufferedWriter</span> <span class="n">bw</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedWriter</span><span class="o">(</span><span class="n">fw</span><span class="o">);</span>
+
+    		<span class="k">while</span> <span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">ready</span><span class="o">())</span> <span class="o">{</span>
+    			<span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+    			<span class="n">bw</span><span class="o">.</span><span class="na">newLine</span><span class="o">();</span>
+    		<span class="o">}</span>
+    		<span class="n">bw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+    		<span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    		<span class="n">bw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    	<span class="o">}</span>
+    	<span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// TODO: handle exception</span>
+    		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>运行之后会在工作文件夹 Test 下生成 b.txt，里面的内容和 a.txt 一样。</p>
+
+<hr />
+
+<h1 id="10-异常捕获">10. 异常捕获</h1>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">try-catch</code> 来捕获 <a href="https://www.runoob.com/java/java-exceptions.html">异常</a>：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="o">{</span>
+    <span class="kt">double</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Got an error: "</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span> <span class="c1">// 打印错误</span>
+<span class="o">}</span> <span class="k">finally</span><span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"This statement is excuted!"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>可以有多个 <code class="language-plaintext highlighter-rouge">catch</code> 来捕获不同类型的错误；不论是否存在异常，<code class="language-plaintext highlighter-rouge">finall</code>关键字中的语句都会被执行。</p>
+
+<p>输出结果为：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Got</span> <span class="n">an</span> <span class="nl">error:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArithmeticException</span><span class="o">:</span> <span class="o">/</span> <span class="n">by</span> <span class="n">zero</span>
+<span class="nc">This</span> <span class="n">statement</span> <span class="n">is</span> <span class="n">excuted</span><span class="o">!</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="11-时间和日期">11. 时间和日期</h1>
+
+<h3 id="111-查看时间">11.1 查看时间</h3>
+
+<p><code class="language-plaintext highlighter-rouge">java.util</code> 包提供了 Date 类来封装当前的日期和时间，可以 new 一个 Date 对象：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="nc">Date</span> <span class="n">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">();</span>    <span class="c1">// 初始化对象</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">date</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="112-格式化输出时间">11.2 格式化输出时间</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.text.SimpleDateFormat</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="c1">// 创建 Date 对象</span>
+        <span class="nc">Date</span> <span class="n">currTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">();</span>
+        <span class="c1">// 设置格式</span>
+        <span class="nc">SimpleDateFormat</span> <span class="n">ft</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"hh:mm:ss yyyy/MM/dd E"</span><span class="o">);</span>
+        <span class="c1">// 格式化输出</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Current time: "</span> <span class="o">+</span> <span class="n">ft</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">currentTime</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="113-测量时间">11.3 测量时间</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Thread.sleep(1000)</code> 休眠 1000ms</p>
+
+<p><code class="language-plaintext highlighter-rouge">System.currentTimeMillis()</code> 获取毫秒数</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+
+<span class="k">try</span> <span class="o">{</span>
+    <span class="c1">// 获取从1970年1月1号0时0分0秒至今的毫秒数</span>
+    <span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+
+    <span class="c1">// 休眠 3 s</span>
+    <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">3000</span><span class="o">);</span>
+
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+    <span class="kt">long</span> <span class="n">end</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+
+    <span class="kt">long</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">start</span> <span class="o">-</span> <span class="n">end</span><span class="o">;</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">diff</span> <span class="o">+</span> <span class="s">" msec"</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Got an exception!"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="114-calendar-类">11.4 Calendar 类</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Calendar</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test1</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Calendar</span> <span class="n">c1</span> <span class="o">=</span> <span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">c1</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">c1</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">YEAR</span><span class="o">));</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">c1</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">MONTH</span><span class="o">));</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">c1</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">DATE</span><span class="o">));</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="13-data-structure">13. data structure</h1>
+
+<p>Java 提供了一系列的存储数据结构和相应的算法，各种容器由 <code class="language-plaintext highlighter-rouge">Collections</code>继承而来，算法可以通过 <code class="language-plaintext highlighter-rouge">Collections</code>类来调用；容器的创建方法如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ContainerName</span><span class="o">;</span>    <span class="c1">// 引入容器类</span>
+
+<span class="nc">ContainerName</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">objectName</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ContainerName</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;();</span>  <span class="c1">// 初始化</span>
+</code></pre></div></div>
+
+<h3 id="131-arraylist">13.1 ArrayList</h3>
+
+<p>ArrayList 类是一个可以动态修改的数组，与普通数组的区别就是它是没有固定大小的限制；</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">dataStructure</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Collections</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">dataStructure</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">myList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span>
+		<span class="n">myList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+		<span class="n">myList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+		<span class="n">myList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+		<span class="n">myList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">6</span><span class="o">);</span>
+		<span class="n">myList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+		<span class="n">myList</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">Integer</span> <span class="n">i</span> <span class="o">:</span> <span class="n">myList</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+		<span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">myList</span><span class="o">);</span>
+<span class="c1">//		Collections.reverse(myList);</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">Integer</span> <span class="n">i</span> <span class="o">:</span> <span class="n">myList</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="132-stack">13.2 Stack</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Stack</code> 常用的方法有：<code class="language-plaintext highlighter-rouge">boolean empty()</code>, <code class="language-plaintext highlighter-rouge">E push()</code>, <code class="language-plaintext highlighter-rouge">E pop()</code>, <code class="language-plaintext highlighter-rouge">E peek()</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">dataStructure</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Stack</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">dataStructure</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span>
+		<span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>              <span class="c1">// 压栈</span>
+		<span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+		<span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+		<span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+		<span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+
+		<span class="nc">Integer</span> <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>   <span class="c1">// 访问栈顶</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+
+		<span class="nc">Integer</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="k">while</span><span class="o">(!</span><span class="n">s</span><span class="o">.</span><span class="na">empty</span><span class="o">())</span> <span class="o">{</span>     <span class="c1">// 判空</span>
+			<span class="n">sum</span> <span class="o">+=</span> <span class="n">s</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>     <span class="c1">// 弹栈</span>
+		<span class="o">}</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sum</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>除此之外，Java 还有 <code class="language-plaintext highlighter-rouge">Vector</code>, <code class="language-plaintext highlighter-rouge">LinkList</code>, <code class="language-plaintext highlighter-rouge">Queue</code>, <code class="language-plaintext highlighter-rouge">Dictionary</code>等常用容器，可以通过查看手册或查看源码来学习使用！</p>
+
+<hr />
+
+<p>以上就是目前学习的内容了，笔记持续更新中～</p>
+:ET
