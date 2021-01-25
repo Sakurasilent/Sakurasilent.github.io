@@ -16,7 +16,7 @@ title: 尹同学的个人简介
 
 抱着对科研浓厚的兴趣，大三下学期我加入鬼成像课题组做科研，在AO上发表了一篇文章：
 
-2021-08 \| SCI三区 \| [Imaging quality improvement of ghost imaging in scattering medium based on Hadamard modulated light field.](https://doi.org/10.1364/AO.400280)
+2020-08 \| SCI三区 \| [Imaging quality improvement of ghost imaging in scattering medium based on Hadamard modulated light field.](https://doi.org/10.1364/AO.400280)
 
 <hr>
 

@@ -1,4 +1,4 @@
-I"�Y<h1 id="1-初识-java">1. 初识 Java</h1>
+I"Y<h1 id="1-初识-java">1. 初识 Java</h1>
 
 <p>Java是一种可以开发跨平台应用软件的面向对象程序设计语言，是一种强类型的语言。</p>
 
@@ -30,7 +30,7 @@
 
 <h3 id="12-java-源程序与编译型运行区别">1.2 Java 源程序与编译型运行区别</h3>
 
-<p><img src="https://www.runoob.com/wp-content/uploads/2013/12/ZSSDMld.png" width="600" align="left" /></p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2013/12/ZSSDMld.png" width="600" /></p>
 
 <p><strong>基础语法</strong></p>
 
@@ -605,7 +605,7 @@
 <span class="kd">public</span> <span class="nf">BufferedWriter</span><span class="o">(</span><span class="nc">Writer</span> <span class="n">out</span><span class="o">)</span>
 </code></pre></div></div>
 
-<p>创建 BueredWriter 对象：</p>
+<p>创建 BufferedWriter 对象：</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.FileWriter</span><span class="o">;</span>
