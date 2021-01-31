@@ -226,13 +226,13 @@ ul {
   list-style-type: disc; }
 
 code {
-  color: #F26900;
-  padding: .1em .4em;
-  background: #F5F2F2;
-  border: 0px solid #F5F2F2;
-  border-radius: 3px;
+  color: #D23258;
+  padding: .1em .3em;
+  background: #F8f8f8;
+  border: 0px;
+  border-radius: 2px;
   font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-  font-size: 1.08em;    /* 代码字体 */
+  font-size: 1.1em;    /* 代码字体 */
   vertical-align: bottom;
   word-wrap: break-word; }
 

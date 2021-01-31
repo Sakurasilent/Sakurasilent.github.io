@@ -1,4 +1,4 @@
-I"Y<h1 id="1-初识-java">1. 初识 Java</h1>
+I"�m<h1 id="1-初识-java">1. 初识 Java</h1>
 
 <p>Java是一种可以开发跨平台应用软件的面向对象程序设计语言，是一种强类型的语言。</p>
 
@@ -526,6 +526,60 @@
 
 <p>StringBuilder 与 StringBuffer 使用方法类似，虽然 StringBuilder 不是线程安全的，但速度快，因此大多数情况下用 StringBuilder 类。</p>
 
+<h3 id="84-正则表达式">8.4 正则表达式</h3>
+
+<p>可以使用正则表达式来判断一个字符串是否满足特定的规则，如：使用 <code class="language-plaintext highlighter-rouge">String</code> 类的 <code class="language-plaintext highlighter-rouge">matches</code> 函数来匹配字符串：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isValidMobileNumber</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">"\\d{11}"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">consistsOfLetters</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">String</span> <span class="n">regex</span> <span class="o">=</span> <span class="s">"[a-zA-Z]+"</span><span class="o">;</span>
+		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="n">regex</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    	<span class="nc">String</span> <span class="n">tel</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"13184542126"</span><span class="o">);</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">isValidMobileNumber</span><span class="o">(</span><span class="n">tel</span><span class="o">));</span>
+    	<span class="nc">String</span> <span class="n">word</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"hahhahicajsdl"</span><span class="o">);</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">consistsOfLetters</span><span class="o">(</span><span class="n">word</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>上面的例子中，定义了一个模板字符串 <strong>regex</strong> ，之后调用待测字符串的 <strong>matches</strong> 函数来进行匹配判断。（注意当使用了 <code class="language-plaintext highlighter-rouge">\</code>时需要转义，即使用 <code class="language-plaintext highlighter-rouge">\\</code>）</p>
+
+<p>常见的匹配规则如下：</p>
+
+<p>匹配开头结尾：<code class="language-plaintext highlighter-rouge">^</code> 与 <code class="language-plaintext highlighter-rouge">$</code></p>
+
+<p>匹配任意字符：<code class="language-plaintext highlighter-rouge">.</code></p>
+
+<p>匹配数字：<code class="language-plaintext highlighter-rouge">\d</code></p>
+
+<p>匹配空格：<code class="language-plaintext highlighter-rouge">\s</code></p>
+
+<p>匹配非数字：<code class="language-plaintext highlighter-rouge">\D</code></p>
+
+<p>匹配有或无：<code class="language-plaintext highlighter-rouge">str?</code></p>
+
+<p>匹配重复N次：<code class="language-plaintext highlighter-rouge">\d{6}</code> 连续的6个数字</p>
+
+<p>重复匹配一个以上: <code class="language-plaintext highlighter-rouge">+</code>，如一个以上的连续数字<code class="language-plaintext highlighter-rouge">\d+</code></p>
+
+<p>重复匹配零个以上：<code class="language-plaintext highlighter-rouge">*</code></p>
+
+<p>匹配特定范围：<code class="language-plaintext highlighter-rouge">[a-z]</code>——匹配小写字母、<code class="language-plaintext highlighter-rouge">[a-zA-Z]</code>——匹配字母；<code class="language-plaintext highlighter-rouge">[1-5]</code>——匹配数字 1-5</p>
+
+<p>匹配特定范围外：<code class="language-plaintext highlighter-rouge">[^a-z]</code>——匹配非小写字母</p>
+
+<p>或规则匹配：<code class="language-plaintext highlighter-rouge">|</code>，如 <code class="language-plaintext highlighter-rouge">AB|CD</code>——匹配 AB 或 匹配 CD</p>
+
+<p>补充：对于复杂的表达式，可以使用括号 <code class="language-plaintext highlighter-rouge">()</code> 括起来</p>
+
 <hr />
 
 <h1 id="9-读写操作">9. 读写操作</h1>
@@ -824,7 +878,11 @@
 
 <h1 id="13-data-structure">13. data structure</h1>
 
-<p>Java 提供了一系列的存储数据结构和相应的算法，各种容器由 <code class="language-plaintext highlighter-rouge">Collections</code>继承而来，算法可以通过 <code class="language-plaintext highlighter-rouge">Collections</code>类来调用；容器的创建方法如下：</p>
+<p>Java 提供的容器框架如下：</p>
+
+<p><img src="/images/posts/blogImages/2021012501.jpg" width="800" /></p>
+
+<p>容器由 <code class="language-plaintext highlighter-rouge">Collections</code>继承而来，算法可以通过 <code class="language-plaintext highlighter-rouge">Collections</code>类来调用，容器的创建方法如下：</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ContainerName</span><span class="o">;</span>    <span class="c1">// 引入容器类</span>
 
