@@ -1,4 +1,4 @@
-I"�m<h1 id="1-初识-java">1. 初识 Java</h1>
+I"�m<h1 id="1-初识-java">1. 初识 Java</h1>
 
 <p>Java是一种可以开发跨平台应用软件的面向对象程序设计语言，是一种强类型的语言。</p>
 
@@ -531,16 +531,16 @@
 <p>可以使用正则表达式来判断一个字符串是否满足特定的规则，如：使用 <code class="language-plaintext highlighter-rouge">String</code> 类的 <code class="language-plaintext highlighter-rouge">matches</code> 函数来匹配字符串：</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
-	
+
 	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isValidMobileNumber</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">"\\d{11}"</span><span class="o">);</span>
 	<span class="o">}</span>
-	
+
 	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">consistsOfLetters</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
 		<span class="nc">String</span> <span class="n">regex</span> <span class="o">=</span> <span class="s">"[a-zA-Z]+"</span><span class="o">;</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="n">regex</span><span class="o">);</span>
 	<span class="o">}</span>
-	
+
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
     	<span class="nc">String</span> <span class="n">tel</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"13184542126"</span><span class="o">);</span>
     	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">isValidMobileNumber</span><span class="o">(</span><span class="n">tel</span><span class="o">));</span>

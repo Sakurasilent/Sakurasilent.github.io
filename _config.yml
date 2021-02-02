@@ -75,6 +75,7 @@ nav:
     - {title: TAGS, description: tags, url: '/tags'}
     # - {title: SUPPORT, description: support, url: '/support'}
     - {title: ABOUT, description: about, url: '/about'}
+    - {title: PROJECTS, description: projects, url: '/snake'}
 
 # Pagination
 gems:          [jekyll-paginate,jekyll-sitemap]
