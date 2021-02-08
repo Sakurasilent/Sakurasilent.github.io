@@ -1,0 +1,660 @@
+I"��<hr />
+
+<h2 id="1-javascript-学习工具">1. JavaScript 学习工具</h2>
+
+<p>学 JavaScript 可以结合 html 来学，我使用的编辑器是 VScode，界面美观，插件丰富：</p>
+
+<p><img src="/images/posts/blogImages/image-20210108163524900.png" width="680" /></p>
+
+<h3 id="11-好用的插件">1.1 好用的插件</h3>
+
+<p>主题插件：<code class="language-plaintext highlighter-rouge">Atom One Dark Theme</code>、<code class="language-plaintext highlighter-rouge">Material Icon Theme</code></p>
+
+<p>代码补全：<code class="language-plaintext highlighter-rouge">JavaScript(ES6) code snippets</code>、<code class="language-plaintext highlighter-rouge">Beauty</code></p>
+
+<p>实时预览效果：<code class="language-plaintext highlighter-rouge">Live Server</code></p>
+
+<h3 id="12-相关设置">1.2 相关设置</h3>
+
+<ul>
+  <li>
+    <p>Linux系统上安装 VScode 后，快捷键 Ctrl + E 会自动打开 VScode，终端输入代码可解决：</p>
+
+    <p>xdg-mime default dde-file-manager.desktop inode/directory</p>
+  </li>
+  <li>
+    <p>键盘放大代码比较麻烦，可以设置鼠标滚轮放大缩小 <a href="https://blog.csdn.net/qq_34492122/article/details/102989330">blog</a>；</p>
+  </li>
+  <li>
+    <p>代码主题和图标主题安装后需要在 settings 中设置选择对应的主题；</p>
+  </li>
+  <li>
+    <p>安装 <code class="language-plaintext highlighter-rouge">Live Server</code>后，建议重新设置快捷键(File - Preference - Keyboard Shortcuts 搜索Live Server)；</p>
+  </li>
+  <li>
+    <p>VScode 输入 <code class="language-plaintext highlighter-rouge">html:5</code> 按下 Enter 可以生成 HTML 模板</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="2-使用-javascript">2. 使用 JavaScript</h2>
+
+<h3 id="21-内部脚本">2.1 内部脚本</h3>
+
+<p>将 JavaScript 代码放在一对 <code class="language-plaintext highlighter-rouge">&lt;script&gt;&lt;/script&gt;</code> 标签之间：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello world!</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h3 id="22-外部脚本">2.2 外部脚本</h3>
+
+<p>在 HTML 中引用外部引用：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"test.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>下面是 <code class="language-plaintext highlighter-rouge">test.js</code>文件内容：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello world!</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="23-strict">2.3 strict</h3>
+
+<p>脚本文件的<strong>顶部</strong>使用 <code class="language-plaintext highlighter-rouge">"use strict";</code> 或者 <code class="language-plaintext highlighter-rouge">'use strict';</code>可以使整个脚本文件都将以“现代”模式进行工作。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use strict</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// 代码以现代模式工作</span>
+</code></pre></div></div>
+
+<p>一旦进入严格模式，就无法取消了！</p>
+
+<hr />
+
+<h1 id="3-交互">3. 交互</h1>
+
+<h4 id="alert">alert</h4>
+
+<p><code class="language-plaintext highlighter-rouge">alert</code> 函数可以让浏览器窗口弹出一个小窗口，叫做模态窗，等待用户处理：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="prompt">prompt</h4>
+
+<p>语法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">result</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span> <span class="p">[</span><span class="k">default</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">prompt</code> 可以接受两个参数：</p>
+
+<ul>
+  <li>title：显示给用户的文本</li>
+  <li>default：可选的参数，指定 input 框的默认值，<code class="language-plaintext highlighter-rouge">[...]</code> 表示方括号内的参数是可选）</li>
+</ul>
+
+<p>浏览器会显示一个带有文本消息的模态窗口，还有 input 框和确定 / 取消按钮。</p>
+
+<p>举个栗子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">year</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">'</span><span class="s1">Which year are you born in?</span><span class="dl">'</span><span class="p">,</span> <span class="mi">2021</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s2">`You are </span><span class="p">${(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getFullYear</span><span class="p">()</span> <span class="o">-</span> <span class="nx">year</span><span class="p">}</span><span class="s2"> years old now!`</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="confirm">confirm</h4>
+
+<p>语法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">result</span> <span class="o">=</span> <span class="nx">confirm</span><span class="p">(</span><span class="nx">question</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">confirm</code> 函数显示带有 <code class="language-plaintext highlighter-rouge">question</code> 以及确定和取消按钮的模态窗口，返回 <code class="language-plaintext highlighter-rouge">true</code> 或 <code class="language-plaintext highlighter-rouge">false</code></p>
+
+<p>举个栗子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">isGirl</span> <span class="o">=</span> <span class="nx">confirm</span><span class="p">(</span><span class="dl">"</span><span class="s2">Are you a Girl?</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">isGirl</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="4-变量和数据类型">4. 变量和数据类型</h1>
+
+<h3 id="41-变量">4.1 变量</h3>
+
+<p><strong>变量名</strong></p>
+
+<ol>
+  <li>变量名只能包含字母、数字、$ 和 _</li>
+  <li>首字母非数字</li>
+</ol>
+
+<p><strong>声明变量</strong></p>
+
+<p>用 <code class="language-plaintext highlighter-rouge">let</code> 声明变量：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="42-常量">4.2 常量</h3>
+
+<p>用 <code class="language-plaintext highlighter-rouge">const</code> 声明常量：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">PI</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">RED</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">#F00</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">ORANGE</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">#FF7F00</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="43-关键字的选择">4.3 关键字的选择</h3>
+
+<p>可以使用 <code class="language-plaintext highlighter-rouge">var</code>、<code class="language-plaintext highlighter-rouge">let</code> 或 <code class="language-plaintext highlighter-rouge">const</code> 声明变量：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">let</code> — 现代的变量声明方式</li>
+  <li><code class="language-plaintext highlighter-rouge">var</code> — 老旧的变量声明方式，一般情况下不使用</li>
+  <li><code class="language-plaintext highlighter-rouge">const</code> — 只声明常量</li>
+</ul>
+
+<h3 id="44-数据类型">4.4 数据类型</h3>
+
+<p>JavaScript 的一个变量可以存储多种不同的数据类型数据，因为 JavaScript 是一种 “动态类型” (dynamically typed) 语言。如：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">num</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="nx">num</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">hahaha</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>JavaScript 有 <strong>8 种数据类型</strong>（一种为引用类型）。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>		<span class="c1">// Number</span>
+<span class="kd">let</span> <span class="nx">str</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">this</span><span class="dl">'</span><span class="p">;</span>	<span class="c1">// String</span>
+<span class="kd">let</span> <span class="nx">checked</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>	<span class="c1">// Boolean</span>
+<span class="kd">let</span> <span class="nx">age</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>		<span class="c1">// null</span>
+<span class="kd">let</span> <span class="nx">age</span><span class="p">;</span>			<span class="c1">// undefined</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">age</span><span class="p">);</span>			
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>	<span class="c1">// obect</span>
+</code></pre></div></div>
+
+<p>字符串可以使用 <code class="language-plaintext highlighter-rouge">''</code>、<code class="language-plaintext highlighter-rouge">""</code> 或 `` 包裹，使用反单引号时可以内嵌表达式：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Tom</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s2">`name: </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>		<span class="c1">// name: Tom</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s2">`3 + 5 = </span><span class="p">${</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>	<span class="c1">// 3 + 5 = 8</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">typeof</code> 运算符可以查看数据的类型</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">n</span><span class="p">);</span>	<span class="c1">// 作为运算符</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">n</span><span class="p">));</span>	<span class="c1">// 作为函数</span>
+</code></pre></div></div>
+
+<p><strong>引用类型</strong></p>
+
+<p>引用类型通常叫做类，类的对象是引用类型的，通过 <code class="language-plaintext highlighter-rouge">new</code> 创建对象：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="45-类型转换">4.5 类型转换</h3>
+
+<p>多数情况下，运算符和函数会自动将接受到的数据转换到正确的类型，但有时需要进行显式的转换。</p>
+
+<h5 id="字符串转换">字符串转换</h5>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use strict</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span><span class="p">);</span>	<span class="c1">// boolean</span>
+<span class="nx">value</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> 		<span class="c1">// "true"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span><span class="p">);</span>	<span class="c1">// string</span>
+</code></pre></div></div>
+
+<h5 id="数字转换">数字转换</h5>
+
+<p><code class="language-plaintext highlighter-rouge">Number()</code> 可以将纯数字字符串转为数字、<code class="language-plaintext highlighter-rouge">undefined</code> 和非数字字符串转为 <code class="language-plaintext highlighter-rouge">NaN</code>、<code class="language-plaintext highlighter-rouge">null</code> 转为 0、<code class="language-plaintext highlighter-rouge">true</code> 和 <code class="language-plaintext highlighter-rouge">false</code> 转为 1 和 0：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">6</span><span class="dl">"</span> <span class="o">/</span> <span class="dl">"</span><span class="s2">2</span><span class="dl">"</span><span class="p">);</span> 	<span class="c1">// 3</span>
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">tom</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">name</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>		<span class="c1">// NaN</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span> 			<span class="c1">// Number</span>
+</code></pre></div></div>
+
+<p>注：使用一元运算符 <code class="language-plaintext highlighter-rouge">+</code> 可以实现其他类型转换为数字类型。</p>
+
+<h5 id="布尔型转换">布尔型转换</h5>
+
+<p>Boolean() 将 null、空字符串、0、undefined 和 NaN 转为 <code class="language-plaintext highlighter-rouge">false</code>，其他转为 <code class="language-plaintext highlighter-rouge">true</code>：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="dl">""</span><span class="p">));</span>			<span class="c1">// false</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>			<span class="c1">// true</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="5-运算符">5. 运算符</h1>
+
+<h3 id="51-数学运算符">5.1 数学运算符</h3>
+
+<p>下面的栗子数学表达式为：$2^3$ 对 $5$ 取余</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">%</span> <span class="mi">5</span><span class="p">);</span>	<span class="c1">// 3</span>
+</code></pre></div></div>
+
+<h3 id="52-加号">5.2 加号</h3>
+
+<p><strong>连接字符串</strong></p>
+
+<p>加号的运算顺序为从左往右，遇到字符串时，数字会转换为字符串，再进行连接。</p>
+
+<p>举个栗子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">3</span><span class="dl">"</span><span class="p">);</span>	<span class="c1">// "33"</span>
+</code></pre></div></div>
+
+<p>若为减法，则字符串转换为数字，再进行运算：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">5</span><span class="dl">"</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>		<span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p><strong>数字转化</strong></p>
+
+<p>通过 <code class="language-plaintext highlighter-rouge">prompt</code> 接收两个数字，再相加：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">"</span><span class="s2">Input the value of a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">"</span><span class="s2">Input the value of b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">);</span>     <span class="c1">// 36</span>
+</code></pre></div></div>
+
+<p>得到的结果为 36，原因是 a 和 b 都是字符串，可以这样处理以获得正确结果：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">+</span><span class="nx">a</span> <span class="o">+</span> <span class="o">+</span><span class="nx">b</span><span class="p">);</span>	<span class="c1">// 9</span>
+</code></pre></div></div>
+
+<h3 id="53-自增">5.3 自增</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="o">++</span><span class="p">;</span>	<span class="c1">// 5</span>
+<span class="kd">let</span> <span class="nx">c</span> <span class="o">=</span> <span class="o">++</span><span class="nx">a</span><span class="p">;</span>	<span class="c1">// 7</span>
+</code></pre></div></div>
+
+<h3 id="54-逗号运算符">5.4 逗号运算符</h3>
+
+<p>逗号运算符可以使用 <code class="language-plaintext highlighter-rouge">,</code> 分隔语句，只有最后一个语句结果会被返回，如：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>	<span class="c1">// 4</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="55-比较运算符">5.5 比较运算符</h3>
+
+<p>数字和字符串比较时，字符串会转化为数字：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">01</span><span class="dl">"</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>		<span class="c1">// true</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">==</code> 用来比较值相同，<code class="language-plaintext highlighter-rouge">===</code> 为严格相等，除了值相等也要求类型相同：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="kc">false</span><span class="p">);</span>	<span class="c1">// false</span>
+</code></pre></div></div>
+
+<h3 id="56-逻辑运算符">5.6 逻辑运算符</h3>
+
+<p>在 JavaScript 中，逻辑运算符更加灵活强大。</p>
+
+<p><strong>或运算符</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">||</code>运算符寻找第一个真值并返回</p>
+
+<ul>
+  <li>从左往右计算操作数（均转化为 boolean）</li>
+  <li>出现真值则返回操作数的初始值</li>
+  <li>若无真值出现则返回最后一个操作数</li>
+</ul>
+
+<p>举个栗子：从左往右出现 5 为真值，因此 a = 5</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">||</span> <span class="mi">5</span> <span class="o">||</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> 	<span class="c1">// 5</span>
+<span class="nx">alert</span><span class="p">(</span><span class="dl">""</span> <span class="o">||</span> <span class="kc">null</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">a</span><span class="dl">"</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>	<span class="c1">// "a"</span>
+</code></pre></div></div>
+
+<p>再看个例子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">||</span> <span class="mi">2</span> <span class="o">||</span> <span class="nx">alert</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>执行上面的语句，会出现 2 个弹窗，首先弹出 1，由于 <code class="language-plaintext highlighter-rouge">alert</code> 函数无返回值，2 是真值，因此 alert(3) 未执行，直接弹窗显示 2</p>
+
+<p><strong>与运算符</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">&amp;&amp;</code> 寻找第一个假值</p>
+
+<ul>
+  <li>从左往右一次计算操作数</li>
+  <li>所有操作数转化为 boolean，出现 false 则返回操作数的初始值</li>
+  <li>无 false 则返回最后一个操作数的初始值</li>
+</ul>
+
+<p>举个栗子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>		<span class="c1">// null</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="mi">3</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>		<span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>再看个栗子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">alert</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>执行上述代码后，首先弹窗显示 1，由于 <code class="language-plaintext highlighter-rouge">alert</code> 函数无返回值，因此第一个操作数为 <code class="language-plaintext highlighter-rouge">undefined</code>，为假，不执行后面的语句，因此直接弹窗 undefined 后结束执行。</p>
+
+<hr />
+
+<h1 id="6-流程控制">6. 流程控制</h1>
+
+<h3 id="61-if---else">6.1 if - else</h3>
+
+<p>if else 的结构如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">hour</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">).</span><span class="nx">getHours</span><span class="p">();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">hour</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Good morning!</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">hour</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Good afternon!</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Good evening!</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>可以使用条件运算符 <code class="language-plaintext highlighter-rouge">?</code> 实现同样的功能：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">hour</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">).</span><span class="nx">getHours</span><span class="p">();</span>
+
+<span class="nx">time</span> <span class="o">=</span> <span class="p">(</span><span class="nx">hour</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">)</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">morning</span><span class="dl">"</span> <span class="p">:</span>
+    <span class="p">(</span><span class="nx">hour</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">)</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">afternoon</span><span class="dl">"</span> <span class="p">:</span>
+    <span class="dl">"</span><span class="s2">evening!</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="62-while">6.2 while</h3>
+
+<p><strong>while</strong> 循环的结构如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="o">--</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>上面的代码执行了三次，打印了 3 2 和 1</p>
+
+<p>等价于 <code class="language-plaintext highlighter-rouge">do-while</code>循环：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="k">do</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="o">--</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="63-for">6.3 for</h3>
+
+<p><strong>for</strong> 循环的结构如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="nx">begin</span><span class="p">;</span> <span class="nx">condition</span><span class="p">;</span> <span class="nx">step</span><span class="p">){</span>
+    <span class="c1">// body</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">condition2</span><span class="p">)</span>	<span class="k">break</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">condition1</span><span class="p">)</span>	<span class="k">continue</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>执行步骤为：</p>
+
+<ul>
+  <li>判断<code class="language-plaintext highlighter-rouge">condition</code> 是否为真</li>
+  <li>为真则执行 <code class="language-plaintext highlighter-rouge">body</code>，接着运行 <code class="language-plaintext highlighter-rouge">step</code>，回到第一步</li>
+  <li>为假则退出循环</li>
+</ul>
+
+<p>举个栗子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>其中 <code class="language-plaintext highlighter-rouge">i</code>是在循环中声明的，在循环外不可见！</p>
+
+<h3 id="64-switch">6.4 switch</h3>
+
+<p>语法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">switch</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">val1</span><span class="p">:</span>	<span class="c1">// if (x == val1)</span>
+        <span class="p">...</span>
+        <span class="p">[</span><span class="k">break</span><span class="p">]</span>
+    <span class="k">case</span> <span class="nx">val2</span><span class="p">:</span>
+        <span class="p">...</span>
+        <span class="p">[</span><span class="k">break</span><span class="p">]</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="p">...</span>
+        <span class="p">[</span><span class="k">break</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>举个栗子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">num</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
+<span class="k">switch</span> <span class="p">(</span><span class="nx">num</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Even</span><span class="dl">"</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Odd</span><span class="dl">"</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="nl">default</span><span class="p">:</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">An error occured!</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>case 分组</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">day</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getDay</span><span class="p">();</span>
+
+<span class="k">switch</span> <span class="p">(</span><span class="nx">day</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">1</span><span class="p">:</span> <span class="c1">// 下面这 5 个 case 被分在一组</span>
+    <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="k">case</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">work time</span><span class="dl">"</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="mi">6</span><span class="p">:</span>	<span class="c1">// 下面这 5 个 case 被分在一组</span>
+    <span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">relax time</span><span class="dl">"</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="7-函数">7. 函数</h1>
+
+<h3 id="71-函数声明">7.1 函数声明</h3>
+
+<p>函数的声明方式如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Name</span><span class="p">(</span><span class="nx">parameters</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// body</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>变量</strong></p>
+
+<p>函数内定义的变量为<code class="language-plaintext highlighter-rouge">局部变量</code>，作用域为函数内部；</p>
+
+<p>函数外定义的变量为<code class="language-plaintext highlighter-rouge">外部变量</code>，作用域为全局环境；</p>
+
+<p><strong>函数参数</strong></p>
+
+<ul>
+  <li>函数调用时会创建副本，函数内对参数的修改对函数外无效！</li>
+  <li>允许对参数赋默认值</li>
+</ul>
+
+<p>函数在定义时允许指定默认参数：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">b</span><span class="o">=</span><span class="mi">0</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>返回值</strong></p>
+
+<p>函数的返回值可有可无，无返回值的函数也可以使用<code class="language-plaintext highlighter-rouge">return</code> 来结束函数。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">printStars</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">num</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">num</span><span class="o">--</span><span class="p">){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">*</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="72-函数表达式">7.2 函数表达式</h3>
+
+<p>在 JavaScript 中，函数也可以作为值赋给一个变量，这种创建函数的语法称为<code class="language-plaintext highlighter-rouge">函数表达式</code>，是表达式上下文中的函数。</p>
+
+<p>语法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">,</span> <span class="p">...,</span> <span class="nx">argN</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// body</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>注：函数表达式不是代码块而是一个赋值语句，因此末尾需要加上一个分号 <code class="language-plaintext highlighter-rouge">;</code>。</p>
+
+<p>函数表达式类似一个数值，可以赋给其他变量，下面的代码可以打印函数的定义：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add</span><span class="p">);</span>		<span class="c1">// 函数定义代码</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>	<span class="c1">// 5</span>
+</code></pre></div></div>
+
+<p><strong>函数表达式 VS 函数声明</strong></p>
+
+<ul>
+  <li>函数声明在函数调用的后面</li>
+  <li>函数表达式只有在创建之后才能够使用</li>
+</ul>
+
+<h3 id="73-回调函数">7.3 回调函数</h3>
+
+<p>一个函数表达式可以作为另一个函数的参数，称为回调函数。举个栗子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">ask</span><span class="p">(</span><span class="nx">question</span><span class="p">,</span> <span class="nx">yes</span><span class="p">,</span> <span class="nx">no</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">confirm</span><span class="p">(</span><span class="nx">question</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">yes</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">no</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">yes</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">You agreed!</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">no</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">You disagreed!</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">ask</span><span class="p">(</span><span class="dl">"</span><span class="s2">Are you handsome?</span><span class="dl">"</span><span class="p">,</span> <span class="nx">yes</span><span class="p">,</span> <span class="nx">no</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>当用户点击确认时，会执行 <code class="language-plaintext highlighter-rouge">yes()</code> 函数，否则执行 <code class="language-plaintext highlighter-rouge">no()</code> 函数。</p>
+
+<h3 id="74-箭头函数">7.4 箭头函数</h3>
+
+<p>使用下面的方法也可以创建函数，而且更简洁高效：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">func</span> <span class="o">=</span> <span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">,</span> <span class="p">...,</span> <span class="nx">argN</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">return</span> <span class="nx">expression</span>
+<span class="kd">let</span> <span class="nx">func</span> <span class="o">=</span> <span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">,</span> <span class="p">...,</span> <span class="nx">argN</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// body</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>等价于：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">func</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">,</span> <span class="p">...,</span> <span class="nx">argN</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">expression</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>举个栗子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">power</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">**</span> <span class="nx">b</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>		<span class="c1">// 8</span>
+</code></pre></div></div>
+
+<p>当函数体有多行时，用 <code class="language-plaintext highlighter-rouge">{}</code> 括起来：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">a</span> <span class="o">&gt;</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">a</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">b</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">alert</span><span class="p">(</span><span class="nx">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>	<span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>应用例子：</p>
+
+<p>上面的回调函数可以写作：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">ask</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">question</span><span class="p">,</span> <span class="nx">yes</span><span class="p">,</span> <span class="nx">no</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">confirm</span><span class="p">(</span><span class="nx">question</span><span class="p">))</span> <span class="nx">yes</span><span class="p">();</span>
+    <span class="k">else</span> <span class="nx">no</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="nx">ask</span><span class="p">(</span><span class="dl">"</span><span class="s2">You are handsome?</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">You agreed!</span><span class="dl">"</span><span class="p">)</span> <span class="p">},</span>
+    <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">You disagreed!</span><span class="dl">"</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>参考内容：<a href="https://zh.javascript.info/">现代 JavaScript 教程</a></p>
+:ET

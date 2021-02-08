@@ -1,12 +1,11 @@
 /* 内容中的 h2 标题 */
 .post h2 {
-  font-size: 2.0em;
+  font-size: 2.6em;
   font-weight: bold;
-  /*background:#B9D3EE;*/
   /*text-align: center;*/
-  padding-left: 15px;
+  /* padding-left: 15px; */
   margin-bottom: 20px;
   letter-spacing: .04em;
-  margin-left: 8px;
-  border-left: 6px solid #22aa66;
+  /* margin-left: 8px; */
+  /* border-left: 6px solid #22aa66; */
 }

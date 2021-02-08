@@ -111,7 +111,7 @@ h3,
 h4,
 h5,
 h5 {
-  margin-top: 1.0em;
+  margin-top: 1.6em;
   margin-bottom: .5em;
   font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   font-weight: lighter;
@@ -120,16 +120,19 @@ h5 {
   font-family: fantasy;}
 
 h1 {
-  margin-top: 5px;
-  font-size: 2.5em;
+  font-size: 3em;
   line-height: 1.2em;
-  letter-spacing: .08em;
+  letter-spacing: .06em;
   font-weight: bold;
+  padding-left: 0px;
+  margin-left: 0px;
   /*text-align: center;*/
 }
 
 /* 头像处的 h2 */
 h2 {
+  margin-top: 1.6em;
+  margin-bottom: 1.0em;
   font-size: 2.0em;
   font-weight: bold;
   letter-spacing: .04em;
@@ -137,39 +140,16 @@ h2 {
 }
 
 h3 {
-  font-size: 1.8em;
+  font-size: 2.0em;
   text-indent: 4px;
   font-weight: bold;
   letter-spacing: .03em;
-  margin-left: 8px;
-  border-left: 6px solid #666666;
-  padding-left: 15px;
 }
-
-/*
-h3 {
-  font-size: 1.2em;
-  text-indent: 4px;
-  border-radius: 4px;
-  padding: 6px 15px;
-  margin-bottom: 20px;
-  margin-top: 5px;
-  background:#B9D3EE;*/
-  /*0px right, 5px botton, 5px fuzzy*/
-  /*box-shadow: 0px 5px 5px #9FB6CD;
-  border-left: 6px solid #1874CD;
-  position:relative;
-}
-*/
 
 h4 {
   font-size: 1.6em;
-  padding-left: 1px;
   font-weight: bold;
   letter-spacing: .02em;
-  margin-left: 8px;
-  /* border-left: 6px solid #666666;
-  padding-left: 15px; */
 }
 
 h5 {
@@ -182,18 +162,20 @@ p {
   margin-bottom: 10px;
   margin-top: 5px;
   line-height: 1.7em;
-  padding-left: 10px;
+  padding-left: 6px;
   font-size: 1.25em;
 }
 
 strong {
+  font-size: 1.0em;
   font-weight: bold;
   letter-spacing: .02em;
   font-family: fantasy;
 }
 
 em {
-  font-style: italic; }
+  font-style: italic;
+}
 
 blockquote {
   padding-top: 8px;
