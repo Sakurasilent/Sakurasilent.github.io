@@ -167,7 +167,7 @@ p {
 }
 
 strong {
-  font-size: 1.0em;
+  font-size: 1.15em;
   font-weight: bold;
   letter-spacing: .02em;
   font-family: fantasy;
@@ -198,7 +198,7 @@ ol li, ul li {
   margin: 0 0 .1em 0;
   line-height: 1.6em;
   line-height: 28px;
-  font-size: 1.1em;  }
+  font-size: 1.2em;  }
 ol ol, ol ul, ul ol, ul ul {
   margin: .1em 0 .2em 2em; }
 ol {

@@ -1,17 +1,19 @@
 ---
 layout: post
-title: 09-JavaScript语法基础
+title: 09-JavaScript 语法基础
 date: 2021-02-08
 description:
-tags: JavaScript
+tags: JavaScript 前端
 ---
 
 ## 1. JavaScript 学习工具
 
 学 JavaScript 可以结合 html 来学，我使用的编辑器是 VScode，界面美观，插件丰富：
 
-<img src="/images/posts/blogImages/image-20210108163524900.png" width=680>
+<img src="/images/posts/blogImages/image-20210108163524900.png" width=800>
 
+
+/home/yin/workspace/Git/git-jhy.github.io
 
 ### 1.1 好用的插件
 
@@ -20,6 +22,8 @@ tags: JavaScript
 代码补全：`JavaScript(ES6) code snippets`、`Beauty`
 
 实时预览效果：`Live Server`
+
+
 
 
 
@@ -61,6 +65,10 @@ tags: JavaScript
 </html>
 ```
 
+
+
+
+
 ### 2.2 外部脚本
 
 在 HTML 中引用外部引用：
@@ -85,6 +93,7 @@ tags: JavaScript
 console.log("Hello world!")
 ```
 
+
 ### 2.3 strict
 
 脚本文件的**顶部**使用 `"use strict";` 或者 `'use strict';`可以使整个脚本文件都将以“现代”模式进行工作。
@@ -99,7 +108,7 @@ console.log("Hello world!")
 
 ---
 
-# 3. 交互
+## 3. 交互
 
 #### alert
 
@@ -152,7 +161,7 @@ alert(isGirl);
 
 ---
 
-# 4. 变量和数据类型
+## 4. 变量和数据类型
 
 ### 4.1 变量
 
@@ -286,7 +295,7 @@ alert(Boolean(2));			// true
 
 ---
 
-# 5. 运算符
+## 5. 运算符
 
 ### 5.1 数学运算符
 
@@ -431,7 +440,7 @@ alert(alert(1) && alert(2));
 
 ---
 
-# 6. 流程控制
+## 6. 流程控制
 
 ### 6.1 if - else
 
@@ -571,7 +580,7 @@ switch (day) {
 
 ---
 
-# 7. 函数
+## 7. 函数
 
 ### 7.1 函数声明
 
@@ -738,6 +747,209 @@ ask("You are handsome?",
     () => { alert("You disagreed!") }
 );
 ```
+
+
+
+### 7.5 调度
+
+可以通过 `setTimeout` 和 `setInterval`来指定时间调用函数：
+
+- `setTimeout`：将函数推迟一段时间后再执行
+- `setInterval`：设置重复执行的间隔
+
+
+
+#### setTimeout
+
+语法：
+
+```js
+let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
+```
+
+`func|code` 是函数表达式，`delay` 是延迟时间，`arg` 是函数的参数。
+
+
+
+举个例子： 1000 ms 后弹窗一次
+
+```js
+setTimeout((name) => alert('Hello! ' + name), 1000, "Jerry");
+```
+
+**取消调度**
+
+```js
+let timerID = setTimeout();
+clearTimeout(timerID);
+```
+
+
+
+#### setInterval
+
+它的用法与 `setTimeout` 一样：
+
+```js
+let timerID = setInterval(() => alert("hhh"), 1500);
+```
+
+
+
+**嵌套**
+
+嵌套的 `setTimeout` 可以精确地设置时间间隔：
+
+```js
+let delay = 5000;
+let timerID = setTimeout(function request() {
+    if (failed == true) {
+        delay *= 2;
+    }
+    timerID = setTimeout(request, delay);
+}, delay);
+```
+
+
+
+---
+
+## 8. 类与继承
+
+前面我们学习了使用构造器和 `new` 创建对象的方法：
+
+```js
+function Cat(name, color = "brown") {
+    this.name = name;
+    this.color = color;
+}
+
+let tom = new Cat("tom");
+console.log(tom.name);
+```
+
+现代 JavaScript 中，还有一个更高级的“类（`class`）”构造方式，它引入许多非常棒的新功能，这些功能对于面向对象编程很有用。
+
+
+
+### 8.1 class
+
+语法：
+
+```js
+class className {
+    // method
+    constructor() {...}
+    method1() {...}
+    method2() {...}
+    ...
+}
+```
+
+然后使用 `new className` 来创建类的对象，`new` 会自动调用 `constructor()` 方法，因此可以在构造方法中初始化对象。
+
+
+
+下面的类定义了矩形，包含了长和宽两个属性，有计算面积的属性：
+
+```js
+class Rect {
+    constructor(width, height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    getSquare() {
+        return this.width * this.height;
+    }
+}
+
+let t = new Rect(3, 4);
+console.log(t.getSquare());		// 12
+
+console.log(typeof Rect);		// function
+```
+
+`constructor` 函数被调用后为对象分配 `this.width` 和 `this.width`。
+
+最后一行代码打印了类的本质 —— function
+
+
+
+### 8.2 类表达式
+
+可以像函数函数表达式一样定义一个类表达式：
+
+```js
+let Rect = class {
+    constructor(width, height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    getSquare() {
+        return this.width * this.height;
+    }
+}
+
+console.log(new Rect(3, 4).getSquare());
+```
+
+
+
+### 8.3 getters 和 setters
+
+就像对象字面量，类可能包括 getters/setters
+
+举个栗子：
+
+```js
+class User {
+    constructor(name) {
+        this.name = name;
+    }
+
+    set name(value) {
+        if (value.length < 4) {
+            alert("Too short!");
+            return;
+        }
+        this.name = value;
+    }
+}
+
+let user = new User('n');   // alert
+```
+
+
+
+### 8.4 继承
+
+使用 `extend` 继承父类，子类可以使用 `super()` 调用父类的构造函数，继承后子类获得父类的所有属性和方法：
+
+```js
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Circle extends Point {
+    constructor(x, y, radius) {
+        super(x, y);
+        this.radius = radius;
+    }
+
+    getSquare() {
+        return Math.PI * this.radius ** 2;
+    }
+}
+
+let c = new Circle(0, 0, 3);
+console.log(c.getSquare());
+```
+
 
 
 
