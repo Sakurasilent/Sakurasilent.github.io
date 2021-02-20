@@ -1,0 +1,590 @@
+I"�<h2 id="1-浏览器环境">1. 浏览器环境</h2>
+
+<p>JavaScript 语言最初是为 Web 浏览器创建的。此后，它已经发展成为一种具有多种用途和平台的语言。</p>
+
+<p><br /></p>
+
+<p>下面是 JavaScript 在浏览器中运行时的鸟瞰示意图：</p>
+
+<p><img src="/images/posts/blogImages/image-20210216185212177.png" width="800" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">windows</code> 是根对象，它充当 JavaScript 的全局对象以及代表着浏览器窗口，提供控制浏览器窗口的方法。</p>
+
+<h3 id="11-dom-文档对象模型">1.1 DOM 文档对象模型</h3>
+
+<p>DOM 将所有页面内容表示为可以修改的对象，<code class="language-plaintext highlighter-rouge">document</code> 是页面的入口，可以利用它修改创建 HTML 的内容，可以参考 <a href="https://dom.spec.whatwg.org/">DOM</a>：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">bodyDOM</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">pink</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">orange</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">},</span> <span class="mi">5000</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="12-bom-浏览器对象模型">1.2 BOM 浏览器对象模型</h3>
+
+<p><code class="language-plaintext highlighter-rouge">BOM</code>表示由浏览器提供的用于处理 <code class="language-plaintext highlighter-rouge">document</code> 之外的所有内容的其他对象，如 <code class="language-plaintext highlighter-rouge">navigator</code> 和 <code class="language-plaintext highlighter-rouge">location</code>。利用 <code class="language-plaintext highlighter-rouge">location</code> 可以读取当前 URL 和 重定向到新的 URL：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">confirm</span><span class="p">(</span><span class="dl">"</span><span class="s2">go to baidu.com</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://git-jhy.github.io</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>此外，常用的 <code class="language-plaintext highlighter-rouge">alert</code>、<code class="language-plaintext highlighter-rouge">confirm</code> 和 <code class="language-plaintext highlighter-rouge">prompt</code> 都是 BOM 的一部分。</p>
+
+<h2 id="2-dom-树">2. DOM 树</h2>
+
+<h3 id="21-dom-树">2.1 DOM 树</h3>
+
+<p>看一个简单的 DOM 例子：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>document<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  This is text.
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">html</code> 是根节点，<code class="language-plaintext highlighter-rouge">head</code> 和 <code class="language-plaintext highlighter-rouge">body</code> 是它的字节点；</p>
+  </li>
+  <li>元素内的文本形成 <strong>文本节点</strong>，被标记为 <code class="language-plaintext highlighter-rouge">#text</code>，如 title 中的 “document”，包括换行、缩进和空格。</li>
+  <li>若浏览器遇到不正确的 HTML，会在形成 DOM 时自动更正。</li>
+</ul>
+
+<p>上面的 HTML 的 DOM 标签树形结构如下，可以在这个网站上查看 DOM 树结构 <a href="http://software.hixie.ch/utilities/js/live-dom-viewer/">Clck me</a>：</p>
+
+<p><img src="/images/posts/blogImages/image-20210216191806441.png" width="800" /></p>
+
+<p>一共有 <a href="https://dom.spec.whatwg.org/#node">12 种节点类型</a>。实际上，我们通常用到的是其中的 4 种：</p>
+
+<ol>
+  <li>doxument —— DOM 入口</li>
+  <li>元素节点 —— HTML 标签</li>
+  <li>文本标签 —— 包含文本</li>
+  <li>注释 —— 读取注释信息</li>
+</ol>
+
+<h3 id="22-遍历-dom">2.2 遍历 DOM</h3>
+
+<p><strong>顶层</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">html</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span>
+<span class="nx">body</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span>
+<span class="nx">head</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">head</span>
+</code></pre></div></div>
+
+<p>注意：若脚本放在 <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>，则脚本访问不到 <code class="language-plaintext highlighter-rouge">docment.body</code> 元素，因为浏览器还未读到它。</p>
+
+<p><strong>子节点</strong></p>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">childNodes</code>、<code class="language-plaintext highlighter-rouge">firstChild</code> 和 <code class="language-plaintext highlighter-rouge">lastChild</code>访问子节点，如访问 <code class="language-plaintext highlighter-rouge">body</code> 中的所有子元素：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;li&gt;</span>a<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>b<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>结果为：text、li、text、p、text、script、text、<code class="language-plaintext highlighter-rouge">script</code></p>
+
+<p>注意：显示的节点只包含 script 之前的所有 body 子节点。</p>
+
+<p><strong>DOM 集合</strong></p>
+
+<p>DOM 集合是可迭代对象，可以使用 <code class="language-plaintext highlighter-rouge">for...of</code> 迭代它，若要使用数组方法，则需要通过<code class="language-plaintext highlighter-rouge">Array.from</code> 将集合转化为数组：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">).</span><span class="nx">filter</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>注意</p>
+
+<ol>
+  <li>DOM 集合是只读的</li>
+  <li>不要用 for…in 遍历集合</li>
+</ol>
+
+<p><strong>兄弟节点和父节点</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// &lt;body&gt; 的父节点是 &lt;html&gt;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">parentNode</span> <span class="o">===</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElenent</span><span class="p">);</span>	<span class="c1">// true</span>
+
+<span class="c1">// &lt;head&gt; 的下一个兄弟节点</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">nextSibing</span><span class="p">);</span>	<span class="c1">// body</span>
+
+<span class="c1">// &lt;body&gt; 的前一个兄弟节点</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">previousSibling</span><span class="p">);</span>	<span class="c1">// HTMLHeadElement</span>
+</code></pre></div></div>
+
+<h3 id="23-纯元素导航">2.3 纯元素导航</h3>
+
+<p>一般不希望得到文本节点和注释节点，只读取元素节点：</p>
+
+<p><img src="/images/posts/blogImages/image-20210216203235431.png" width="800" /></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">children</span>	<span class="c1">// 子元素</span>
+<span class="nx">firstElementChild</span>	<span class="c1">// 第一个子元素</span>
+<span class="nx">previousElementSibling</span>	<span class="c1">// 前一个兄弟元素</span>
+<span class="nx">parentElement</span>	<span class="c1">// 父元素</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">document.documentElement</code>的父节点为 <code class="language-plaintext highlighter-rouge">document</code>，但父元素节点为 <code class="language-plaintext highlighter-rouge">null</code>。</p>
+
+<p>若要从任意节点到达 <code class="language-plaintext highlighter-rouge">&lt;html&gt;</code> 元素节点：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">);</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">elem</span> <span class="o">=</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">elem</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>遍历元素：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">elem</span> <span class="k">of</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">elem</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>应用例子</strong></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div&gt;</span>Users:<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>John<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Pete<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<ol>
+  <li>从上面的 HTML 中获取 div；</li>
+  <li>获取第二个 li 元素</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastElementChild</span>
+</code></pre></div></div>
+
+<h2 id="3-搜索元素">3. 搜索元素</h2>
+
+<h3 id="getelementbyid">getElementById</h3>
+
+<p>通过 <code class="language-plaintext highlighter-rouge">document.getElementById('id')</code> 方法可以获取具有 <code class="language-plaintext highlighter-rouge">id</code> 属性的元素，如：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"elem"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"text"</span><span class="nt">&gt;</span>text<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">text</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">orange</span><span class="dl">'</span><span class="p">;</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>补充：实际上直接使用 id 作为变量名也可以实现，但不建议！</p>
+
+<h3 id="queryselectorall">querySelectorAll</h3>
+
+<p>最常用的方法是：<code class="language-plaintext highlighter-rouge">elem.querySelectorALL(css)</code>，css 是一个 <code class="language-plaintext highlighter-rouge">css</code> 选择器：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;ol&gt;</span>
+            <span class="nt">&lt;li&gt;</span>a<span class="nt">&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;</span>b<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;/ol&gt;</span>
+        <span class="nt">&lt;p&gt;</span>b<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">ol &gt; li:last-child</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">element</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">;</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><strong>querySelector</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">elem.querySelector(css)</code>也很常用，返回第一个与给定的 CSS 选择器匹配的元素。它等价于 <code class="language-plaintext highlighter-rouge">elem.querySelectorAll(css)[0]</code></p>
+
+<h3 id="matches">matches</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">elem.matches(css)</code> 可以检查 <code class="language-plaintext highlighter-rouge">elem</code> 是否与给定的 CSS 匹配，返回 <code class="language-plaintext highlighter-rouge">true</code> 或 <code class="language-plaintext highlighter-rouge">false</code>。</p>
+
+<p>在遍历是可以利用 <code class="language-plaintext highlighter-rouge">matches</code>来进一步筛选元素：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;ol&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"a.cn"</span><span class="nt">&gt;</span>a<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"b.com"</span><span class="nt">&gt;</span>b<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"c.org"</span><span class="nt">&gt;</span>c<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"d.com"</span><span class="nt">&gt;</span>d<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ol&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">ol &gt; li</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">elem</span> <span class="k">of</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 匹配 id 属性以 com 结尾的 li 标签</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">matches</span><span class="p">(</span><span class="dl">'</span><span class="s1">li[id$="com"]</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">elem</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h3 id="getelementsby">getElementsBy*</h3>
+
+<p>有以下三种方法：</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">getElementsByTagName(tag)</code>：查找具有给定标签的元素；</li>
+  <li><code class="language-plaintext highlighter-rouge">getElementsByClassName(className)</code>：返回具有给定 CSS类 的元素；</li>
+  <li><code class="language-plaintext highlighter-rouge">getElementsByName(name)</code>：返回具有 <code class="language-plaintext highlighter-rouge">name</code> 属性的元素，不常用。</li>
+</ol>
+
+<p>注意：</p>
+
+<ol>
+  <li>不能漏了<code class="language-plaintext highlighter-rouge">s</code></li>
+  <li>返回值为一个 <strong>集合</strong></li>
+</ol>
+
+<h3 id="31-实时性">3.1 实时性</h3>
+
+<p>看一个小例子：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div&gt;</span>first<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">divs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">divs</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>   <span class="c1">// 1</span>
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;div&gt;</span>second<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">divs</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>   <span class="c1">// 2</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>从上面的例子可以看到：<code class="language-plaintext highlighter-rouge">getElementsByTagName</code> 是动态实时的；<code class="language-plaintext highlighter-rouge">querySelector</code>、<code class="language-plaintext highlighter-rouge">querySelectorAll</code> 和 <code class="language-plaintext highlighter-rouge">getElementById</code>是静态的。</p>
+
+<p><strong>应用例子</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 筛选 name="search" 的表单</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">form[name="search"]</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// 筛选 id 以 com 结尾的 a 标签</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">a[id$="com"]</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="4-节点属性">4. 节点属性</h2>
+
+<h3 id="41-dom-节点类">4.1 DOM 节点类</h3>
+
+<p><img src="/images/posts/blogImages/image-20210217160258292.png" width="800" /></p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Node</code> —— 抽象类，充当 DOM 基础，提供树的核心功能：parentNode、nextSibling，childNodes 等；</li>
+  <li><code class="language-plaintext highlighter-rouge">Element</code> —— DOM 元素的基本类，提供元素级的导航，如 children；</li>
+  <li><code class="language-plaintext highlighter-rouge">HTMLElement</code> —— 最终是 HTML 元素的基本类，包括 HTMLInputElement，htmlBodyElement 和 HTMLAnchorElement 等；</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="kd">constructor</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>	<span class="c1">// HTMLBodyElement</span>
+</code></pre></div></div>
+
+<p><strong>nodeName、tagName 和 nodeType</strong></p>
+
+<ol>
+  <li>nodeName：节点名，有 undefined， #comment 和 标签名</li>
+  <li>nodeType：元素节点为 1, 文本节点为 3, document对象为 9</li>
+  <li>tagName：标签名</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">nodeType</span><span class="p">);</span> <span class="c1">// 1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">tagName</span><span class="p">);</span> <span class="c1">// BODY</span>
+</code></pre></div></div>
+
+<h3 id="42-innerhtml">4.2 innerHTML</h3>
+
+<p><code class="language-plaintext highlighter-rouge">innerHTML</code> 属性可以将元素内的 HTML 获取为字符串的形式（不包含外面的标签，但包括换行），也可以设置内容：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+        Hello
+        <span class="nt">&lt;b&gt;</span>World<span class="nt">&lt;/b&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">text</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><strong>注意</strong></p>
+
+<p>下面的语句是对 HTML 的<em>重写</em>（移除旧的内容写入新的内容），两个语句等价：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="dl">"</span><span class="s2">...</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">...</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="43-outerhtml">4.3 outerHTML</h3>
+
+<p><code class="language-plaintext highlighter-rouge">outerHTML</code>可以获取完整的 HTML （包含外面的标签）：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+        Hello
+        <span class="nt">&lt;b&gt;</span>World<span class="nt">&lt;/b&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">text</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">outerHTML</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h3 id="44-textcontent">4.4 textContent</h3>
+
+<p><code class="language-plaintext highlighter-rouge">textContent</code> 可以获取纯文本：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"news"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Headline!<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Martians attack people!<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+  <span class="c1">// Headline! Martians attack people!</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="nx">news</span><span class="p">.</span><span class="nx">textContent</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>假设有一个用户输入的字符串，我们希望将其显示出来。</p>
+
+<ul>
+  <li>使用 <code class="language-plaintext highlighter-rouge">innerHTML</code>，我们将其“作为 HTML”插入，带有所有 HTML 标签。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">textContent</code>，我们将其“作为文本”插入，所有符号（symbol）均按字面意义处理。</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"elem1"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"elem2"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">"</span><span class="s2">What's your name?</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">&lt;b&gt;Winnie-the-Pooh!&lt;/b&gt;</span><span class="dl">"</span><span class="p">);</span>
+
+    <span class="nx">elem1</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="nx">elem2</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>在大多数情况下，我们期望来自用户的文本，并希望将其视为文本对待。我们不希望在我们的网站中出现意料不到的 HTML。</p>
+
+<h3 id="45-hidden">4.5 hidden</h3>
+
+<p><code class="language-plaintext highlighter-rouge">hidden</code> 属性可以设置元素是否隐藏，下面的代码使用定时函数设置了标签是否可见，实现闪烁的效果：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"blink"</span><span class="nt">&gt;</span>I'm blinking<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#blink</span><span class="dl">'</span><span class="p">);</span>
+        <span class="nx">elem</span><span class="p">.</span><span class="nx">hidden</span> <span class="o">=</span> <span class="o">!</span><span class="nx">elem</span><span class="p">.</span><span class="nx">hidden</span><span class="p">;</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><strong>其他属性</strong></p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">value</code> —— input，select，textarea 标签的 value</li>
+  <li><code class="language-plaintext highlighter-rouge">href</code> —— a 标签的 href</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code> —— 所有元素的 id 属性</li>
+</ol>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"fruit"</span> <span class="na">id=</span><span class="s">"fruit"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">name=</span><span class="s">"submit"</span> <span class="na">id=</span><span class="s">"submit"</span> <span class="na">onclick=</span><span class="s">"show()"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">show</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">fruit</span><span class="dl">'</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>此时点击提交按钮可以显示出框内的文字内容（value）</p>
+
+<h2 id="5-修改文档">5. 修改文档</h2>
+
+<p>DOM 修改是创建“实时”页面的关键。</p>
+
+<h3 id="51-创建元素">5.1 创建元素</h3>
+
+<p><strong>document.createELement(tag)</strong> —— 创建元素节点；</p>
+
+<p><strong>document.createTextNode(text)</strong> —— 创建文本节点；</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">textNOde</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="dl">'</span><span class="s1">text</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>举个栗子</strong></p>
+
+<p>创建一个 <code class="language-plaintext highlighter-rouge">div</code> 标签：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">alert</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">&lt;strong&gt;Hello&lt;/strong&gt; guys!</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>此时元素不能在浏览器中显示出来，需要插入。</p>
+
+<h3 id="52-插入方法">5.2 插入方法</h3>
+
+<p>有以下常用方法：</p>
+
+<ol>
+  <li>node.append(nodes or strings) ：在 ` node` 的末尾插入（放在内部）</li>
+  <li>node.prepend(nodes or strings) ：在 <code class="language-plaintext highlighter-rouge">node</code> 的开头插入（放在内部）</li>
+  <li>node.before(nodes or strings)：在 <code class="language-plaintext highlighter-rouge">node</code> 前面插入</li>
+  <li>node.after(nodes or strings)：在 <code class="language-plaintext highlighter-rouge">node</code> 后面插入</li>
+  <li>node.replaceWith(nodes or strings)：替换  <code class="language-plaintext highlighter-rouge">node</code> 的内容</li>
+</ol>
+
+<p>如在 <code class="language-plaintext highlighter-rouge">ol</code> 标签插入：</p>
+
+<p><img src="/images/posts/blogImages/image-20210217224454184.png" width="800" /></p>
+
+<p>将上面的 <code class="language-plaintext highlighter-rouge">div</code> 标签插入到 <code class="language-plaintext highlighter-rouge">document.body</code>：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="53-节点移除">5.3 节点移除</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">node.remove()</code> 移除节点：</p>
+
+<p>下面的代码在 <code class="language-plaintext highlighter-rouge">ol</code> 的尾部追加了一个 <code class="language-plaintext highlighter-rouge">li</code> 标签，1s 后再删除 <code class="language-plaintext highlighter-rouge">li</code> 标签：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;ol&gt;</span>
+        <span class="nt">&lt;li&gt;</span>a<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>b<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>c<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ol&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">li</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">li</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">li</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">d</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">'</span><span class="s1">ol</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">append</span><span class="p">(</span><span class="nx">li</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">li</span><span class="p">.</span><span class="nx">remove</span><span class="p">(),</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h3 id="54-克隆节点">5.4 克隆节点</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">elem.cloneNode(true)</code> 创建元素的一个 “深” 克隆（复制所有特性和子元素）；</p>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">elem.cloneNode(false)</code> 创建元素的一个 “深” 克隆；</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">div2</span> <span class="o">=</span> <span class="nx">div</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> <span class="c1">// 克隆消息</span>
+</code></pre></div></div>
+
+<h2 id="6-样式和类">6. 样式和类</h2>
+
+<p>可以用 javascript 设置 style 属性：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#circle</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">le</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">le</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="nx">circle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">le</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">circle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">650px</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">},</span> <span class="mi">5</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>上面的 HTML 可以让绿色的圆匀速滚动，通过设置 <code class="language-plaintext highlighter-rouge">elem.stle.xx</code> 设置样式元素的属性。</p>
+
+<p>可以查看 style：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="61-classlist--classname">6.1 classList &amp; className</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">className</code> 可以查看标签的所有类名；</p>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">classList</code> 可以增加 / 删除标签类名；</p>
+
+<p>举个栗子：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"class1 class2"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+    <span class="c1">// 两个类： class1 class2</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">div</span><span class="p">.</span><span class="nx">className</span><span class="p">);</span>
+
+    <span class="nx">div</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">class3</span><span class="dl">'</span><span class="p">);</span>
+    <span class="c1">// 三个类： class1 class2 class3</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">div</span><span class="p">.</span><span class="nx">className</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">classList</code> 常用方法：</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">elem.classList.add/remove(class)</code> —— 添加 / 移除</li>
+  <li><code class="language-plaintext highlighter-rouge">elem.classList.toggle(class)</code> —— 类不存在就添加，否则移出</li>
+  <li><code class="language-plaintext highlighter-rouge">elem.classList.contains(class)</code> —— 检查是否有给定类</li>
+</ol>
+
+<h3 id="62-应用例子">6.2 应用例子</h3>
+
+<p>创建一个 div ，添加内容为 Hello，设置颜色为红色，背景为粉色：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">pink</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+:ET
