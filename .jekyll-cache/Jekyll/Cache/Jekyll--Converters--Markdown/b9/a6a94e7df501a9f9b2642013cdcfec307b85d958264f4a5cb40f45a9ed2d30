@@ -1,0 +1,773 @@
+I"�@<h2 id="1-浏览器事件">1. 浏览器事件</h2>
+
+<p>浏览器事件包括 <strong>鼠标事件</strong>（click， mousedown等）、<strong>键盘事件</strong>（keydown 和 keyup）、<strong>表单事件</strong>（submit 和 focus）、<strong>Document 事件</strong>（DOMContentLoaded） 和 <strong>CSS 事件</strong>（transitionend）</p>
+
+<h3 id="11-事件处理">1.1 事件处理</h3>
+
+<p>当触发一个事件时，要分配一个处理层需，如按钮按下：</p>
+
+<p>HTML 特性：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">value=</span><span class="s">"Click me"</span> <span class="na">onclick=</span><span class="s">"alert('Hi')"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">button</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>DOM 属性：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">value=</span><span class="s">"Click me"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">button</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hi</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><strong>使用 this</strong></p>
+
+<p>this 指向元素（对象）：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">value=</span><span class="s">"Click me"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">button</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h3 id="12-addeventlistener">1.2 addEventListener</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">elem.onclick</code> 方式只能添加一个处理程序，使用 <code class="language-plaintext highlighter-rouge">elem.addEventListener()</code> 可以添加多个处理程序。</p>
+
+<p>语法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handler</span><span class="p">[,</span> <span class="nx">options</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<ol>
+  <li>element：元素</li>
+  <li>event：事件类型，如 <code class="language-plaintext highlighter-rouge">onclick</code></li>
+  <li>handler：处理程序（可以是箭头函数、函数名或函数表达式）</li>
+</ol>
+
+<p>移出处理程序可以使用：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">elem</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handle</span><span class="p">[,</span> <span class="nx">options</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>举个栗子：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"btn"</span> <span class="na">value=</span><span class="s">"click me"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"display: none;"</span><span class="nt">&gt;</span>I'm here!<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#btn</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">elem1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello!</span><span class="dl">'</span><span class="p">));</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">elem1</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>补充：一些事件只能用 <code class="language-plaintext highlighter-rouge">addEventListener</code> 分配，如 <code class="language-plaintext highlighter-rouge">DOMContentLoaded</code></p>
+
+<h3 id="13-事件对象">1.3 事件对象</h3>
+
+<p>当时间发生是，浏览器会创建 <code class="language-plaintext highlighter-rouge">event</code> 对象，将详细信息放入其中，并将参数传递给处理程序。</p>
+
+<p>获取鼠标指针坐标：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"click me"</span> <span class="na">id=</span><span class="s">"btn"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#btn</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> at </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Coordinates: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientY</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>事件的属性：</p>
+
+<ol>
+  <li>event.type：事件类型</li>
+  <li>event.currentTarget：处理事件的元素</li>
+  <li>event.clientX 和 event.clientY：指针事件的指针窗口坐标</li>
+</ol>
+
+<h3 id="14-冒泡">1.4 冒泡</h3>
+
+<p>当一个事件发生在一个元素上，首先会运行处理程序，然后运行父元素上的处理程序，知道其他祖先上的处理程序：</p>
+
+<p><img src="/images/posts/blogImages/image-20210219151058335.png" width="800" /></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">onclick=</span><span class="s">"alert('A')"</span><span class="nt">&gt;</span>
+        A
+        <span class="nt">&lt;div</span> <span class="na">onclick=</span><span class="s">"alert('B')"</span><span class="nt">&gt;</span>
+            B
+            <span class="nt">&lt;div</span> <span class="na">onclick=</span><span class="s">"alert('C')"</span><span class="nt">&gt;</span>C<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#btn</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> at </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Coordinates: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientY</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>上面的代码中，点击 C 会依次弹出 3 个窗口：C、B 和 A</p>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">stopPropagation()</code> 可以停止冒泡：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"event.stopPropagation()"</span><span class="nt">&gt;</span>Click me<span class="nt">&lt;/button&gt;</span>
+</code></pre></div></div>
+
+<h2 id="2-ui-事件">2. UI 事件</h2>
+
+<h3 id="21-鼠标事件">2.1 鼠标事件</h3>
+
+<p><strong>事件顺序</strong></p>
+
+<p>一个用户操作可能会触发多个事件，如点击鼠标左键时，首先触发 <code class="language-plaintext highlighter-rouge">mousedown</code>，左键释放后触发 <code class="language-plaintext highlighter-rouge">mouseup</code> 和 <code class="language-plaintext highlighter-rouge">click</code>。</p>
+
+<p><strong>鼠标按钮</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">click</code> 事件只在单击鼠标时触发，<code class="language-plaintext highlighter-rouge">mousedown</code> 和 <code class="language-plaintext highlighter-rouge">mouseup</code> 事件中可能需要 <code class="language-plaintext highlighter-rouge">event.button</code>，因为这两个事件在任何按键上都会除法，通过 <code class="language-plaintext highlighter-rouge">button</code> 属性来区分左键与右键。左键的 <code class="language-plaintext highlighter-rouge">button</code> 值为 0, 右键的 <code class="language-plaintext highlighter-rouge">button</code> 值为 1。</p>
+
+<p><strong>组合键</strong></p>
+
+<p>如果在事件期间按下了相应的键，则它们为 <code class="language-plaintext highlighter-rouge">true</code>。</p>
+
+<p>下面的例子当点击按钮的同时，按下 <code class="language-plaintext highlighter-rouge">ctrl</code> + <code class="language-plaintext highlighter-rouge">alt</code> 时，会出现弹窗：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">'btn'</span><span class="nt">&gt;</span>click<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#btn</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">altKey</span> <span class="o">&amp;&amp;</span> <span class="nx">event</span><span class="p">.</span><span class="nx">ctrlKey</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">ALT + CTRL + CLICK</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><strong>坐标</strong></p>
+
+<p>相对窗口的坐标：<code class="language-plaintext highlighter-rouge">clientX</code> 与 <code class="language-plaintext highlighter-rouge">clientY</code></p>
+
+<p>相对文档的坐标：<code class="language-plaintext highlighter-rouge">pageX</code> 与 <code class="language-plaintext highlighter-rouge">pageY</code></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">'input'</span> <span class="na">value=</span><span class="s">"mouse over me"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#input</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">onmousemove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> : </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientY</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><strong>双击</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">elem</span><span class="p">.</span><span class="nx">ondbclick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>应用例子</strong></p>
+
+<p>实现一个类似文件管理器的点击事件：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p&gt;</span>click on a list item to select it.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+        <span class="nt">&lt;li&gt;</span>A<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>B<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>C<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>D<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>E<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">lists</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">li</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">elem</span> <span class="k">of</span> <span class="nx">lists</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 单击效果</span>
+        <span class="nx">elem</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="c1">// 若此时 ctrl 未按下</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">event</span><span class="p">.</span><span class="nx">ctrlKey</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">siblings</span> <span class="o">=</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">sibling</span> <span class="k">of</span> <span class="nx">siblings</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">sibling</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="nx">elem</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">#acf</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>效果如下，鼠标单击时元素背景变蓝，按住 CRTL 可以选择多项：</p>
+
+<p><img src="/images/posts/blogImages/image-20210219170533307.png" width="800" /></p>
+
+<h3 id="22-移动鼠标">2.2 移动鼠标</h3>
+
+<p><strong>mouseover / mouseout，relatedTarget</strong></p>
+
+<p>当鼠标移动到某个元素时，<code class="language-plaintext highlighter-rouge">mouseover</code> 发生，鼠标离开时，<code class="language-plaintext highlighter-rouge">mouseout</code> 时间发生。</p>
+
+<p>当鼠标从一个元素 A 到元素 B 时，元素 A 为 <code class="language-plaintext highlighter-rouge">target</code>，元素 B 是 <code class="language-plaintext highlighter-rouge">relatedTarget</code>。</p>
+
+<p><strong>mouseenter 和 mouseleave</strong></p>
+
+<p>事件 <code class="language-plaintext highlighter-rouge">mouseenter / mouseleave</code> 类似于 <code class="language-plaintext highlighter-rouge">mouseover / mouseout</code>，它们在鼠标指针进入 / 离开元素时触发。</p>
+
+<p>注意：<code class="language-plaintext highlighter-rouge">mouseenter / mouseleave</code> 不会冒泡</p>
+
+<p>举个栗子：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
+    <span class="nf">#outer</span> <span class="p">{</span>
+        <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="no">pink</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#inner</span> <span class="p">{</span>
+        <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">160px</span><span class="p">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">160px</span><span class="p">;</span>
+        <span class="nl">top</span><span class="p">:</span> <span class="m">70px</span><span class="p">;</span>
+        <span class="nl">left</span><span class="p">:</span> <span class="m">70px</span><span class="p">;</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="m">134</span><span class="p">,</span> <span class="m">224</span><span class="p">,</span> <span class="m">146</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"outer"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"inner"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">inner</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#inner</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">outer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#outer</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">outer</span><span class="p">.</span><span class="nx">onmouseleave</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">t</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span>
+            <span class="nx">t</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">()</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> | mouseleave</span><span class="dl">'</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> target: parent</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="nx">outer</span><span class="p">.</span><span class="nx">onmouseenter</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">(</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> : </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">)</span><span class="dl">'</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">t</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span>
+            <span class="nx">t</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">()</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> | mouseenter</span><span class="dl">'</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> target: parent</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="nx">inner</span><span class="p">.</span><span class="nx">onmouseleave</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">t</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span>
+            <span class="nx">t</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">()</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> | mouseleave</span><span class="dl">'</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> target: child</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="nx">inner</span><span class="p">.</span><span class="nx">onmouseenter</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">t</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">:</span><span class="dl">"</span> <span class="o">+</span>
+            <span class="nx">t</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">()</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> | mouseenter</span><span class="dl">'</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> target: child</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>得到的结果如下：</p>
+
+<p><img src="/images/posts/blogImages/image-20210219175635946.png" width="800" /></p>
+
+<p>当鼠标进入 / 离开内外正方形时，可以打印当前的时间。</p>
+
+<h3 id="23-鼠标拖放">2.3 鼠标拖放</h3>
+
+<p>鼠标拖放可以看作：<code class="language-plaintext highlighter-rouge">mousedown</code> + <code class="language-plaintext highlighter-rouge">mousemove</code> + <code class="language-plaintext highlighter-rouge">mouseup</code></p>
+
+<p><strong>举个栗子</strong></p>
+
+<p>创建一个滑动条：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
+    <span class="nf">#bar</span> <span class="p">{</span>
+        <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">26px</span><span class="p">;</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="m">192</span><span class="p">,</span> <span class="m">213</span><span class="p">,</span> <span class="m">164</span><span class="p">);</span>
+        <span class="nl">border-radius</span><span class="p">:</span> <span class="m">6px</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#cube</span> <span class="p">{</span>
+        <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+        <span class="nl">top</span><span class="p">:</span> <span class="m">-2px</span><span class="p">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">30px</span><span class="p">;</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+        <span class="nl">border-radius</span><span class="p">:</span> <span class="m">8px</span><span class="p">;</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="m">96</span><span class="p">,</span> <span class="m">173</span><span class="p">,</span> <span class="m">101</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"bar"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"cube"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<p>效果如下：</p>
+
+<p><img src="/images/posts/blogImages/image-20210219191732501.png" width="800" /></p>
+
+<p>添加 JavaScript 代码：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">cube</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#cube</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">bar</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#bar</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">cube</span><span class="p">.</span><span class="nx">onmousedown</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 按下鼠标后移动滑块</span>
+    <span class="kd">let</span> <span class="nx">onMouseMove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">&lt;</span> <span class="mi">300</span> <span class="o">&amp;&amp;</span> <span class="nx">event</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span>
+            <span class="nx">cube</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">-</span> <span class="mi">20</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mousemove</span><span class="dl">'</span><span class="p">,</span> <span class="nx">onMouseMove</span><span class="p">);</span>
+
+    <span class="c1">// 松开鼠标</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">onmouseup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mousemove</span><span class="dl">'</span><span class="p">,</span> <span class="nx">onMouseMove</span><span class="p">);</span>
+        <span class="nx">cube</span><span class="p">.</span><span class="nx">onmouseup</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cube</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="24-键盘">2.4 键盘</h3>
+
+<p><strong>keydown 与 keyup</strong></p>
+
+<p>一个按键事件包含了 <code class="language-plaintext highlighter-rouge">keydown</code> 和 <code class="language-plaintext highlighter-rouge">keyup</code></p>
+
+<p>查看键盘按键的 <code class="language-plaintext highlighter-rouge">key</code> 和 <code class="language-plaintext highlighter-rouge">code</code>：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">keydown</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">event.key: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">event.code: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="25-滚动">2.5 滚动</h3>
+
+<p><code class="language-plaintext highlighter-rouge">scroll</code> 时间允许对页面或元素滚动做出反应</p>
+
+<p>看个显示当前滚动的例子：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"showScroll"</span> <span class="na">style=</span><span class="s">"position: fixed;"</span><span class="nt">&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"height: 8000px;"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">scroll</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">showScroll</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Current scroll = </span><span class="dl">'</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><strong>应用栗子</strong></p>
+
+<p>创建一个长的页面，当页面下滑的距离大于窗口高度时，显示三角形，否则不显示。点击三角形可以回到顶部：</p>
+
+<ol>
+  <li>使用 <code class="language-plaintext highlighter-rouge">window.pageYOffset</code> 可以获取滚动距离</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">document.clientHeight</code> 可以获取页面高</li>
+</ol>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
+    <span class="nf">#arrow</span> <span class="p">{</span>
+        <span class="nl">font-size</span><span class="p">:</span> <span class="m">1.6em</span><span class="p">;</span>
+        <span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+        <span class="nl">position</span><span class="p">:</span> <span class="nb">fixed</span><span class="p">;</span>
+        <span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"arrow"</span> <span class="na">hidden</span><span class="nt">&gt;</span>▲<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">p</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3000</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">p</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="nx">i</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">let</span> <span class="nx">arrow</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#arrow</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">scroll</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">arrow</span><span class="p">.</span><span class="nx">hidden</span> <span class="o">=</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span> <span class="o">&lt;</span> <span class="nb">document</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">arrow</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">scrollTo</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h2 id="3-表单与控件">3. 表单与控件</h2>
+
+<h3 id="31-表单属性与方法">3.1 表单属性与方法</h3>
+
+<p>表单是特殊的集合 <code class="language-plaintext highlighter-rouge">document.forms</code> 的成员，可以使用 <code class="language-plaintext highlighter-rouge">document.forms.formName</code> 来获取表单。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">name=</span><span class="s">"form1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"one"</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"two"</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    <span class="c1">// 获取表单</span>
+    <span class="kd">let</span> <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">forms</span><span class="p">.</span><span class="nx">form1</span><span class="p">;</span>
+    <span class="c1">// 获取表单元素</span>
+    <span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nx">form</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">one</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+    <span class="nx">form</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">one</span> <span class="o">==</span> <span class="nx">form</span><span class="p">.</span><span class="nx">one</span><span class="p">;</span>	<span class="c1">// true</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>注意：有时元素 <code class="language-plaintext highlighter-rouge">name</code> 相同，则通过 <code class="language-plaintext highlighter-rouge">name</code> 获取的元素是数组。</p>
+
+<p><strong>反向引用</strong></p>
+
+<p>可以通过元素反向引用到表单：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">forms</span><span class="p">.</span><span class="nx">xxx</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nx">form</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">elemName</span><span class="p">;</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">form</span>	<span class="c1">// 表单</span>
+</code></pre></div></div>
+
+<p><strong>表单元素</strong></p>
+
+<p>(1) <code class="language-plaintext highlighter-rouge">input</code> 和 <code class="language-plaintext highlighter-rouge">texarea</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">input</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">input</span><span class="p">.</span><span class="nx">checked</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>(2) <code class="language-plaintext highlighter-rouge">select</code> 和 <code class="language-plaintext highlighter-rouge">options</code></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">"category"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"game"</span><span class="nt">&gt;</span>game<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"music"</span><span class="nt">&gt;</span>music<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">category</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="dl">'</span><span class="s1">category</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="c1">// 下面的三行功能一样</span>
+    <span class="nx">category</span><span class="p">.</span><span class="nx">options</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">selected</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">category</span><span class="p">.</span><span class="nx">selectedINdex</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nx">category</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">game</span><span class="dl">'</span><span class="p">;</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<ol>
+  <li>select.options —— 表单元素的集合</li>
+  <li>select.value —— 当前所选元素的 <code class="language-plaintext highlighter-rouge">value</code></li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">option</code> 有以下属性：</p>
+
+<ol>
+  <li>option.selected</li>
+  <li>option.index</li>
+  <li>option.text</li>
+</ol>
+
+<p><strong>应用例子</strong></p>
+
+<p>显示所选文本的值和内容：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"genres"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"rock"</span><span class="nt">&gt;</span>Rock<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"blues"</span> <span class="na">selected</span><span class="nt">&gt;</span>Blues<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">opt</span> <span class="k">of</span> <span class="nx">genres</span><span class="p">.</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">opt</span><span class="p">.</span><span class="nx">selected</span> <span class="o">==</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">opt</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">opt</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h3 id="32-聚焦">3.2 聚焦</h3>
+
+<p><strong>focus/blur 事件</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">foucus</code> 意味着输入；<code class="language-plaintext highlighter-rouge">blur</code> 失焦意味着输入完成</p>
+
+<p>下面的例子检查用户的输入：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
+    <span class="nc">.invalid</span> <span class="p">{</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;label&gt;</span>your email:
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"email"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">id=</span><span class="s">"input"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#input</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">info</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">p</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">onblur</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">invalid</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">onfocus</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">invalid</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>当输入无效时会输入框背景变红，再次聚焦时背景恢复正常。</p>
+
+<p>当输入无效时，也可以再次强制聚焦：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">input</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>允许在任何元素上聚焦：tabindex</strong></p>
+
+<p>支持聚焦的元素： button, input, select, a</p>
+
+<p>设置 <code class="language-plaintext highlighter-rouge">tabindex</code> 属性可以让其他元素具有聚焦功能：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+    <span class="c">&lt;!-- tabindex="-1" 只允许以编程的方式聚焦于元素 --&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">tabindex=</span><span class="s">"-1"</span><span class="nt">&gt;</span>One<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+
+<p><strong>应用例子</strong></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;pre</span> <span class="na">id=</span><span class="s">"mouse"</span> <span class="na">style=</span><span class="s">"position: absolute; left: 20px; top: 20px; cursor: pointer;"</span> <span class="na">tabindex=</span><span class="s">"-1"</span><span class="nt">&gt;</span>
+    _   _
+   (q\_/p)
+    /. .\
+   =\_t_/=   _
+    /   \   (
+   ((   ))   )
+   /\) (/\  /
+   \  Y  /-'
+    nn^nn
+    <span class="nt">&lt;/pre&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">mouse</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#mouse</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">mouse</span><span class="p">.</span><span class="nx">onfocus</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">keydown</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">switch</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">case</span> <span class="dl">'</span><span class="s1">ArrowRight</span><span class="dl">'</span><span class="p">:</span>
+                    <span class="nx">mouse</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">mouse</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="dl">'</span><span class="s1">ArrowLeft</span><span class="dl">'</span><span class="p">:</span>
+                    <span class="nx">mouse</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">mouse</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span> <span class="o">-</span> <span class="mi">20</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="dl">'</span><span class="s1">ArrowDown</span><span class="dl">'</span><span class="p">:</span>
+                    <span class="nx">mouse</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">mouse</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span><span class="p">)</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="dl">'</span><span class="s1">ArrowUp</span><span class="dl">'</span><span class="p">:</span>
+                    <span class="nx">mouse</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">mouse</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span><span class="p">)</span> <span class="o">-</span> <span class="mi">20</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h3 id="33-事件-changeinput-cutcopypaste">3.3 事件 change，input， cut，copy，paste</h3>
+
+<p><strong>1. change</strong></p>
+
+<p>当元素更改完成后会触发 <code class="language-plaintext highlighter-rouge">change</code> 事件，对于文本框，当失去焦点时会触发 <code class="language-plaintext highlighter-rouge">change</code> 事件：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">onchange=</span><span class="s">"console.log(this.value)"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p><strong>2. input</strong></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"input"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+	<span class="nx">input</span><span class="p">.</span><span class="nx">oninput</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">oninput</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><strong>3. cut, copy, paste</strong></p>
+
+<p>打印事件类型和获取的数据：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"input"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">oncut</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">oncopy</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">onpaste</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> - </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clipboardData</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="dl">'</span><span class="s1">text/plain</span><span class="dl">'</span><span class="p">));</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><strong>应用例子</strong></p>
+
+<p>实现下面计算储蓄金额的功能：</p>
+
+<p><img src="/images/posts/blogImages/image-20210220121946972.png" width="800" /></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
+    <span class="nc">.bar</span> <span class="p">{</span>
+        <span class="nl">margin</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+        <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="n">grey</span><span class="p">;</span>
+        <span class="nl">vertical-align</span><span class="p">:</span> <span class="nb">bottom</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#was</span> <span class="p">{</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#becomes</span> <span class="p">{</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#diagram</span> <span class="nt">td</span> <span class="p">{</span>
+        <span class="nl">vertical-align</span><span class="p">:</span> <span class="nb">bottom</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    Deposit caculator.
+    <span class="nt">&lt;table&gt;</span>
+        <span class="nt">&lt;tbody&gt;</span>
+            <span class="nt">&lt;tr&gt;</span>
+                <span class="nt">&lt;td&gt;</span>Inital deposit<span class="nt">&lt;/td&gt;</span>
+                <span class="nt">&lt;td&gt;</span>
+                    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"number"</span> <span class="na">id=</span><span class="s">"initial"</span> <span class="na">value=</span><span class="s">"10000"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;/tr&gt;</span>
+            <span class="nt">&lt;tr&gt;</span>
+                <span class="nt">&lt;td&gt;</span>How many months?<span class="nt">&lt;/td&gt;</span>
+                <span class="nt">&lt;td&gt;</span>
+                    <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"duration"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">&gt;</span>03 months<span class="nt">&lt;/option&gt;</span>
+                        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"6"</span><span class="nt">&gt;</span>06 months<span class="nt">&lt;/option&gt;</span>
+                        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"12"</span><span class="nt">&gt;</span>12 months<span class="nt">&lt;/option&gt;</span>
+                        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"18"</span><span class="nt">&gt;</span>18 months<span class="nt">&lt;/option&gt;</span>
+                        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"24"</span><span class="nt">&gt;</span>24 months<span class="nt">&lt;/option&gt;</span>
+                        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"30"</span><span class="nt">&gt;</span>30 months<span class="nt">&lt;/option&gt;</span>
+                    <span class="nt">&lt;/select&gt;</span>
+                <span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;/tr&gt;</span>
+            <span class="nt">&lt;tr&gt;</span>
+                <span class="nt">&lt;td&gt;</span>Interest per year?<span class="nt">&lt;/td&gt;</span>
+                <span class="nt">&lt;td&gt;</span>
+                    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"number"</span> <span class="na">id=</span><span class="s">"interest"</span> <span class="na">value=</span><span class="s">"5"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;/tbody&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>
+    <span class="nt">&lt;table</span> <span class="na">id=</span><span class="s">"diagram"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th</span> <span class="na">id=</span><span class="s">"a"</span><span class="nt">&gt;</span>was 10000<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th</span> <span class="na">id=</span><span class="s">"b"</span><span class="nt">&gt;</span>becomes 10000<span class="nt">&lt;/th&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;td&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bar"</span> <span class="na">id=</span><span class="s">"was"</span> <span class="na">style=</span><span class="s">"height: 50px;"</span><span class="nt">&gt;&lt;/div&gt;</span>
+            <span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bar"</span> <span class="na">id=</span><span class="s">"becomes"</span> <span class="na">style=</span><span class="s">"height: 50px;"</span><span class="nt">&gt;&lt;/div&gt;</span>
+            <span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>
+
+    <span class="nt">&lt;br&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">let</span> <span class="nx">initHeight</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">initialVal</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">durationVal</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">interestVal</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">becomesVal</span> <span class="o">=</span> <span class="mi">11250</span><span class="p">;</span>
+    <span class="nx">becomes</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nx">interestVal</span><span class="p">)</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span>
+
+    <span class="nx">initial</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">initialVal</span> <span class="o">=</span> <span class="nx">initial</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        <span class="nx">becomesVal</span> <span class="o">=</span> <span class="nx">initialVal</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nx">interestVal</span> <span class="o">*</span> <span class="nx">durationVal</span><span class="p">);</span>
+        <span class="nx">was</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">initHeight</span> <span class="o">*</span> <span class="nx">initialVal</span> <span class="o">/</span> <span class="mi">10000</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">becomes</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">initHeight</span> <span class="o">*</span> <span class="nx">becomesVal</span> <span class="o">/</span> <span class="mi">10000</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">a</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">was: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">initialVal</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">duration</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">option</span> <span class="k">of</span> <span class="nx">duration</span><span class="p">.</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">option</span><span class="p">.</span><span class="nx">selected</span> <span class="o">==</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">durationVal</span> <span class="o">=</span> <span class="nx">option</span><span class="p">.</span><span class="nx">value</span> <span class="o">/</span> <span class="mi">12</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nx">becomesVal</span> <span class="o">=</span> <span class="nx">initialVal</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nx">interestVal</span> <span class="o">*</span> <span class="nx">durationVal</span><span class="p">);</span>
+        <span class="nx">was</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">initHeight</span> <span class="o">*</span> <span class="nx">initialVal</span> <span class="o">/</span> <span class="mi">10000</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">becomes</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">initHeight</span> <span class="o">*</span> <span class="nx">becomesVal</span> <span class="o">/</span> <span class="mi">10000</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">b</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">becomes: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">becomesVal</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">interest</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">interestVal</span> <span class="o">=</span> <span class="nx">interest</span><span class="p">.</span><span class="nx">value</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="nx">becomesVal</span> <span class="o">=</span> <span class="nx">initialVal</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nx">interestVal</span> <span class="o">*</span> <span class="nx">durationVal</span><span class="p">);</span>
+        <span class="nx">was</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">initHeight</span> <span class="o">*</span> <span class="nx">initialVal</span> <span class="o">/</span> <span class="mi">10000</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">becomes</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">initHeight</span> <span class="o">*</span> <span class="nx">becomesVal</span> <span class="o">/</span> <span class="mi">10000</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">b</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">becomes: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">becomesVal</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h3 id="34-表单事件">3.4 表单事件</h3>
+
+<p>在表单中使用 <code class="language-plaintext highlighter-rouge">&lt;input type='submit'&gt;</code> 或在 <code class="language-plaintext highlighter-rouge">input</code> 输入完按下 <code class="language-plaintext highlighter-rouge">Enter</code> 可以触发 <code class="language-plaintext highlighter-rouge">submit</code> 事件：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">onsubmit=</span><span class="s">"alert('succussfully')"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">""</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre></div></div>
+
+<p>参考：<a href="https://zh.javascript.info/forms-submit">现代 JavaScript 教程</a></p>
+:ET
