@@ -791,7 +791,9 @@ clearTimeout(timerID);
 它的用法与 `setTimeout` 一样：
 
 ```js
-let timerID = setInterval(() => alert("hhh"), 1500);
+let timer = setInterval(function() {
+    console.log((new Date()).getSeconds());
+}, 1000);
 ```
 
 
