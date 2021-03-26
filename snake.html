@@ -11,40 +11,6 @@
     body {
         background-color: white;
     }
-
-    #length {
-        position: absolute;
-        font-size: 1.5em;
-        font-weight: bold;
-        color: rgba(68, 151, 219, 0.89);
-        top: 8%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: inline-block;
-    }
-
-    #map {
-        position: absolute;
-        top: 56%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border: solid 5px #555555;
-        display: inline-block;
-    }
-
-    .snakeBody {
-        width: 25px;
-        height: 25px;
-        position: absolute;
-        background-color: rgb(0, 0, 0);
-    }
-
-    .food {
-        width: 25px;
-        height: 25px;
-        position: absolute;
-        background-color: rgb(255, 118, 94);
-    }
 </style>
 
 <body>
@@ -55,8 +21,6 @@
     <p id=failedvalue style=" font-size: 1.5em; color: red">失败次数： 0</p>
     <div style="height: 30px;"></div>
     <button id="clear" onclick="restart()" style=" font-size: 1.5em; font-weight: bold;">clear</button>
-    <!-- <div id="length"></div>
-    <div id="map"></div> -->
 </body>
 
 <script>
@@ -75,159 +39,6 @@
         value2 = 0;
         document.getElementById("countvalue").innerHTML = "总次数： " + 0;
         document.getElementById("failedvalue").innerHTML = "失败次数： " + 0;
-    }
-    // map
-    const WIDTH = 25;
-    const HEIGHT = 25;
-    const SIZE = 25;
-
-    var length = 3;
-
-    // snake body
-    class snakeBody {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
-        }
-    };
-    let snakeArr = [];
-
-    // food
-    let foodX = 0;
-    let foodY = 0;
-
-    // direction of snake head
-    let diredction = [1, 0];
-
-    let interval;
-
-
-    window.onload = function() {
-        let mapDom = document.getElementById("map");
-        mapDom.style.width = WIDTH * SIZE + 'px';
-        mapDom.style.height = HEIGHT * SIZE + 'px';
-
-        init();
-
-        interval = setInterval(function() {
-
-            checkOutOfBorder();
-            checkBiteSelf();
-
-            // eat food
-            if (isFood()) {
-                createFood();
-                addBody();
-                length++;
-            }
-
-            // draw sanke
-            let snakeHtml = "";
-            for (let i = 0; i < snakeArr.length; i++) {
-                snakeHtml += '<div class="snakeBody" style="left: ' +
-                    snakeArr[i].x * SIZE + 'px; top: ' +
-                    snakeArr[i].y * SIZE + 'px"></div>';
-            }
-
-            // draw food
-            let foodHtml = '<div class="food" style="left: ' +
-                foodX * SIZE + 'px; top: ' +
-                foodY * SIZE + 'px"></div>';
-            mapDom.innerHTML = snakeHtml + foodHtml;
-
-            // length
-            document.getElementById("length").innerHTML = "Length: " + length;
-
-            // move
-            move();
-        }, 180);
-
-    }
-
-    // keyDown
-    document.onkeydown = function(e) {
-        // console.log(e);
-        switch (e.key) {
-            case "ArrowRight":
-                if (diredction[0] != -1) {
-                    diredction = [1, 0];
-                }
-                break;
-            case "ArrowLeft":
-                if (diredction[0] != 1) {
-                    diredction = [-1, 0];
-                }
-                break;
-            case "ArrowUp":
-                if (diredction[1] != 1) {
-                    diredction = [0, -1];
-                }
-                break;
-            case "ArrowDown":
-                if (diredction[1] != -1) {
-                    diredction = [0, 1];
-                }
-                break;
-        }
-    }
-
-    // init
-    function init() {
-        snakeArr[0] = new snakeBody(5, 4);
-        snakeArr[1] = new snakeBody(4, 4);
-        snakeArr[2] = new snakeBody(3, 4);
-        createFood();
-    }
-
-    // generate food
-    function createFood() {
-        foodX = Math.floor(Math.random() * WIDTH);
-        foodY = Math.floor(Math.random() * HEIGHT);
-    }
-
-    // moving
-    function move() {
-        for (let i = snakeArr.length - 1; i > 0; i--) {
-            snakeArr[i].x = snakeArr[i - 1].x;
-            snakeArr[i].y = snakeArr[i - 1].y;
-        }
-        snakeArr[0].x += diredction[0];
-        snakeArr[0].y += diredction[1];
-    }
-
-    // out Of Border
-    function checkOutOfBorder() {
-        let head = snakeArr[0];
-        if (head.x < 0 || head.x >= WIDTH ||
-            head.y < 0 || head.y >= HEIGHT) {
-            alert("Game over!");
-            clearInterval(interval);
-        }
-    }
-
-    // check bitte self
-    function checkBiteSelf() {
-        let head = snakeArr[0];
-        for (let i = 1; i < snakeArr.length; i++) {
-            if (head.x == snakeArr[i].x &&
-                head.y == snakeArr[i].y) {
-                alert("Game over!");
-                clearInterval(interval);
-            }
-        }
-    }
-
-    // collision
-    function isFood() {
-        let head = snakeArr[0];
-        if (head.x == foodX && head.y == foodY) {
-            return true;
-        }
-    }
-
-    function addBody() {
-        let tail = snakeArr[snakeArr.length - 1];
-        snakeArr.push(new snakeBody(tail.x, tail.y));
     }
 </script>
 
