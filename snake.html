@@ -11,16 +11,40 @@
     body {
         background-color: white;
     }
+    #box1{
+        height: 40vh;
+        width: 100%;
+        background: #66CDAA;
+        text-align:center;
+    }
+    #box2{
+        height: 40vh;
+        width: 100%;
+        background: #E9967A;
+        align-items: center;
+        text-align:center;
+    }
+    #box3{
+        height: 20vh;
+        width: 100%;
+        background: #aaccee;
+        align-items: center;
+        text-align:center;
+    }
 </style>
 
 <body>
-    <button id="count" onclick="count1()" style=" font-size: 2em;">count</button>
-    <p id="countvalue" style=" font-size: 2em;">总次数： 0</p>
-    <div style="height: 50px;"></div>
-    <button id="fail"  onclick="count2()" style=" font-size: 2em;">fail</button>
-    <p id=failedvalue style=" font-size: 2em; color: red">失败次数： 0</p>
-    <div style="height: 50px;"></div>
-    <button id="clear" onclick="restart()" style=" font-size: 2em; font-weight: bold;">clear</button>
+    <div id="box1" onclick="count1()">
+        <p id="countvalue" style="display: inline-block; margin-top: 15vh; font-size: 2em;">总次数： 0</p>
+    </div>
+
+    <div id="box2" onclick="count2()">
+        <p id=failedvalue style="display: inline-block; margin-top: 15vh; font-size: 2em;">失败次数： 0</p>
+    </div>
+
+    <div id="box3" onclick="reset()">
+        <p id=failedvalue style="display: inline-block; margin-top: 6vh; font-size: 2em;">Reset</p>
+    </div>
 </body>
 
 <script>
