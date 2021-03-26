@@ -66,11 +66,11 @@
         document.getElementById("failedvalue").innerHTML = "失败次数： " + value2;
     }
     let reset = function(){
+        document.getElementById("record").innerHTML += value1 + " " + value2 + ", ";
         value1 = 0;
         value2 = 0;
         document.getElementById("countvalue").innerHTML = "总次数： " + 0;
         document.getElementById("failedvalue").innerHTML = "失败次数： " + 0;
-        document.getElementById("record").innerHTML += value1 + " " + value2 + ", ";
     }
 </script>
 
