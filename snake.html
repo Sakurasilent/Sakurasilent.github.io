@@ -50,7 +50,7 @@
     <div id="box3" onclick="reset()">
         <p id=failedvalue style="display: inline-block; margin-top: 6vh; font-size: 2em;">Reset</p>
     </div>
-    <p id="record"></p>
+    <p id="record">Recordes: </p>
 
 </body>
 
@@ -66,7 +66,7 @@
         document.getElementById("failedvalue").innerHTML = "失败次数： " + value2;
     }
     let reset = function(){
-        document.getElementById("record").innerHTML += value1 + " " + value2 + ", ";
+        document.getElementById("record").innerHTML +=  `<li>total: ` + value1 + ` ` + `error: ` + value2 + `</li>`;
         value1 = 0;
         value2 = 0;
         document.getElementById("countvalue").innerHTML = "总次数： " + 0;
