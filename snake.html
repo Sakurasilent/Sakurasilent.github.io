@@ -40,16 +40,18 @@
 
 <body>
     <div id="box1" onclick="count1()">
-        <p id="countvalue" style="display: inline-block; margin-top: 15vh; font-size: 2em;">总次数： 0</p>
+        <p id="countvalue" style="display: inline-block; margin-top: 13vh; font-size: 2em;">总次数： 0</p>
     </div>
 
     <div id="box2" onclick="count2()">
-        <p id=failedvalue style="display: inline-block; margin-top: 15vh; font-size: 2em;">失败次数： 0</p>
+        <p id=failedvalue style="display: inline-block; margin-top: 13vh; font-size: 2em;">失败次数： 0</p>
     </div>
 
     <div id="box3" onclick="reset()">
         <p id=failedvalue style="display: inline-block; margin-top: 6vh; font-size: 2em;">Reset</p>
     </div>
+    <p id="record"></p>
+
 </body>
 
 <script>
@@ -68,6 +70,7 @@
         value2 = 0;
         document.getElementById("countvalue").innerHTML = "总次数： " + 0;
         document.getElementById("failedvalue").innerHTML = "失败次数： " + 0;
+        document.getElementById("record").innerHTML += value1 + " " + value2 + ", ";
     }
 </script>
 
