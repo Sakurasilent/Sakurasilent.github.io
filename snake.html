@@ -48,11 +48,34 @@
 </style>
 
 <body>
-    <div id="length"></div>
-    <div id="map"></div>
+    <button id="count" onclick="count1()" style=" font-size: 1.5em;">count</button>
+    <p id="countvalue" style=" font-size: 1.5em;">总次数： 0</p>
+    <div style="height: 30px;"></div>
+    <button id="fail"  onclick="count2()" style=" font-size: 1.5em;">fail</button>
+    <p id=failedvalue style=" font-size: 1.5em; color: red">失败次数： 0</p>
+    <div style="height: 30px;"></div>
+    <button id="clear" onclick="restart()" style=" font-size: 1.5em; font-weight: bold;">clear</button>
+    <!-- <div id="length"></div>
+    <div id="map"></div> -->
 </body>
 
 <script>
+    let value1 = 0;
+    let value2 = 0;
+    let count1 = function(){
+        value1 += 1;
+        document.getElementById("countvalue").innerHTML = "总次数： " + value1;
+    }
+    let count2 = function(){
+        value2 += 1;
+        document.getElementById("failedvalue").innerHTML = "失败次数： " + value2;
+    }
+    let restart = function(){
+        value1 = 0;
+        value2 = 0;
+        document.getElementById("countvalue").innerHTML = "总次数： " + 0;
+        document.getElementById("failedvalue").innerHTML = "失败次数： " + 0;
+    }
     // map
     const WIDTH = 25;
     const HEIGHT = 25;
