@@ -1,77 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greedy snake</title>
+    <title></title>
 </head>
 
-<style>
-    body {
-        background-color: white;
+<style type="text/css">
+    .list{
+        text-decoration: none;
+        list-style: none;
+        padding-left: 10px;
     }
-    #box1{
-        height: 35vh;
-        width: 100%;
-        border-radius: 20px;
-        background: #66CDAA;
-        text-align:center;
-        margin-bottom: 10px;
+    li{
+        width: 100px;
+        padding-top: 10px;
     }
-    #box2{
-        height: 35vh;
-        width: 100%;
-        border-radius: 20px;
-        background: #E9967A;
-        align-items: center;
-        text-align:center;
-        margin-bottom: 10px;
+    
+    #fruits .list li:hover{
+        color: red;
+        font-weight: bold;
     }
-    #box3{
-        height: 20vh;
-        width: 100%;
-        border-radius: 20px;
-        background: #aaccee;
-        align-items: center;
-        text-align:center;
+    #vegetable .list li:hover{
+        color: blue;
+        font-weight: bold;
     }
+    
 </style>
 
 <body>
-    <div id="box1" onclick="count1()">
-        <p id="countvalue" style="display: inline-block; margin-top: 13vh; font-size: 2em;">总次数： 0</p>
+    <div id="fruits">
+        <strong>Fruits</strong>
+        <ul class="list">
+            <li class="like">apple</li>
+            <li class="like">banana</li>
+            <li class="like red">cherry</li>
+            <li class="favorite">Durian </li>
+        </ul>
     </div>
 
-    <div id="box2" onclick="count2()">
-        <p id=failedvalue style="display: inline-block; margin-top: 13vh; font-size: 2em;">失败次数： 0</p>
+    <div id="vegetable">
+        <strong>Vegetable</strong>
+        <ul class="list">
+            <li class="green">cabbage</li>
+            <li class="dislike">been</li>
+            <li class="like tomato">tomato</li>
+        </ul>
     </div>
-
-    <div id="box3" onclick="reset()">
-        <p id=failedvalue style="display: inline-block; margin-top: 6vh; font-size: 2em;">Reset</p>
-    </div>
-    <p id="record">Recordes: </p>
-
 </body>
-
-<script>
-    let value1 = 0;
-    let value2 = 0;
-    let count1 = function(){
-        value1 += 1;
-        document.getElementById("countvalue").innerHTML = "总次数： " + value1;
-    }
-    let count2 = function(){
-        value2 += 1;
-        document.getElementById("failedvalue").innerHTML = "失败次数： " + value2;
-    }
-    let reset = function(){
-        document.getElementById("record").innerHTML +=  `<li>total: ` + value1 + ` ` + `error: ` + value2 + `</li>`;
-        value1 = 0;
-        value2 = 0;
-        document.getElementById("countvalue").innerHTML = "总次数： " + 0;
-        document.getElementById("failedvalue").innerHTML = "失败次数： " + 0;
-    }
-</script>
-
 </html>
