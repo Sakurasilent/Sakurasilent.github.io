@@ -1,12 +1,12 @@
 # Basic
-title:         我有两颗糖
+title:         爱喝牛奶
 subtitle:      博客小屋
-description:   By 某只不愿露脸的尹同学
+description:   By 某只不愿露脸的尹同学的小弟
 # 头像里面的标题
 avatarTitle:   Candy
 # 头像里面的描述
-avatarDesc:    Deep learning
-url:           "https://git-jhy.github.io/"
+avatarDesc:    Learning
+url:           "https://Sakurasilent.github.io.github.io/"
 
 # 博客是否自动生成目录，false为不生成
 enableToc:     false
@@ -20,9 +20,9 @@ comment:
 
 # Social
 social:
-    github:    git-jhy
-    QQ:        1437130953
-    mail:      jianhuayin@hnu.edu.cn
+    github:    Sakurasilent.github.io
+    QQ:        492627639
+    mail:      492627639@qq.com
     # weibo:   5366874726
     # zhihu:   panpanleopard
     # juejin:  xxx
