@@ -104,5 +104,6 @@ public class HelloWorld {
 ```shell
 $ javac HelloWorld.java	## 生成字节码格式文件
 $ java HelloWorld		## 运行
+$ test test test test test ## 测试
 ```
 testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
