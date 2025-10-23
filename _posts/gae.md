@@ -20,8 +20,10 @@ tags: rl GAE
   - 无偏：基于真实经历
   - 高方差：不同回合结果差异很大
 - 折扣回报定义：
-  
-  \[ G_t \doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \]
+
+$$
+G_t \doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}
+$$
   
 
 ## 时序差分（TD）
@@ -38,13 +40,16 @@ tags: rl GAE
 
 - 定义：估计值的波动程度，衡量测量结果的分散程度/不稳定性。
 - 公式：
-  \[ \sigma^2 = \frac{\sum_i (x_i - \mu)^2}{N} \]
+
+$$
+\sigma^2 = \frac{\sum_i (x_i - \mu)^2}{N}
+$$
 - 其中：
-  - \( \sigma^2 \)：总体方差
-  - \( x_i \)：第 i 个数据点
-  - \( \mu = \frac{\sum_i x_i}{N} \)：总体均值
-  - \( N \)：总体中的数据点总数
-  - \( \Sigma \)：求和符号
+  - $\sigma^2$：总体方差
+  - $x_i$：第 i 个数据点
+  - $\mu = \frac{\sum_i x_i}{N}$：总体均值
+  - $N$：总体中的数据点总数
+  - $\Sigma$：求和符号
 
 ## 参考资料
 
